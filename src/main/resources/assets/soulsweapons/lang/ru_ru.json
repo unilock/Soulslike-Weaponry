@@ -643,6 +643,8 @@
     "tooltip.soulsweapons.armor.set_bonus": "Бонус Полного Комплекта",
     "tooltip.soulsweapons.armor.set_bonus.gain_effects": "- Получите ",
     "tooltip.soulsweapons.armor.set_bonus.forlorn_armor_heal": "- Исцеляйтесь, когда сущность умирает рядом с вами",
+    "tooltip.soulsweapons.transparent": "Transparent",
+    "tooltip.soulsweapons.transparent.1": "- Use to turn the weapon invisible for others",
 
     "tooltip.soulsweapons.lord_soul_purple.part_1": "Редкая форма душ, считавшаяся вымершей.",
     "tooltip.soulsweapons.lord_soul_purple.part_2": "Её тёмный, но сбалансированный цвет указывает,",

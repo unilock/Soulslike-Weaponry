@@ -727,6 +727,9 @@
     "tooltip.soulsweapons.armor.set_bonus.forlorn_armor_heal": "- 당신 근처의 생물이 죽을 때마다 치유됩니다.",
     "tooltip.soulsweapons.epic_fight.crouch_replaces_offhand": "Epic Fight 모드와 함께, 보조 손 대신 앉으면서 사용하세요.",
 
+    "tooltip.soulsweapons.transparent": "Transparent",
+    "tooltip.soulsweapons.transparent.1": "- Use to turn the weapon invisible for others",
+
     "tooltip.soulsweapons.lord_soul_purple.part_1": "희귀한 형태의 영혼으로, 멸종된 것으로 여겨집니다.",
     "tooltip.soulsweapons.lord_soul_purple.part_2": "어두우면서도 균형 잡힌 색조는",
     "tooltip.soulsweapons.lord_soul_purple.part_3": "사용자가 수세기를 살아왔음을 암시합니다.",

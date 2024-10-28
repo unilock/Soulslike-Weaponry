@@ -69,6 +69,9 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static boolean disable_recipe_kraken_slayer_bow = true;
     @Entry public static boolean disable_recipe_kraken_slayer_crossbow = false;
     @Entry public static boolean disable_recipe_darkmoon_longbow = false;
+    @Entry public static boolean disable_recipe_translucent_sword = false;
+    @Entry public static boolean disable_recipe_translucent_glaive = false;
+    @Entry public static boolean disable_recipe_translucent_double_edged_greatsword = false;
 
     @Entry public static boolean disable_recipe_arkenplate = false;
     @Entry public static boolean disable_recipe_chaos_helmet = false;
@@ -140,6 +143,7 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static boolean disable_use_ludwigs_holy_greatsword = false;
     @Entry public static boolean disable_use_moonstone_ring = false;
     @Entry public static boolean disable_use_chaos_orb = false;
+    @Entry public static boolean disable_use_translucent_weapons = false;
 
     @Entry public static boolean disable_use_arkenplate = false;
     @Entry public static boolean disable_use_chaos_crown = false;
@@ -541,6 +545,12 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static float sword_of_freyr_attack_speed = 1.6f;
     @Entry public static boolean sword_of_freyr_friendly_fire = true;
     //@Entry public static float sword_of_freyr_animation_speed = 1.0f;
+    @Entry public static int translucent_sword_damage = 6;
+    @Entry public static float translucent_sword_attack_speed = 1.6f;
+    @Entry public static int translucent_glaive_damage = 7;
+    @Entry public static float translucent_glaive_attack_speed = 1.4f;
+    @Entry public static int translucent_double_edged_greatsword_damage = 8;
+    @Entry public static float translucent_double_edged_greatsword_attack_speed = 1.2f;
     @Entry public static int whirligig_sawblade_damage = 8;
     @Entry public static float whirligig_sawblade_attack_speed = 1.6f;
     @Entry public static float whirligig_sawblade_ability_damage = 5.0f;

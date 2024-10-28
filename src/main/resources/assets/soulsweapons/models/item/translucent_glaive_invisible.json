@@ -1,18 +1,18 @@
 {
     "parent": "item/handheld",
     "textures": {
-      "layer0": "soulsweapons:item/translucent_glaive"
+      "layer0": "soulsweapons:item/translucent_glaive_invisible"
     },
     "display": {
         "thirdperson_righthand": {
             "rotation": [-55, -90, 0],
             "translation": [0.00, 5.0, 2.00],
-            "scale": [2.125, 2.125, 1.0]
+            "scale": [0, 0, 0]
         },
         "thirdperson_lefthand": {
             "rotation": [-55, 90, 0],
             "translation": [0.00, 5.0, 2.00],
-            "scale": [2.125, 2.125, 1.0]
+            "scale": [0, 0, 0]
         },
         "firstperson_righthand": {
             "rotation": [0, -90, 30],
@@ -34,13 +34,5 @@
             "translation": [ 2, 6, 0],
             "scale":[ 1.8, 1.8, 1.8 ]
         }
-    },
-    "overrides": [
-        {
-            "predicate": {
-                "invisible": 1
-            },
-            "model": "soulsweapons:item/translucent_glaive_invisible"
-        }
-    ]
+    }
 }

@@ -51,6 +51,10 @@ public class PredicateRegistry {
         PredicateRegistry.registerCharged(WeaponRegistry.HOLY_MOONLIGHT_SWORD);
         PredicateRegistry.registerCharged(WeaponRegistry.BLUEMOON_GREATSWORD);
 
+        PredicateRegistry.registerTranslucentAbility(WeaponRegistry.TRANSLUCENT_SWORD);
+        PredicateRegistry.registerTranslucentAbility(WeaponRegistry.TRANSLUCENT_GLAIVE);
+        PredicateRegistry.registerTranslucentAbility(WeaponRegistry.TRANSLUCENT_DOUBLE_GREATSWORD);
+
         ModelPredicateProviderRegistry.register(WeaponRegistry.DRAUGR, new Identifier("night"), (ItemStack itemStack, ClientWorld clientWorld, LivingEntity livingEntity, int number) -> {
             if (livingEntity != null && livingEntity.getWorld().getDimension().hasSkyLight() && livingEntity.getWorld().getTimeOfDay() % 24000 > 13000 && livingEntity.getWorld().getTimeOfDay() % 24000 < 23000) {
                 if (itemStack.getEnchantments().size() > 0) {
@@ -139,6 +143,10 @@ public class PredicateRegistry {
             }
             return 0.0f;
         });
+    }
+
+    public static void registerTranslucentAbility(Item item) {
+        ModelPredicateProviderRegistry.register(item, new Identifier("invisible"), (ItemStack itemStack, ClientWorld clientWorld, LivingEntity livingEntity, int number) -> TranslucentWeapon.isInvisible(itemStack) ? 1f : 0f);
     }
 
     /*protected static void registerCrossbowCharged(Item item) {

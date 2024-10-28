@@ -27,9 +27,9 @@ public class WeaponRegistry {
     public static DetonateGroundItem COMET_SPEAR = new CometSpear(ModToolMaterials.MOONSTONE_OR_VERGLAS, new FabricItemSettings().rarity(Rarity.EPIC));
     public static ToolItem LICH_BANE = new LichBane(ModToolMaterials.MOONSTONE_OR_VERGLAS, new FabricItemSettings().rarity(Rarity.EPIC));
     public static BowItem GALEFORCE = new Galeforce(new FabricItemSettings().maxDamage(1300).rarity(Rarity.EPIC), () -> Ingredient.ofItems(ItemRegistry.VERGLAS, ItemRegistry.MOONSTONE));
-    public static ToolItem TRANSLUCENT_SWORD = new SwordItem(ModToolMaterials.LOST_SOUL, 6, -2.4F, new FabricItemSettings().rarity(Rarity.RARE));
-    public static ToolItem TRANSLUCENT_GLAIVE = new SwordItem(ModToolMaterials.LOST_SOUL, 7, -2.6F, new FabricItemSettings().rarity(Rarity.RARE));
-    public static ToolItem TRANSLUCENT_DOUBLE_GREATSWORD = new SwordItem(ModToolMaterials.LOST_SOUL, 8, -2.8F, new FabricItemSettings().rarity(Rarity.RARE));
+    public static ToolItem TRANSLUCENT_SWORD = new TranslucentWeapon(ModToolMaterials.LOST_SOUL, ConfigConstructor.translucent_sword_damage, ConfigConstructor.translucent_sword_attack_speed, new FabricItemSettings().rarity(Rarity.RARE));
+    public static ToolItem TRANSLUCENT_GLAIVE = new TranslucentWeapon(ModToolMaterials.LOST_SOUL, ConfigConstructor.translucent_glaive_damage, ConfigConstructor.translucent_glaive_attack_speed, new FabricItemSettings().rarity(Rarity.RARE));
+    public static ToolItem TRANSLUCENT_DOUBLE_GREATSWORD = new TranslucentWeapon(ModToolMaterials.LOST_SOUL, ConfigConstructor.translucent_double_edged_greatsword_damage, ConfigConstructor.translucent_double_edged_greatsword_attack_speed, new FabricItemSettings().rarity(Rarity.RARE));
     public static ToolItem DRAUGR = new Draugr(ModToolMaterials.MOONSTONE_OR_VERGLAS, new FabricItemSettings().rarity(Rarity.EPIC));
     public static ToolItem DAWNBREAKER = new Dawnbreaker(ModToolMaterials.MOONSTONE_OR_VERGLAS, new FabricItemSettings().rarity(Rarity.EPIC));
     public static ToolItem SOUL_REAPER = new SoulReaper(ModToolMaterials.MOONSTONE_OR_VERGLAS, new FabricItemSettings().rarity(Rarity.EPIC));
@@ -76,9 +76,9 @@ public class WeaponRegistry {
         ItemRegistry.registerWeaponItem(COMET_SPEAR, "comet_spear", ConfigConstructor.disable_recipe_comet_spear);
         ItemRegistry.registerWeaponItem(LICH_BANE, "lich_bane", ConfigConstructor.disable_recipe_lich_bane);
         ItemRegistry.registerWeaponItem(GALEFORCE, "galeforce", ConfigConstructor.disable_recipe_galeforce);
-        ItemRegistry.registerItem(TRANSLUCENT_SWORD, "translucent_sword");
-        ItemRegistry.registerItem(TRANSLUCENT_GLAIVE, "translucent_glaive");
-        ItemRegistry.registerItem(TRANSLUCENT_DOUBLE_GREATSWORD, "translucent_double_greatsword");
+        ItemRegistry.registerWeaponItem(TRANSLUCENT_SWORD, "translucent_sword", ConfigConstructor.disable_recipe_translucent_sword);
+        ItemRegistry.registerWeaponItem(TRANSLUCENT_GLAIVE, "translucent_glaive", ConfigConstructor.disable_recipe_translucent_glaive);
+        ItemRegistry.registerWeaponItem(TRANSLUCENT_DOUBLE_GREATSWORD, "translucent_double_greatsword", ConfigConstructor.disable_recipe_translucent_double_edged_greatsword);
         ItemRegistry.registerWeaponItem(DRAUGR, "draugr", ConfigConstructor.disable_recipe_draugr);
         ItemRegistry.registerWeaponItem(DAWNBREAKER, "dawnbreaker", ConfigConstructor.disable_recipe_dawnbreaker);
         ItemRegistry.registerWeaponItem(SOUL_REAPER, "soul_reaper", ConfigConstructor.disable_recipe_soul_reaper);

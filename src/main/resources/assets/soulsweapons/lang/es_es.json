@@ -642,6 +642,8 @@
   "tooltip.soulsweapons.armor.set_bonus": "Bonificación completa del conjunto",
   "tooltip.soulsweapons.armor.set_bonus.gain_effects": "- Gana ",
   "tooltip.soulsweapons.armor.set_bonus.forlorn_armor_heal": "- Cura cada vez que una entidad muere cerca de ti",
+  "tooltip.soulsweapons.transparent": "Transparent",
+  "tooltip.soulsweapons.transparent.1": "- Use to turn the weapon invisible for others",
 
   "tooltip.soulsweapons.lord_soul_purple.part_1": "Una forma rara de almas, que se cree extinta.",
   "tooltip.soulsweapons.lord_soul_purple.part_2": "Su color oscuro pero equilibrado sugiere",
