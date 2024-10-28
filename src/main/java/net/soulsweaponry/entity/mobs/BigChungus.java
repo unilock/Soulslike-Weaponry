@@ -45,6 +45,7 @@ import java.util.List;
 public class BigChungus extends HostileEntity implements InventoryOwner {
 
     private static final TrackedData<Boolean> IS_BOSNIAN = DataTracker.registerData(BigChungus.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final TrackedData<Boolean> AGGRESSIVE = DataTracker.registerData(BigChungus.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Integer> TRADE_TICKS = DataTracker.registerData(BigChungus.class, TrackedDataHandlerRegistry.INTEGER);
     private boolean healthUpdated = false;
     private final SimpleInventory inventory = new SimpleInventory(1);
@@ -61,7 +62,7 @@ public class BigChungus extends HostileEntity implements InventoryOwner {
         this.goalSelector.add(3, new WanderAroundFarGoal(this, 1.0D));
         this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.add(8, new LookAroundGoal(this));
-        this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true, (p) -> !p.hasStatusEffect(EffectRegistry.CHUNGUS_TONIC_EFFECT)));
+        this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true, (p) -> !p.hasStatusEffect(EffectRegistry.CHUNGUS_TONIC_EFFECT) || this.isAggressive()));
     }
 
     public static DefaultAttributeContainer.Builder createChungusAttributes() {
@@ -135,7 +136,7 @@ public class BigChungus extends HostileEntity implements InventoryOwner {
             }
             this.healthUpdated = true;
         }
-        if (!this.getInventory().isEmpty()) {
+        if (!this.getInventory().isEmpty() && !this.isAggressive()) {
             this.increaseTradeTicks(1);
             this.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 30, 250, true, false));
             this.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 30, 250, true, false));
@@ -197,11 +198,20 @@ public class BigChungus extends HostileEntity implements InventoryOwner {
         this.dataTracker.set(IS_BOSNIAN, bl);
     }
 
+    public boolean isAggressive() {
+        return this.dataTracker.get(AGGRESSIVE);
+    }
+
+    public void setAggressive(boolean bl) {
+        this.dataTracker.set(AGGRESSIVE, bl);
+    }
+
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
         this.dataTracker.startTracking(IS_BOSNIAN, false);
         this.dataTracker.startTracking(TRADE_TICKS, 0);
+        this.dataTracker.startTracking(AGGRESSIVE, false);
     }
 
     @Override
@@ -219,6 +229,9 @@ public class BigChungus extends HostileEntity implements InventoryOwner {
         if (nbt.contains("turnChance")) {
             this.turnChance = nbt.getFloat("turnChance");
         }
+        if (nbt.contains("aggressive")) {
+            this.setAggressive(nbt.getBoolean("aggressive"));
+        }
         this.readInventory(nbt);
     }
 
@@ -229,6 +242,7 @@ public class BigChungus extends HostileEntity implements InventoryOwner {
         nbt.putBoolean("bosnian", this.isBosnian());
         nbt.putInt("tradeCounter", this.maxTradeCount);
         nbt.putFloat("turnChance", this.turnChance);
+        nbt.putBoolean("aggressive", this.isAggressive());
         this.writeInventory(nbt);
     }
 
@@ -250,7 +264,7 @@ public class BigChungus extends HostileEntity implements InventoryOwner {
     @Override
     protected ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack stack = player.getStackInHand(hand);
-        if (stack.isOf(ItemRegistry.CHUNGUS_EMERALD) && this.getInventory().isEmpty()) {
+        if (stack.isOf(ItemRegistry.CHUNGUS_EMERALD) && this.getInventory().isEmpty() && !this.isAggressive()) {
             this.addItem(stack);
             if (!player.isCreative()) {
                 stack.decrement(1);

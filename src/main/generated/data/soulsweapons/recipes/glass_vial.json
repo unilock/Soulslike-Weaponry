@@ -3,16 +3,17 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "soulsweapons:chungus_emerald"
+      "item": "minecraft:glass"
     }
   },
   "pattern": [
-    "###",
     "# #",
-    "###"
+    "# #",
+    " # "
   ],
   "result": {
-    "item": "soulsweapons:chungus_disc"
+    "count": 5,
+    "item": "soulsweapons:glass_vial"
   },
   "show_notification": true
 }

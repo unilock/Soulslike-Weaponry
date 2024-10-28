@@ -15,9 +15,7 @@ import net.soulsweaponry.items.armor.ChaosSet;
 import net.soulsweaponry.items.armor.WitheredArmor;
 import net.soulsweaponry.items.material.ModArmorMaterials;
 import net.soulsweaponry.items.material.ModToolMaterials;
-import net.soulsweaponry.items.potion.CustomLingeringPotion;
-import net.soulsweaponry.items.potion.CustomPotionItem;
-import net.soulsweaponry.items.potion.CustomSplashPotion;
+import net.soulsweaponry.items.potion.*;
 import net.soulsweaponry.util.RecipeHandler;
 
 public class ItemRegistry {
@@ -68,6 +66,8 @@ public class ItemRegistry {
     public static final Item ENHANCED_WITHERED_CHEST = new WitheredArmor(ModArmorMaterials.WITHERED_ARMOR, ArmorItem.Type.CHESTPLATE, new FabricItemSettings().rarity(Rarity.EPIC));
     public static final Item CHAOS_ROBES = new ChaosSet(ModArmorMaterials.CHAOS_SET, ArmorItem.Type.CHESTPLATE, new FabricItemSettings().rarity(Rarity.EPIC));
     public static final Item CHAOS_ORB = new ChaosOrb(new FabricItemSettings().rarity(Rarity.EPIC).fireproof());
+    public static final Item GLASS_VIAL = new Item(new FabricItemSettings());
+    public static final Item BLOOD_VIAL = new BloodVial(new FabricItemSettings().maxCount(20));
 
     public static final PotionItem CHUNGUS_TONIC_POTION = new CustomPotionItem(new Item.Settings().maxCount(16), EffectRegistry.CHUNGUS_TONIC_POTION);
     public static final PotionItem CHUNGUS_TONIC_SPLASH = new CustomSplashPotion(new Item.Settings().maxCount(16), EffectRegistry.CHUNGUS_TONIC_POTION);
@@ -116,6 +116,8 @@ public class ItemRegistry {
         registerArmorItem(ENHANCED_WITHERED_CHEST, "enhanced_withered_chest", ConfigConstructor.disable_recipe_enhanced_withered_chest);
         registerItem(CHAOS_ROBES, "chaos_robes");
         registerItem(CHAOS_ORB, "chaos_orb");
+        registerItem(GLASS_VIAL, "glass_vial");
+        registerItem(BLOOD_VIAL, "blood_vial");
 
         registerItem(CHUNGUS_TONIC_POTION, "chungus_tonic_potion");
         registerItem(CHUNGUS_TONIC_SPLASH, "chungus_tonic_splash");

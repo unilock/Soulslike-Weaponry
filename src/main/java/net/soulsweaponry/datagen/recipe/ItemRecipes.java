@@ -23,7 +23,7 @@ public class ItemRecipes {
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ItemRegistry.CHUNGUS_DISC)
                 .input('#', ItemRegistry.CHUNGUS_EMERALD)
                 .pattern("###")
-                .pattern("###")
+                .pattern("# #")
                 .pattern("###")
                 .criterion("has_item", RecipeProvider.conditionsFromItemPredicates(ItemPredicate.Builder.create()
                         .items(ItemRegistry.CHUNGUS_EMERALD).build()))
@@ -187,6 +187,14 @@ public class ItemRecipes {
                 .input(BlockRegistry.VERGLAS_BLOCK)
                 .criterion("has_item", RecipeProvider.conditionsFromItemPredicates(ItemPredicate.Builder.create()
                         .items(ItemRegistry.VERGLAS).build()))
+                .offerTo(consumer);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ItemRegistry.GLASS_VIAL, 5)
+                .input('#', Items.GLASS)
+                .pattern("# #")
+                .pattern("# #")
+                .pattern(" # ")
+                .criterion("has_item", RecipeProvider.conditionsFromItemPredicates(ItemPredicate.Builder.create()
+                        .items(Items.GLASS).build()))
                 .offerTo(consumer);
 
         WeaponRecipeProvider.smeltingRecipe(Ingredient.ofItems(ItemRegistry.DEMON_CHUNK), ItemRegistry.CRIMSON_INGOT, 0.1f, 200, ItemRegistry.DEMON_HEART, consumer);

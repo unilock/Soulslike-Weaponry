@@ -12,13 +12,13 @@ public class ConfigConstructor extends MidnightConfig {
     // Config changes won't apply to generated json files/runtime so no point in having these as entries.
     public static int moonstone_ore_vein_size = 5;
     public static int moonstone_ore_count_per_chunk = 4;
-    public static int moonstone_ore_min_height = -63;
+    public static int moonstone_ore_min_height = -80;
     public static int moonstone_ore_max_height = 16;
 
     public static int verglas_ore_vein_size = 3;
-    public static int verglas_ore_count_per_chunk = 48;
+    public static int verglas_ore_count_per_chunk = 50;
     public static int verglas_ore_min_height = -80;
-    public static int verglas_ore_max_height = 120;
+    public static int verglas_ore_max_height = 300;
 
     @Entry public static boolean disable_weapon_recipes = false;
     @Entry public static boolean disable_gun_recipes = false;
@@ -562,15 +562,21 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static int max_posture_loss = 200;
     @Entry public static int stagger_enchant_posture_loss_applied_per_level = 5;
     @Entry(min=0) public static float stagger_enchant_posture_loss_on_player_modifier = 1f;
+
     @Entry public static boolean enable_shield_parry = true;
     @Entry public static int shield_parry_cooldown = 40;
     @Entry(min=2) public static int shield_parry_max_animation_frames = 10;
     @Entry(min=2) public static int shield_parry_frames = 3;
+
     @Entry public static boolean chungus_tonic_can_use = true;
     @Entry public static int chungus_tonic_ticks_until_chungified = 300;
     @Entry public static String[] chungus_tonic_excluded_entities_to_become = {
             "minecraft:command_block_minecart", "minecraft:spawner_minecart", "soulsweapons:freyr_sword_entity", "minecraft:fishing_bobber", "minecraft:player"
     };
+
+    @Entry public static float blood_vial_heal = 5f;
+    @Entry public static int blood_vial_regen_amp = 0;
+    @Entry public static int blood_vial_regen_duration_ticks = 40;
 
     @Entry public static boolean can_projectiles_apply_posture_loss = true;
     @Entry public static float silver_bullet_undead_bonus_damage = 4f;

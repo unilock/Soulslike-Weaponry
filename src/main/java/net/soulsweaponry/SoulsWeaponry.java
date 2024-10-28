@@ -41,6 +41,8 @@ public class SoulsWeaponry implements ModInitializer {
         LOGGER.info("Successfully initialized Geckolib!");
         BlockRegistry.init();
         ItemRegistry.init();
+        FluidRegistry.init();
+        FluidRegistry.registerCauldronBehavior();
         EffectRegistry.init();
         EnchantRegistry.init();
         EntityRegistry.init();

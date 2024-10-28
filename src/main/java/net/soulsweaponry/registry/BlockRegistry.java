@@ -1,7 +1,5 @@
 package net.soulsweaponry.registry;
 
-import java.util.function.ToIntFunction;
-
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
@@ -17,6 +15,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.soulsweaponry.SoulsWeaponry;
 import net.soulsweaponry.blocks.*;
+
+import java.util.function.ToIntFunction;
 
 public class BlockRegistry {
 
@@ -81,10 +81,14 @@ public class BlockRegistry {
         return state -> state.get(Properties.LIT) ? litLevel : 0;
     }
 
-    public static <I extends Block> I registerBlock(I block, String name) {
-        registerBlockItem(block, name);
+    public static <I extends Block> I registerBlockAlone(I block, String name) {
 		return Registry.register(Registries.BLOCK, new Identifier(SoulsWeaponry.ModId, name), block);
 	}
+
+    public static <I extends Block> I registerBlock(I block, String name) {
+        registerBlockItem(block, name);
+        return Registry.register(Registries.BLOCK, new Identifier(SoulsWeaponry.ModId, name), block);
+    }
 
     public static Item registerBlockItem(Block block, String name) {
         Item item = new BlockItem(block, new FabricItemSettings());
