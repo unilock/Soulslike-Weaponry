@@ -28,4 +28,11 @@ public class PurifiedBloodCauldronBlock extends LeveledCauldronBlock {
             living.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 20, 0));
         }
     }
+
+    public void incrementFluidLevel(World world, BlockPos pos, BlockState state) {
+        int level = state.get(LEVEL);
+        if (level < 3) {
+            world.setBlockState(pos, state.with(LEVEL, level + 1), 3);
+        }
+    }
 }

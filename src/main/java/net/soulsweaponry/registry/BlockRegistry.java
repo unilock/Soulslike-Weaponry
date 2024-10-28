@@ -2,11 +2,12 @@ package net.soulsweaponry.registry;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.*;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.enums.Instrument;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
@@ -15,17 +16,18 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.soulsweaponry.SoulsWeaponry;
 import net.soulsweaponry.blocks.*;
+import net.soulsweaponry.blocks.entity.CrimsonObsidianBlockEntity;
 
 import java.util.function.ToIntFunction;
 
 public class BlockRegistry {
 
-    public static final Block CRIMSON_OBSIDIAN = new DrippingBlock(FabricBlockSettings
+    public static final Block CRIMSON_OBSIDIAN = new CrimsonObsidian(FabricBlockSettings
         .copyOf(Blocks.OBSIDIAN)
         .strength(50.0F, 1200.0F) //hardness and resistance, check wiki
         .sounds(BlockSoundGroup.STONE)
         .luminance(10)
-        .requiresTool(), ParticleTypes.FALLING_LAVA);
+        .requiresTool().nonOpaque());
     public static final Block INFUSED_BLACKSTONE = new Block(FabricBlockSettings.copyOf(Blocks.BLACKSTONE).strength(1.8F, 7.0F).sounds(BlockSoundGroup.STONE).requiresTool());
     public static final Block CRACKED_INFUSED_BLACKSTONE = new Block(FabricBlockSettings.copyOf(Blocks.BLACKSTONE).strength(1.8F, 7.0F) .sounds(BlockSoundGroup.STONE).requiresTool());
     public static final Block MOONSTONE_ORE = new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.DIAMOND_ORE).strength(3.0F, 3.0F).sounds(BlockSoundGroup.STONE).luminance(9).requiresTool(), UniformIntProvider.create(4, 8));
@@ -49,6 +51,8 @@ public class BlockRegistry {
     public static final Block SOUL_LAMP = new SoulLampBlock(AbstractBlock.Settings.copy(Blocks.REDSTONE_LAMP).luminance(BlockRegistry.createLightLevelFromLitBlockState(15)).strength(0.3f).sounds(BlockSoundGroup.GLASS).allowsSpawning((state, world, pos, type) -> true));
     public static final Block CHUNGUS_MONOLITH = new ChungusMonolith(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_TILES).strength(3f, 3f).sounds(BlockSoundGroup.STONE).nonOpaque().requiresTool());
     public static final Block CHUNGUS_EMERALD_BLOCK = new Block(AbstractBlock.Settings.create().mapColor(MapColor.EMERALD_GREEN).instrument(Instrument.BIT).requiresTool().strength(5.0F, 6.0F).sounds(BlockSoundGroup.METAL));
+
+    public static BlockEntityType<CrimsonObsidianBlockEntity> CRIMSON_OBSIDIAN_BLOCK_ENTITY;
 
     public static void init() {
         registerBlock(CRIMSON_OBSIDIAN, "crimson_obsidian");
@@ -75,6 +79,12 @@ public class BlockRegistry {
         registerBlock(SOUL_LAMP, "soul_lamp");
         registerBlock(CHUNGUS_MONOLITH, "chungus_monolith");
         registerBlock(CHUNGUS_EMERALD_BLOCK, "chungus_emerald_block");
+
+        CRIMSON_OBSIDIAN_BLOCK_ENTITY = Registry.register(
+                Registries.BLOCK_ENTITY_TYPE,
+                new Identifier(SoulsWeaponry.ModId, "crimson_obsidian_block_entity"),
+                FabricBlockEntityTypeBuilder.create(CrimsonObsidianBlockEntity::new, BlockRegistry.CRIMSON_OBSIDIAN).build(null)
+        );
     }
 
     private static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {

@@ -35,7 +35,7 @@ public class FluidRegistry {
     public static Item PURIFIED_BLOOD_BUCKET;
 
     public static final Predicate<Biome.Precipitation> NONE_PREDICATE = precipitation -> precipitation == Biome.Precipitation.NONE;
-    public static Block BLOOD_CAULDRON;
+    public static PurifiedBloodCauldronBlock PURIFIED_BLOOD_CAULDRON;
     public static final Map<Item, CauldronBehavior> BLOOD_CAULDRON_BEHAVIOR = CauldronBehavior.createMap();
 
     public static void init() {
@@ -51,7 +51,7 @@ public class FluidRegistry {
 
     public static void registerCauldronBehavior() {
         CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(PURIFIED_BLOOD_BUCKET, (state, world, pos, player, hand, stack) -> CauldronBehavior.fillCauldron(
-                world, pos, player, hand, stack, BLOOD_CAULDRON.getDefaultState().with(LeveledCauldronBlock.LEVEL, 3), SoundEvents.ITEM_BUCKET_EMPTY
+                world, pos, player, hand, stack, PURIFIED_BLOOD_CAULDRON.getDefaultState().with(LeveledCauldronBlock.LEVEL, 3), SoundEvents.ITEM_BUCKET_EMPTY
         ));
         BLOOD_CAULDRON_BEHAVIOR.put(
                 Items.BUCKET,
@@ -93,10 +93,10 @@ public class FluidRegistry {
                         SoundEvents.ITEM_BUCKET_FILL
                 )
         );
-        BLOOD_CAULDRON = BlockRegistry.registerBlockAlone(
+        PURIFIED_BLOOD_CAULDRON = BlockRegistry.registerBlockAlone(
                 new PurifiedBloodCauldronBlock(AbstractBlock.Settings.copy(Blocks.CAULDRON), NONE_PREDICATE, BLOOD_CAULDRON_BEHAVIOR/*CauldronBehavior.WATER_CAULDRON_BEHAVIOR*/),
                 "purified_blood_cauldron"
         );
-        CauldronFluidContent.registerCauldron(BLOOD_CAULDRON, STILL_PURIFIED_BLOOD, FluidConstants.BOTTLE, LeveledCauldronBlock.LEVEL);
+        CauldronFluidContent.registerCauldron(PURIFIED_BLOOD_CAULDRON, STILL_PURIFIED_BLOOD, FluidConstants.BOTTLE, LeveledCauldronBlock.LEVEL);
     }
 }
