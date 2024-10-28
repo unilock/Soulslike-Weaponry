@@ -2,7 +2,7 @@ package net.soulsweaponry.registry;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.util.Rarity;
-import net.soulsweaponry.items.*;
+import net.soulsweaponry.items.gun.*;
 
 public class GunRegistry {
 

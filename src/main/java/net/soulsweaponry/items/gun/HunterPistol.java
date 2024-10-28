@@ -1,4 +1,4 @@
-package net.soulsweaponry.items;
+package net.soulsweaponry.items.gun;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -14,58 +14,59 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.soulsweaponry.config.ConfigConstructor;
+import net.soulsweaponry.items.gun.GunItem;
 import net.soulsweaponry.registry.EnchantRegistry;
 import net.soulsweaponry.registry.ItemRegistry;
 
-public class Blunderbuss extends GunItem {
+public class HunterPistol extends GunItem {
 
-    public Blunderbuss(Settings settings) {
+    public HunterPistol(Settings settings) {
         super(settings);
     }
 
     @Override
     public int getPostureLoss(ItemStack stack) {
         int lvl = EnchantmentHelper.getLevel(EnchantRegistry.VISCERAL, stack);
-        return ConfigConstructor.blunderbuss_posture_loss + lvl * 2;
+        return ConfigConstructor.hunter_pistol_posture_loss + lvl * 7;
     }
 
     @Override
     public float getBulletDamage(ItemStack stack) {
-        return ConfigConstructor.blunderbuss_damage;
+        return ConfigConstructor.hunter_pistol_damage;
     }
 
     @Override
     public float getBulletVelocity(ItemStack stack) {
-        return ConfigConstructor.blunderbuss_velocity;
+        return ConfigConstructor.hunter_pistol_velocity;
     }
 
     @Override
     public float getBulletDivergence(ItemStack stack) {
-        return ConfigConstructor.blunderbuss_divergence;
+        return ConfigConstructor.hunter_pistol_divergence;
     }
 
     @Override
     public int getCooldown(ItemStack stack) {
-        return ConfigConstructor.blunderbuss_cooldown - this.getReducedCooldown(stack);
+        return ConfigConstructor.hunter_pistol_cooldown - this.getReducedCooldown(stack);
     }
 
     @Override
     public int bulletsNeeded() {
-        return ConfigConstructor.blunderbuss_bullets_needed;
+        return ConfigConstructor.hunter_pistol_bullets_needed;
     }
 
     @Override
     public boolean isFireproof() {
-        return ConfigConstructor.is_fireproof_blunderbuss;
+        return ConfigConstructor.is_fireproof_hunter_pistol;
     }
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        ItemStack stack = user.getStackInHand(hand);
-        if (this.isDisabled(stack)) {
+        if (this.isDisabled(user.getStackInHand(hand))) {
             this.notifyDisabled(user);
             return TypedActionResult.fail(user.getStackInHand(hand));
         }
+        ItemStack stack = user.getStackInHand(hand);
         boolean bl = user.getAbilities().creativeMode || EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0;
         ItemStack itemStack = user.getProjectileType(stack);
         if (!itemStack.isEmpty() || bl) {
@@ -73,20 +74,18 @@ public class Blunderbuss extends GunItem {
                 itemStack = new ItemStack(ItemRegistry.SILVER_BULLET);
             }
             boolean bl2 = bl && itemStack.isOf(ItemRegistry.SILVER_BULLET);
-            int projectileCount = ConfigConstructor.blunderbuss_projectile_amount + EnchantmentHelper.getLevel(Enchantments.POWER, stack) / 2;
             Vec3d pov = user.getRotationVector();
             Vec3d particleBox = pov.multiply(1).add(user.getPos());
-            for (int i = 0; i < projectileCount; i++) {
-                PersistentProjectileEntity entity = this.createSilverBulletEntity(world, user, stack);
-                world.spawnEntity(entity);
-            }
             if (world.isClient) {
-                for (int k = 0; k < 50; k++) {
-                    world.addParticle(ParticleTypes.FLAME, true, particleBox.x, particleBox.y + 1.5F, particleBox.z, pov.x + user.getRandom().nextDouble() - .5, pov.y + user.getRandom().nextDouble() - .5, pov.z + user.getRandom().nextDouble() - .5);
-                    world.addParticle(ParticleTypes.SMOKE, true, particleBox.x, particleBox.y + 1.5F, particleBox.z, pov.x + user.getRandom().nextDouble() - .5, pov.y + user.getRandom().nextDouble() - .5, pov.z + user.getRandom().nextDouble() - .5);
+                for (int k = 0; k < 10; k++) {
+                    world.addParticle(ParticleTypes.FLAME, true, particleBox.x, particleBox.y + 1.5F, particleBox.z, pov.x + user.getRandom().nextDouble() - .25, pov.y + user.getRandom().nextDouble() - .5, pov.z + user.getRandom().nextDouble() - .25);
+                    world.addParticle(ParticleTypes.SMOKE, true, particleBox.x, particleBox.y + 1.5F, particleBox.z, pov.x + user.getRandom().nextDouble() - .25, pov.y + user.getRandom().nextDouble() - .5, pov.z + user.getRandom().nextDouble() - .25);
                 }
             }
-            world.playSound(user, user.getBlockPos(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 1f, 1f);
+
+            PersistentProjectileEntity entity = this.createSilverBulletEntity(world, user, stack);
+            world.spawnEntity(entity);
+            world.playSound(user, user.getBlockPos(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 1f,1f);
             stack.damage(1, user, (p_220045_0_) -> p_220045_0_.sendToolBreakStatus(user.getActiveHand()));
             if (!bl2 && !user.getAbilities().creativeMode) {
                 itemStack.decrement(this.bulletsNeeded());
@@ -94,6 +93,7 @@ public class Blunderbuss extends GunItem {
                     user.getInventory().removeOne(itemStack);
                 }
             }
+
             user.incrementStat(Stats.USED.getOrCreateStat(this));
             if (!user.isCreative()) user.getItemCooldownManager().set(this, this.getCooldown(stack));
             return TypedActionResult.success(stack, world.isClient());
@@ -103,6 +103,6 @@ public class Blunderbuss extends GunItem {
 
     @Override
     public boolean isDisabled(ItemStack stack) {
-        return ConfigConstructor.disable_use_hunter_blunderbuss;
+        return ConfigConstructor.disable_use_hunter_pistol;
     }
 }
