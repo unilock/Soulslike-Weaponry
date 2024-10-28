@@ -10,6 +10,7 @@
     "EnderDragonEntityMixin",
     "EntityDataSaverMixin",
     "EntityMixin",
+    "GlassBottleMixin",
     "LivingEntityInvoker",
     "LivingEntityMixin",
     "ModelInvoker",

@@ -8,6 +8,8 @@ import net.minecraft.block.*;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.item.*;
+import net.minecraft.potion.PotionUtil;
+import net.minecraft.potion.Potions;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundCategory;
@@ -22,6 +24,7 @@ import net.soulsweaponry.fluid.PurifiedBloodCauldronBlock;
 import net.soulsweaponry.fluid.PurifiedBlood;
 import net.soulsweaponry.fluid.PurifiedBloodBlock;
 
+import java.util.Map;
 import java.util.function.Predicate;
 
 public class FluidRegistry {
@@ -32,10 +35,8 @@ public class FluidRegistry {
     public static Item PURIFIED_BLOOD_BUCKET;
 
     public static final Predicate<Biome.Precipitation> NONE_PREDICATE = precipitation -> precipitation == Biome.Precipitation.NONE;
-    public static final Block BLOOD_CAULDRON = BlockRegistry.registerBlockAlone(
-            new PurifiedBloodCauldronBlock(AbstractBlock.Settings.copy(Blocks.CAULDRON), NONE_PREDICATE, CauldronBehavior.WATER_CAULDRON_BEHAVIOR),
-            "purified_blood_cauldron"
-    );
+    public static Block BLOOD_CAULDRON;
+    public static final Map<Item, CauldronBehavior> BLOOD_CAULDRON_BEHAVIOR = CauldronBehavior.createMap();
 
     public static void init() {
         STILL_PURIFIED_BLOOD = registerFluid("purified_blood", new PurifiedBlood.Still());
@@ -51,8 +52,8 @@ public class FluidRegistry {
     public static void registerCauldronBehavior() {
         CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(PURIFIED_BLOOD_BUCKET, (state, world, pos, player, hand, stack) -> CauldronBehavior.fillCauldron(
                 world, pos, player, hand, stack, BLOOD_CAULDRON.getDefaultState().with(LeveledCauldronBlock.LEVEL, 3), SoundEvents.ITEM_BUCKET_EMPTY
-        ));//TODO right clicking the fluid (in general, both in and out of cauldron) gives regular water bottle, remove this somehow
-        CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(
+        ));
+        BLOOD_CAULDRON_BEHAVIOR.put(
                 Items.BUCKET,
                 (state, world, pos, player, hand, stack) -> CauldronBehavior.emptyCauldron(
                         state,
@@ -66,7 +67,7 @@ public class FluidRegistry {
                         SoundEvents.ITEM_BUCKET_FILL
                 )
         );
-        CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(ItemRegistry.GLASS_VIAL, (state, world, pos, player, hand, stack) -> {
+        BLOOD_CAULDRON_BEHAVIOR.put(ItemRegistry.GLASS_VIAL, (state, world, pos, player, hand, stack) -> {//CauldronBehavior.WATER_CAULDRON_BEHAVIOR
             if (!world.isClient) {
                 Item item = stack.getItem();
                 player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, ItemRegistry.BLOOD_VIAL.getDefaultStack()));
@@ -78,6 +79,24 @@ public class FluidRegistry {
             }
             return ActionResult.success(world.isClient);
         });
+        BLOOD_CAULDRON_BEHAVIOR.put(
+                Items.GLASS_BOTTLE,
+                (state, world, pos, player, hand, stack) -> CauldronBehavior.emptyCauldron(
+                        state,
+                        world,
+                        pos,
+                        player,
+                        hand,
+                        stack,
+                        PotionUtil.setPotion(new ItemStack(Items.POTION), Potions.HEALING),
+                        state1 -> state1.get(LeveledCauldronBlock.LEVEL) == 3,
+                        SoundEvents.ITEM_BUCKET_FILL
+                )
+        );
+        BLOOD_CAULDRON = BlockRegistry.registerBlockAlone(
+                new PurifiedBloodCauldronBlock(AbstractBlock.Settings.copy(Blocks.CAULDRON), NONE_PREDICATE, BLOOD_CAULDRON_BEHAVIOR/*CauldronBehavior.WATER_CAULDRON_BEHAVIOR*/),
+                "purified_blood_cauldron"
+        );
         CauldronFluidContent.registerCauldron(BLOOD_CAULDRON, STILL_PURIFIED_BLOOD, FluidConstants.BOTTLE, LeveledCauldronBlock.LEVEL);
     }
 }
