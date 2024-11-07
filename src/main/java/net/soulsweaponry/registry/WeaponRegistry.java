@@ -7,6 +7,9 @@ import net.minecraft.util.Rarity;
 import net.soulsweaponry.config.ConfigConstructor;
 import net.soulsweaponry.items.*;
 import net.soulsweaponry.items.material.ModToolMaterials;
+import net.soulsweaponry.items.wand.ChungusStaff;
+import net.soulsweaponry.items.wand.DragonStaff;
+import net.soulsweaponry.items.wand.WitheredWabbajack;
 
 public class WeaponRegistry {
 
@@ -57,6 +60,7 @@ public class WeaponRegistry {
     public static BowItem KRAKEN_SLAYER = new KrakenSlayer(new FabricItemSettings().maxDamage(1258).rarity(Rarity.EPIC), () -> Ingredient.ofItems(Items.GOLD_INGOT));
     public static CrossbowItem KRAKEN_SLAYER_CROSSBOW = new KrakenSlayerCrossbow(new FabricItemSettings().maxDamage(1258).rarity(Rarity.EPIC), () -> Ingredient.ofItems(Items.GOLD_INGOT));
     public static BowItem DARKMOON_LONGBOW = new DarkmoonLongbow(new FabricItemSettings().maxDamage(1400).rarity(Rarity.EPIC), () -> Ingredient.ofItems(Items.GOLD_INGOT));
+    public static ToolItem CHUNGUS_STAFF = new ChungusStaff(ModToolMaterials.MOONSTONE_OR_VERGLAS, new FabricItemSettings().maxDamage(1258).rarity(Rarity.EPIC));
 
     public static void init() {
         ItemRegistry.registerWeaponItem(BLUEMOON_SHORTSWORD, "bluemoon_shortsword", ConfigConstructor.disable_recipe_bluemoon_shortsword);
@@ -106,5 +110,6 @@ public class WeaponRegistry {
         ItemRegistry.registerWeaponItem(KRAKEN_SLAYER, "kraken_slayer", ConfigConstructor.disable_recipe_kraken_slayer_bow);
         ItemRegistry.registerWeaponItem(KRAKEN_SLAYER_CROSSBOW, "kraken_slayer_crossbow", ConfigConstructor.disable_recipe_kraken_slayer_crossbow);
         ItemRegistry.registerWeaponItem(DARKMOON_LONGBOW, "darkmoon_longbow", ConfigConstructor.disable_recipe_darkmoon_longbow);
+        ItemRegistry.registerWeaponItem(CHUNGUS_STAFF, "chungus_staff", ConfigConstructor.disable_recipe_chungus_staff);
     }
 }

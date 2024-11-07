@@ -72,6 +72,7 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static boolean disable_recipe_translucent_sword = false;
     @Entry public static boolean disable_recipe_translucent_glaive = false;
     @Entry public static boolean disable_recipe_translucent_double_edged_greatsword = false;
+    @Entry public static boolean disable_recipe_chungus_staff = true;
 
     @Entry public static boolean disable_recipe_arkenplate = false;
     @Entry public static boolean disable_recipe_chaos_helmet = false;
@@ -144,6 +145,7 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static boolean disable_use_moonstone_ring = false;
     @Entry public static boolean disable_use_chaos_orb = false;
     @Entry public static boolean disable_use_translucent_weapons = false;
+    @Entry public static boolean disable_use_chungus_staff = false;
 
     @Entry public static boolean disable_use_arkenplate = false;
     @Entry public static boolean disable_use_chaos_crown = false;
@@ -198,6 +200,8 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static boolean is_fireproof_kraken_slayer_bow = true;
     @Entry public static boolean is_fireproof_kraken_slayer_crossbow = true;
     @Entry public static boolean is_fireproof_darkmoon_longbow = true;
+    @Entry public static boolean is_fireproof_translucent_weapons = false;
+    @Entry public static boolean is_fireproof_chungus_staff = false;
 
     @Entry public static boolean is_fireproof_blunderbuss = false;
     @Entry public static boolean is_fireproof_gatling_gun = false;
@@ -272,6 +276,10 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static int bluemoon_shortsword_projectile_min_cooldown = 10;
     @Entry public static boolean bluemoon_shortsword_enchant_reduces_cooldown = false;
     @Entry public static String bluemoon_shortsword_enchant_reduces_cooldown_id = "damage";
+    @Entry public static int chungus_staff_damage = 9;
+    @Entry public static float chungus_staff_attack_speed = 1.1f;
+    @Entry public static boolean chungus_staff_enchant_reduces_cooldown = true;
+    @Entry public static String chungus_staff_enchant_reduces_cooldown_id = "damage";
     @Entry public static int comet_spear_damage = 8;
     @Entry public static float comet_spear_attack_speed = 1.4f;
     @Entry public static float comet_spear_projectile_damage = 8.0f;

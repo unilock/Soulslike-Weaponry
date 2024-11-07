@@ -6,8 +6,8 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.biome.BiomeKeys;
 import net.soulsweaponry.config.ConfigConstructor;
+import net.soulsweaponry.entity.mobs.BigChungus;
 import net.soulsweaponry.entity.mobs.DarkSorcerer;
 import net.soulsweaponry.entity.mobs.EvilForlorn;
 
@@ -24,7 +24,7 @@ public class SpawnInit {
         BiomeModifications.addSpawn(BiomeSelectors.foundInTheNether(), SpawnGroup.MONSTER, EntityRegistry.EVIL_FORLORN, spawnRateForlorn, 1, 1);
 
         SpawnRestriction.register(EntityRegistry.WITHERED_DEMON, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnInDark);
-        SpawnRestriction.register(EntityRegistry.BIG_CHUNGUS, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnInDark);
+        SpawnRestriction.register(EntityRegistry.BIG_CHUNGUS, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, BigChungus::canSpawnInDark);
         SpawnRestriction.register(EntityRegistry.EVIL_FORLORN, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, EvilForlorn::canSpawn);
         SpawnRestriction.register(EntityRegistry.DARK_SORCERER, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, DarkSorcerer::canSpawn);
     }

@@ -29,15 +29,7 @@ public interface ICooldownItem {
     default int getReduceCooldownEnchantLevel(ItemStack stack) {
         if (this.canEnchantReduceCooldown(stack)) {
             String string = this.getReduceCooldownEnchantId(stack);
-            if (string.equals("damage")) {
-                return WeaponUtil.getEnchantDamageBonus(stack);
-            } else {
-                Identifier id = new Identifier(string);
-                Enchantment enchantment = Registries.ENCHANTMENT.get(id);
-                if (enchantment != null) {
-                    return EnchantmentHelper.getLevel(enchantment, stack);
-                }
-            }
+            return this.getReducedCooldownWithoutCheck(stack, string);
         }
         return 0;
     }
@@ -45,14 +37,19 @@ public interface ICooldownItem {
     default int getReduceLifeStealCooldownEnchantLevel(ItemStack stack) {
         if (ConfigConstructor.lifesteal_item_enchant_reduces_cooldown) {
             String string = ConfigConstructor.lifesteal_item_enchant_reduces_cooldown_id;
-            if (string.equals("damage")) {
-                return WeaponUtil.getEnchantDamageBonus(stack);
-            } else {
-                Identifier id = new Identifier(string);
-                Enchantment enchantment = Registries.ENCHANTMENT.get(id);
-                if (enchantment != null) {
-                    return EnchantmentHelper.getLevel(enchantment, stack);
-                }
+            return this.getReducedCooldownWithoutCheck(stack, string);
+        }
+        return 0;
+    }
+
+    default int getReducedCooldownWithoutCheck(ItemStack stack, String enchantId) {
+        if (enchantId.equals("damage")) {
+            return WeaponUtil.getEnchantDamageBonus(stack);
+        } else {
+            Identifier id = new Identifier(enchantId);
+            Enchantment enchantment = Registries.ENCHANTMENT.get(id);
+            if (enchantment != null) {
+                return EnchantmentHelper.getLevel(enchantment, stack);
             }
         }
         return 0;

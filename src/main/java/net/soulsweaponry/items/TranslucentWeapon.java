@@ -53,6 +53,6 @@ public class TranslucentWeapon extends ModdedSword {
 
     @Override
     public boolean isFireproof() {
-        return false;
+        return ConfigConstructor.is_fireproof_translucent_weapons;
     }
 }

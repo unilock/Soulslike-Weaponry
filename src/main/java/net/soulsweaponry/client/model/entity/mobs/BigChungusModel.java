@@ -1,5 +1,6 @@
 package net.soulsweaponry.client.model.entity.mobs;
 
+import net.minecraft.entity.mob.MobEntity;
 import org.spongepowered.include.com.google.common.collect.ImmutableList;
 
 import net.fabricmc.api.EnvType;
@@ -16,7 +17,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.mob.HostileEntity;
 
 @Environment(EnvType.CLIENT)
-public class BigChungusModel<T extends HostileEntity> extends SinglePartEntityModel<T> {
+public class BigChungusModel<T extends MobEntity> extends SinglePartEntityModel<T> {
 
     private final ModelPart root;
     

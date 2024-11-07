@@ -1,4 +1,4 @@
-package net.soulsweaponry.items;
+package net.soulsweaponry.items.wand;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -19,6 +19,7 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 import net.soulsweaponry.config.ConfigConstructor;
 import net.soulsweaponry.entity.projectile.DragonStaffProjectile;
+import net.soulsweaponry.items.ModdedSword;
 import net.soulsweaponry.registry.EffectRegistry;
 import net.soulsweaponry.registry.ParticleRegistry;
 import net.soulsweaponry.util.CustomDamageSource;

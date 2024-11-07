@@ -2,9 +2,7 @@ package net.soulsweaponry.entity.mobs;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.InventoryOwner;
-import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -14,7 +12,12 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.Monster;
+import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
@@ -32,17 +35,19 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.*;
+import net.minecraft.world.dimension.DimensionType;
 import net.soulsweaponry.SoulsWeaponry;
 import net.soulsweaponry.config.ConfigConstructor;
 import net.soulsweaponry.particles.ParticleEvents;
 import net.soulsweaponry.particles.ParticleHandler;
 import net.soulsweaponry.registry.*;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class BigChungus extends HostileEntity implements InventoryOwner {
+public class BigChungus extends TameableEntity implements InventoryOwner {
 
     private static final TrackedData<Boolean> IS_BOSNIAN = DataTracker.registerData(BigChungus.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Boolean> AGGRESSIVE = DataTracker.registerData(BigChungus.class, TrackedDataHandlerRegistry.BOOLEAN);
@@ -55,14 +60,22 @@ public class BigChungus extends HostileEntity implements InventoryOwner {
     public BigChungus(EntityType<? extends BigChungus> entityType, World world) {
         super(entityType, world);
         this.experiencePoints = 50;
+        this.setTamed(false);
     }
 
     protected void initGoals() {
-        this.goalSelector.add(1, new MeleeAttackGoal(this, 2.0D, false));
-        this.goalSelector.add(3, new WanderAroundFarGoal(this, 1.0D));
+        this.goalSelector.add(1, new SitGoal(this));
+        this.goalSelector.add(2, new MeleeAttackGoal(this, 2.0D, false));
+        this.goalSelector.add(3, new FollowOwnerGoal(this, 1.0D, 10.0F, 5.0F, false));
+        this.goalSelector.add(6, new WanderAroundFarGoal(this, 1.0D));
         this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.add(8, new LookAroundGoal(this));
-        this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true, (p) -> !p.hasStatusEffect(EffectRegistry.CHUNGUS_TONIC_EFFECT) || this.isAggressive()));
+        this.targetSelector.add(1, new TrackOwnerAttackerGoal(this));
+        this.targetSelector.add(2, new AttackWithOwnerGoal(this));
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, true, p -> (!p.hasStatusEffect(EffectRegistry.CHUNGUS_TONIC_EFFECT) || this.isAggressive()) && !this.isTamed()));
+        this.targetSelector.add(5, new ActiveTargetGoal<>(this, MobEntity.class, true, entity -> entity instanceof Monster
+                && !(entity instanceof CreeperEntity) && this.isTamed() && !this.isTeammate(entity)));
+        this.targetSelector.add(6, new RevengeGoal(this).setGroupRevenge());
     }
 
     public static DefaultAttributeContainer.Builder createChungusAttributes() {
@@ -207,6 +220,11 @@ public class BigChungus extends HostileEntity implements InventoryOwner {
     }
 
     @Override
+    public @Nullable PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
+        return null;
+    }
+
+    @Override
     protected void initDataTracker() {
         super.initDataTracker();
         this.dataTracker.startTracking(IS_BOSNIAN, false);
@@ -262,7 +280,7 @@ public class BigChungus extends HostileEntity implements InventoryOwner {
     }
 
     @Override
-    protected ActionResult interactMob(PlayerEntity player, Hand hand) {
+    public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack stack = player.getStackInHand(hand);
         if (stack.isOf(ItemRegistry.CHUNGUS_EMERALD) && this.getInventory().isEmpty() && !this.isAggressive()) {
             this.addItem(stack);
@@ -271,7 +289,24 @@ public class BigChungus extends HostileEntity implements InventoryOwner {
             }
             return ActionResult.SUCCESS;
         }
-        return super.interactMob(player, hand);
+        if (stack.isOf(WeaponRegistry.CHUNGUS_STAFF) && !this.isAggressive() && !this.isTamed()) {
+            this.setTamed(true);
+            this.setOwner(player);
+            this.setTarget(null);
+            this.getWorld().sendEntityStatus(this, EntityStatuses.ADD_POSITIVE_PLAYER_REACTION_PARTICLES);
+            this.navigation.stop();
+            return ActionResult.SUCCESS;
+        }
+        if (this.isTamed() && this.isOwner(player) && this.getTradeTicks() == 0) {
+            this.setSitting(!this.isSitting());
+            if (this.isSitting()) {
+                this.getWorld().sendEntityStatus(this, EntityStatuses.ADD_NEGATIVE_PLAYER_REACTION_PARTICLES);
+            } else {
+                this.getWorld().sendEntityStatus(this, EntityStatuses.ADD_DEATH_PARTICLES);
+            }
+            return ActionResult.SUCCESS;
+        }
+        return ActionResult.PASS;
     }
 
     private ItemStack getBarterItem() {
@@ -293,6 +328,42 @@ public class BigChungus extends HostileEntity implements InventoryOwner {
             this.getInventory().addStack(item.getStack());
             this.getWorld().playSound(null, this.getBlockPos(), SoundEvents.ENTITY_ITEM_PICKUP, this.getSoundCategory(), 1f, 1f);
             item.getStack().decrement(1);
+        }
+    }
+
+    @Override
+    public boolean isTeammate(Entity other) {
+        if (other instanceof Tameable) {
+            if (((Tameable)other).getOwner() != null && this.getOwner() != null) {
+                if (((Tameable)other).getOwner() == this.getOwner()) {
+                    return true;
+                }
+            }
+        }
+        return super.isTeammate(other);
+    }
+
+    @Override
+    public EntityView method_48926() {
+        return super.getWorld();
+    }
+
+    public static boolean canSpawnInDark(EntityType<? extends MobEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return world.getDifficulty() != Difficulty.PEACEFUL && isSpawnDark(world, pos, random) && canMobSpawn(type, world, spawnReason, pos, random);
+    }
+
+    public static boolean isSpawnDark(ServerWorldAccess world, BlockPos pos, Random random) {
+        if (world.getLightLevel(LightType.SKY, pos) > random.nextInt(32)) {
+            return false;
+        } else {
+            DimensionType dimensionType = world.getDimension();
+            int i = dimensionType.monsterSpawnBlockLightLimit();
+            if (i < 15 && world.getLightLevel(LightType.BLOCK, pos) > i) {
+                return false;
+            } else {
+                int j = world.toServerWorld().isThundering() ? world.getLightLevel(pos, 10) : world.getLightLevel(pos);
+                return j <= dimensionType.monsterSpawnLightTest().get(random);
+            }
         }
     }
 }

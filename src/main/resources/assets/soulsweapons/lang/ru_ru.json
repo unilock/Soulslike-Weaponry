@@ -145,6 +145,7 @@
     "item.soulsweapons.kraken_slayer": "Лук-копьё Убийцы Кракена",
     "item.soulsweapons.kraken_slayer_crossbow": "Арбалет Убийцы Кракена",
     "item.soulsweapons.darkmoon_longbow": "Длинный Лук Темной Луны",
+    "item.soulsweapons.chungus_staff": "Chungus Staff",
 
     "item.soulsweapons.big_chungus_spawn_egg": "Яйцо призыва Чунгуса Среднего Размера",
     "item.soulsweapons.withered_demon_spawn_egg": "Яйцо призыва Иссохшего Демона",
@@ -645,6 +646,14 @@
     "tooltip.soulsweapons.armor.set_bonus.forlorn_armor_heal": "- Исцеляйтесь, когда сущность умирает рядом с вами",
     "tooltip.soulsweapons.transparent": "Transparent",
     "tooltip.soulsweapons.transparent.1": "- Use to turn the weapon invisible for others",
+    "tooltip.soulsweapons.chungus_infused": "Chungus Infused",
+    "tooltip.soulsweapons.chungus_infused.1": "- Gain §aChungus Tonic§r effect when the item is in your",
+    "tooltip.soulsweapons.chungus_infused.2": "inventory, preventing §fModerately Sized Chunguses§r from",
+    "tooltip.soulsweapons.chungus_infused.3": "attacking you (given they aren't in aggressive state)",
+    "tooltip.soulsweapons.chungus_infused.4": "- Use to give yourself §bSpeed III§r and §eHaste III§r",
+    "tooltip.soulsweapons.chungus_infused.5": "- Use on a §fModerately Sized Chungus§r to tame it, making",
+    "tooltip.soulsweapons.chungus_infused.6": "it fight for you and your life",
+    "tooltip.soulsweapons.chungus_infused.7": "Acquired through chungus bartering",
 
     "tooltip.soulsweapons.lord_soul_purple.part_1": "Редкая форма душ, считавшаяся вымершей.",
     "tooltip.soulsweapons.lord_soul_purple.part_2": "Её тёмный, но сбалансированный цвет указывает,",
@@ -724,6 +733,7 @@
     "tooltip.soulsweapons.withered_chest.lore.enhanced.1": "Когда сердце и эгида наполняются новой",
     "tooltip.soulsweapons.withered_chest.lore.enhanced.2": "силой и энергией, сердце слабо бьется",
     "tooltip.soulsweapons.withered_chest.lore.enhanced.3": "снова...",
+    "tooltip.soulsweapons.chungus_emerald.part_1": "Use on Moderately Sized Chunguses to barter with them",
 
     "enchantment.soulsweapons.fast_hands": "Быстрые Руки",
     "enchantment.soulsweapons.fast_hands.desc": "Сокращает время перезарядки оружий и луков. (Модель не меняется).",

@@ -145,6 +145,7 @@
     "item.soulsweapons.kraken_slayer": "Kraken Slayer Spear Bow",
     "item.soulsweapons.kraken_slayer_crossbow": "Kraken Slayer Crossbow",
     "item.soulsweapons.darkmoon_longbow": "Darkmoon Longbow",
+    "item.soulsweapons.chungus_staff": "Chungus Staff",
 
     "item.soulsweapons.big_chungus_spawn_egg": "中型蠢古斯兔刷怪蛋",
     "item.soulsweapons.withered_demon_spawn_egg": "凋零恶魔刷怪蛋",
@@ -643,6 +644,14 @@
     "tooltip.soulsweapons.armor.set_bonus.forlorn_armor_heal": "- Heal whenever an entity dies near you",
     "tooltip.soulsweapons.transparent": "Transparent",
     "tooltip.soulsweapons.transparent.1": "- Use to turn the weapon invisible for others",
+    "tooltip.soulsweapons.chungus_infused": "Chungus Infused",
+    "tooltip.soulsweapons.chungus_infused.1": "- Gain §aChungus Tonic§r effect when the item is in your",
+    "tooltip.soulsweapons.chungus_infused.2": "inventory, preventing §fModerately Sized Chunguses§r from",
+    "tooltip.soulsweapons.chungus_infused.3": "attacking you (given they aren't in aggressive state)",
+    "tooltip.soulsweapons.chungus_infused.4": "- Use to give yourself §bSpeed III§r and §eHaste III§r",
+    "tooltip.soulsweapons.chungus_infused.5": "- Use on a §fModerately Sized Chungus§r to tame it, making",
+    "tooltip.soulsweapons.chungus_infused.6": "it fight for you and your life",
+    "tooltip.soulsweapons.chungus_infused.7": "Acquired through chungus bartering",
 
     "tooltip.soulsweapons.lord_soul_purple.part_1": "A rare form of souls, thought to be extinct.",
     "tooltip.soulsweapons.lord_soul_purple.part_2": "It's dark, but balanced color, suggests",
@@ -722,6 +731,7 @@
     "tooltip.soulsweapons.withered_chest.lore.enhanced.1": "As the heart and aegis is filled with new",
     "tooltip.soulsweapons.withered_chest.lore.enhanced.2": "vigor and power, the heart faintly beats",
     "tooltip.soulsweapons.withered_chest.lore.enhanced.3": "yet again...",
+    "tooltip.soulsweapons.chungus_emerald.part_1": "Use on Moderately Sized Chunguses to barter with them",
 
     "enchantment.soulsweapons.fast_hands": "快枪手",
     "enchantment.soulsweapons.fast_hands.desc": "减少枪械与弓的准备时间（模型不会改变）",

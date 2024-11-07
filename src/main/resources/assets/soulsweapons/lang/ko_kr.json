@@ -145,6 +145,7 @@
     "item.soulsweapons.kraken_slayer": "크라켄 슬레이어의 활",
     "item.soulsweapons.kraken_slayer_crossbow": "크라켄 슬레이어의 석궁",
     "item.soulsweapons.darkmoon_longbow": "다크문 장궁",
+    "item.soulsweapons.chungus_staff": "Chungus Staff",
 
     "item.soulsweapons.big_chungus_spawn_egg": "중간 크기의 청거스 생성 알",
     "item.soulsweapons.withered_demon_spawn_egg": "시든 악마 생성 알",
@@ -730,6 +731,15 @@
     "tooltip.soulsweapons.transparent": "Transparent",
     "tooltip.soulsweapons.transparent.1": "- Use to turn the weapon invisible for others",
 
+    "tooltip.soulsweapons.chungus_infused": "Chungus Infused",
+    "tooltip.soulsweapons.chungus_infused.1": "- Gain §aChungus Tonic§r effect when the item is in your",
+    "tooltip.soulsweapons.chungus_infused.2": "inventory, preventing §fModerately Sized Chunguses§r from",
+    "tooltip.soulsweapons.chungus_infused.3": "attacking you (given they aren't in aggressive state)",
+    "tooltip.soulsweapons.chungus_infused.4": "- Use to give yourself §bSpeed III§r and §eHaste III§r",
+    "tooltip.soulsweapons.chungus_infused.5": "- Use on a §fModerately Sized Chungus§r to tame it, making",
+    "tooltip.soulsweapons.chungus_infused.6": "it fight for you and your life",
+    "tooltip.soulsweapons.chungus_infused.7": "Acquired through chungus bartering",
+
     "tooltip.soulsweapons.lord_soul_purple.part_1": "희귀한 형태의 영혼으로, 멸종된 것으로 여겨집니다.",
     "tooltip.soulsweapons.lord_soul_purple.part_2": "어두우면서도 균형 잡힌 색조는",
     "tooltip.soulsweapons.lord_soul_purple.part_3": "사용자가 수세기를 살아왔음을 암시합니다.",
@@ -830,6 +840,8 @@
     "tooltip.soulsweapons.withered_chest.lore.enhanced.1": "심장과 방패가",
     "tooltip.soulsweapons.withered_chest.lore.enhanced.2": "새로운 활력과 힘으로 가득 차면서,",
     "tooltip.soulsweapons.withered_chest.lore.enhanced.3": "심장은 다시 약하게 뛰기 시작합니다...",
+
+    "tooltip.soulsweapons.chungus_emerald.part_1": "Use on Moderately Sized Chunguses to barter with them",
 
     "enchantment.soulsweapons.fast_hands": "빠른 재장전",
     "enchantment.soulsweapons.fast_hands.desc": "총기의 충전 시간을 줄이거나 사용 시간을 증가시킵니다.",

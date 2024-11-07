@@ -24,7 +24,7 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
-import net.soulsweaponry.items.WitheredWabbajack.LuckType;
+import net.soulsweaponry.items.wand.WitheredWabbajack.LuckType;
 import net.soulsweaponry.registry.EntityRegistry;
 import net.soulsweaponry.registry.SoundRegistry;
 import net.soulsweaponry.particles.ParticleHandler;

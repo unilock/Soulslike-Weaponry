@@ -351,6 +351,16 @@ public class WeaponRecipes {
                 .criterion("has_item", conditionsFromItemPredicates(ItemPredicate.Builder.create()
                         .items(ItemRegistry.ESSENCE_OF_EVENTIDE).build()))
                 .offerTo(consumer);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, WeaponRegistry.CHUNGUS_STAFF)
+                .input('#', Items.BLAZE_ROD)
+                .input('E', ItemRegistry.CHUNGUS_EMERALD)
+                .input('0', Items.EGG)
+                .pattern(" E0")
+                .pattern(" #E")
+                .pattern("#  ")
+                .criterion("has_item", conditionsFromItemPredicates(ItemPredicate.Builder.create()
+                        .items(ItemRegistry.ESSENCE_OF_EVENTIDE).build()))
+                .offerTo(consumer);
 
         WeaponRecipeProvider.smithingRecipeLordSoulCombat(Ingredient.ofItems(WeaponRegistry.BLOODTHIRSTER), WeaponRegistry.DARKIN_BLADE, consumer);
         WeaponRecipeProvider.smithingRecipeLordSoulCombat(Ingredient.ofItems(Items.GOLDEN_SWORD), WeaponRegistry.DAWNBREAKER, consumer);

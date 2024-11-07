@@ -1,4 +1,4 @@
-package net.soulsweaponry.items;
+package net.soulsweaponry.items.wand;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
@@ -20,6 +20,7 @@ import net.soulsweaponry.config.ConfigConstructor;
 import net.soulsweaponry.entity.projectile.DragonStaffProjectile;
 import net.soulsweaponry.entity.projectile.GrowingFireball;
 import net.soulsweaponry.entity.projectile.WitheredWabbajackProjectile;
+import net.soulsweaponry.items.ModdedSword;
 import net.soulsweaponry.util.WeaponUtil;
 
 import java.util.ArrayList;
