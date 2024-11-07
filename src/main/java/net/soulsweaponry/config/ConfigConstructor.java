@@ -591,6 +591,7 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static String[] chungus_tonic_excluded_entities_to_become = {
             "minecraft:command_block_minecart", "minecraft:spawner_minecart", "soulsweapons:freyr_sword_entity", "minecraft:fishing_bobber", "minecraft:player"
     };
+    @Entry public static boolean can_chungus_barter = true;
 
     @Entry public static float blood_vial_heal = 5f;
     @Entry public static int blood_vial_regen_amp = 0;

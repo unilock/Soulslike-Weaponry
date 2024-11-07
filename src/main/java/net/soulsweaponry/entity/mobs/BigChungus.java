@@ -40,6 +40,7 @@ import net.minecraft.world.*;
 import net.minecraft.world.dimension.DimensionType;
 import net.soulsweaponry.SoulsWeaponry;
 import net.soulsweaponry.config.ConfigConstructor;
+import net.soulsweaponry.items.IConfigDisable;
 import net.soulsweaponry.particles.ParticleEvents;
 import net.soulsweaponry.particles.ParticleHandler;
 import net.soulsweaponry.registry.*;
@@ -282,14 +283,14 @@ public class BigChungus extends TameableEntity implements InventoryOwner {
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack stack = player.getStackInHand(hand);
-        if (stack.isOf(ItemRegistry.CHUNGUS_EMERALD) && this.getInventory().isEmpty() && !this.isAggressive()) {
+        if (ConfigConstructor.can_chungus_barter && stack.isOf(ItemRegistry.CHUNGUS_EMERALD) && this.getInventory().isEmpty() && !this.isAggressive()) {
             this.addItem(stack);
             if (!player.isCreative()) {
                 stack.decrement(1);
             }
             return ActionResult.SUCCESS;
         }
-        if (stack.isOf(WeaponRegistry.CHUNGUS_STAFF) && !this.isAggressive() && !this.isTamed()) {
+        if (stack.isOf(WeaponRegistry.CHUNGUS_STAFF) && !((IConfigDisable)stack.getItem()).isDisabled(stack) && !this.isAggressive() && !this.isTamed()) {
             this.setTamed(true);
             this.setOwner(player);
             this.setTarget(null);
@@ -319,7 +320,7 @@ public class BigChungus extends TameableEntity implements InventoryOwner {
 
     @Override
     public boolean canPickUpLoot() {
-        return this.inventory.isEmpty();
+        return this.inventory.isEmpty() && ConfigConstructor.can_chungus_barter;
     }
 
     @Override
