@@ -55,7 +55,7 @@ public class Nightfall extends UltraHeavyWeapon implements GeoItem, IKeybindAbil
 
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
-        if (user instanceof PlayerEntity player) {
+        if (user instanceof PlayerEntity player && !player.getItemCooldownManager().isCoolingDown(this)) {
             int i = this.getMaxUseTime(stack) - remainingUseTicks;
             if (i >= 10) {
                 this.applyItemCooldown(player, this.getScaledCooldownSmash(stack));

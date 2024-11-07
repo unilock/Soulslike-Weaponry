@@ -52,7 +52,7 @@ public class DraupnirSpear extends ChargeToUseItem implements GeoItem, IKeybindA
 
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
-        if (user instanceof PlayerEntity playerEntity) {
+        if (user instanceof PlayerEntity playerEntity && !playerEntity.getItemCooldownManager().isCoolingDown(this)) {
             int i = this.getMaxUseTime(stack) - remainingUseTicks;
             if (i >= 10) {
                 DraupnirSpearEntity entity = new DraupnirSpearEntity(world, playerEntity, stack);

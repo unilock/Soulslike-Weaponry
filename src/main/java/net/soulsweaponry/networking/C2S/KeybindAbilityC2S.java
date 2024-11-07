@@ -25,6 +25,7 @@ public class KeybindAbilityC2S {
                             return;
                         }
                         keybindItem.useKeybindAbilityServer(serverWorld, stack, player);
+                        player.stopUsingItem();
                     }
                 }
                 for (ItemStack armorStack : player.getArmorItems()) {
