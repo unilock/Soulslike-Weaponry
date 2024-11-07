@@ -2,7 +2,11 @@ package net.soulsweaponry.registry;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.util.Rarity;
-import net.soulsweaponry.items.*;
+import net.soulsweaponry.items.Blunderbuss;
+import net.soulsweaponry.items.GatlingGun;
+import net.soulsweaponry.items.GunItem;
+import net.soulsweaponry.items.HunterCannon;
+import net.soulsweaponry.items.HunterPistol;
 
 public class GunRegistry {
 

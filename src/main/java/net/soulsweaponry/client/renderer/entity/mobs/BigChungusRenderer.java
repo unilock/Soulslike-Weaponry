@@ -2,10 +2,9 @@ package net.soulsweaponry.client.renderer.entity.mobs;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory.Context;
+import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.util.Identifier;
-import net.soulsweaponry.client.SoulsWeaponryClient;
 import net.soulsweaponry.client.model.entity.mobs.BigChungusModel;
 import net.soulsweaponry.client.registry.EntityModelLayerModRegistry;
 import net.soulsweaponry.entity.mobs.BigChungus;

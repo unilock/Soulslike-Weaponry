@@ -17,10 +17,10 @@ import net.soulsweaponry.config.ConfigConstructor;
 import net.soulsweaponry.entity.mobs.NightShade;
 import net.soulsweaponry.entity.projectile.MoonlightProjectile;
 import net.soulsweaponry.entity.projectile.ShadowOrb;
+import net.soulsweaponry.particles.ParticleHandler;
 import net.soulsweaponry.registry.EffectRegistry;
 import net.soulsweaponry.registry.EntityRegistry;
 import net.soulsweaponry.registry.SoundRegistry;
-import net.soulsweaponry.particles.ParticleHandler;
 
 import java.util.EnumSet;
 import java.util.HashMap;

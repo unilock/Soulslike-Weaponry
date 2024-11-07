@@ -1,11 +1,10 @@
 package net.soulsweaponry.util;
 
-import java.util.ArrayList;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
 import net.minecraft.util.Identifier;
+
+import java.util.ArrayList;
 
 public class JsonCreator {
     

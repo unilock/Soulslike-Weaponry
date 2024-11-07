@@ -1,7 +1,11 @@
 package net.soulsweaponry.registry;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.soulsweaponry.events.*;
+import net.soulsweaponry.events.AttemptAttackCallback;
+import net.soulsweaponry.events.AttemptAttackHandler;
+import net.soulsweaponry.events.LivingEntityTickCallback;
+import net.soulsweaponry.events.LivingEntityTickHandler;
+import net.soulsweaponry.events.PlayerTickHandler;
 
 public class EventRegistry {
 

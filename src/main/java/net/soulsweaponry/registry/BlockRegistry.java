@@ -1,10 +1,15 @@
 package net.soulsweaponry.registry;
 
-import java.util.function.ToIntFunction;
-
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.*;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.ExperienceDroppingBlock;
+import net.minecraft.block.MagmaBlock;
+import net.minecraft.block.MapColor;
+import net.minecraft.block.TransparentBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.particle.ParticleTypes;
@@ -15,7 +20,18 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.soulsweaponry.SoulsWeaponry;
-import net.soulsweaponry.blocks.*;
+import net.soulsweaponry.blocks.AltarBlock;
+import net.soulsweaponry.blocks.BlackstonePedestal;
+import net.soulsweaponry.blocks.ChungusMonolith;
+import net.soulsweaponry.blocks.DrippingBlock;
+import net.soulsweaponry.blocks.SoulLampBlock;
+import net.soulsweaponry.blocks.WitheredBlock;
+import net.soulsweaponry.blocks.WitheredFlower;
+import net.soulsweaponry.blocks.WitheredGrass;
+import net.soulsweaponry.blocks.WitheredTallFlower;
+import net.soulsweaponry.blocks.WitheredTallGrass;
+
+import java.util.function.ToIntFunction;
 
 public class BlockRegistry {
 

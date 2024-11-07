@@ -15,7 +15,13 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.tag.EntityTypeTags;
 import net.minecraft.util.Identifier;
 import net.soulsweaponry.SoulsWeaponry;
-import net.soulsweaponry.entity.effect.*;
+import net.soulsweaponry.entity.effect.Decay;
+import net.soulsweaponry.entity.effect.Fear;
+import net.soulsweaponry.entity.effect.Freezing;
+import net.soulsweaponry.entity.effect.HallowedDragonMist;
+import net.soulsweaponry.entity.effect.LifeLeach;
+import net.soulsweaponry.entity.effect.PostureBreak;
+import net.soulsweaponry.entity.effect.VeilOfFire;
 import net.soulsweaponry.util.CustomDamageSource;
 import net.soulsweaponry.util.ModTags;
 

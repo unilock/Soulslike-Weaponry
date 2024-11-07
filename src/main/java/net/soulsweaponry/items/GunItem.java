@@ -1,8 +1,5 @@
 package net.soulsweaponry.items;
 
-import java.util.List;
-import java.util.function.Predicate;
-
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -17,10 +14,13 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.soulsweaponry.config.ConfigConstructor;
 import net.soulsweaponry.entity.projectile.SilverBulletEntity;
+import net.soulsweaponry.registry.EnchantRegistry;
 import net.soulsweaponry.registry.GunRegistry;
 import net.soulsweaponry.registry.ItemRegistry;
-import net.soulsweaponry.registry.EnchantRegistry;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+import java.util.function.Predicate;
 
 public abstract class GunItem extends BowItem implements IConfigDisable {
 

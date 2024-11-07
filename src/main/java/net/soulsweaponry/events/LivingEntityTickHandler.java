@@ -5,10 +5,10 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.ActionResult;
 import net.soulsweaponry.config.ConfigConstructor;
-import net.soulsweaponry.registry.EffectRegistry;
-import net.soulsweaponry.registry.SoundRegistry;
 import net.soulsweaponry.entitydata.IEntityDataSaver;
 import net.soulsweaponry.entitydata.PostureData;
+import net.soulsweaponry.registry.EffectRegistry;
+import net.soulsweaponry.registry.SoundRegistry;
 
 public class LivingEntityTickHandler implements LivingEntityTickCallback {
     @Override

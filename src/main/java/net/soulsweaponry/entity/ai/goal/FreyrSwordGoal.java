@@ -11,8 +11,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.soulsweaponry.config.ConfigConstructor;
 import net.soulsweaponry.entity.mobs.FreyrSwordEntity;
-import net.soulsweaponry.util.CustomDamageSource;
 import net.soulsweaponry.particles.ParticleHandler;
+import net.soulsweaponry.util.CustomDamageSource;
 
 import java.util.EnumSet;
 

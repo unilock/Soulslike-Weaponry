@@ -1,7 +1,6 @@
 package net.soulsweaponry.client.model.entity.mobs;
 
-import org.spongepowered.include.com.google.common.collect.ImmutableList;
-
+import com.google.common.collect.ImmutableList;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.ModelData;

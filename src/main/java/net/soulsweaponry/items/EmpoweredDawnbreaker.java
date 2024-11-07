@@ -3,8 +3,6 @@ package net.soulsweaponry.items;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;

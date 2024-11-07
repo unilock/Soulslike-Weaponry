@@ -15,10 +15,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.soulsweaponry.config.ConfigConstructor;
 import net.soulsweaponry.entity.mobs.DraugrBoss;
-import net.soulsweaponry.registry.EffectRegistry;
-import net.soulsweaponry.registry.SoundRegistry;
 import net.soulsweaponry.particles.ParticleEvents;
 import net.soulsweaponry.particles.ParticleHandler;
+import net.soulsweaponry.registry.EffectRegistry;
+import net.soulsweaponry.registry.SoundRegistry;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;

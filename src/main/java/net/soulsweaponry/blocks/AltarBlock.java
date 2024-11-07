@@ -24,7 +24,11 @@ import net.minecraft.world.World;
 import net.soulsweaponry.entity.mobs.DraugrBoss;
 import net.soulsweaponry.entity.mobs.Moonknight;
 import net.soulsweaponry.entity.mobs.ReturningKnight;
-import net.soulsweaponry.registry.*;
+import net.soulsweaponry.registry.EntityRegistry;
+import net.soulsweaponry.registry.ItemRegistry;
+import net.soulsweaponry.registry.ParticleRegistry;
+import net.soulsweaponry.registry.SoundRegistry;
+import net.soulsweaponry.registry.WeaponRegistry;
 
 import java.util.ArrayList;
 import java.util.HashMap;

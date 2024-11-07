@@ -1,9 +1,6 @@
 package net.soulsweaponry.items;
 
-import java.util.Optional;
-
 import com.mojang.datafixers.util.Pair;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,6 +15,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionTypes;
 import net.minecraft.world.gen.structure.Structure;
 import net.soulsweaponry.util.ModTags;
+
+import java.util.Optional;
 
 public class BossCompass extends Item {
 

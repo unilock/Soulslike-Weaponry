@@ -1,13 +1,12 @@
 package net.soulsweaponry.mixin;
 
+import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.boss.dragon.EnderDragonEntity;
+import net.soulsweaponry.registry.ItemRegistry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.boss.dragon.EnderDragonEntity;
-import net.soulsweaponry.registry.ItemRegistry;
 
 @Mixin(EnderDragonEntity.class)
 public class EnderDragonEntityMixin {

@@ -16,9 +16,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.soulsweaponry.items.IChargeNeeded;
 import net.soulsweaponry.items.TrickWeapon;
-import net.soulsweaponry.registry.SoundRegistry;
 import net.soulsweaponry.particles.ParticleEvents;
 import net.soulsweaponry.particles.ParticleHandler;
+import net.soulsweaponry.registry.SoundRegistry;
 import net.soulsweaponry.util.WeaponUtil;
 
 import java.util.Map;

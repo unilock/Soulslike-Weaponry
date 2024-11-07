@@ -15,9 +15,9 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 import net.soulsweaponry.entity.mobs.NightProwler;
-import net.soulsweaponry.registry.EntityRegistry;
 import net.soulsweaponry.particles.ParticleEvents;
 import net.soulsweaponry.particles.ParticleHandler;
+import net.soulsweaponry.registry.EntityRegistry;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;

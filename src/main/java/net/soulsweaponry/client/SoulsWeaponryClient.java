@@ -5,7 +5,11 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.render.RenderLayer;
 import net.soulsweaponry.client.hud.PostureHudOverlay;
-import net.soulsweaponry.client.registry.*;
+import net.soulsweaponry.client.registry.EntityModelLayerModRegistry;
+import net.soulsweaponry.client.registry.EntityModelRegistry;
+import net.soulsweaponry.client.registry.KeyBindRegistry;
+import net.soulsweaponry.client.registry.ParticleClientRegistry;
+import net.soulsweaponry.client.registry.PredicateRegistry;
 import net.soulsweaponry.networking.PacketRegistry;
 import net.soulsweaponry.registry.BlockRegistry;
 

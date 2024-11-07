@@ -1,7 +1,6 @@
 package net.soulsweaponry.client.model.entity.projectile;
 
 import com.google.common.collect.ImmutableList;
-
 import net.minecraft.client.model.ModelData;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.model.ModelPartBuilder;

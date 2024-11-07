@@ -7,8 +7,8 @@ import net.minecraft.particle.ParticleTypes;
 import net.soulsweaponry.entity.mobs.FrostGiant;
 import net.soulsweaponry.entity.mobs.RimeSpectre;
 import net.soulsweaponry.items.LeviathanAxe;
-import net.soulsweaponry.util.IAnimatedDeath;
 import net.soulsweaponry.particles.ParticleHandler;
+import net.soulsweaponry.util.IAnimatedDeath;
 
 public class Freezing extends StatusEffect {
 

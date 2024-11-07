@@ -16,11 +16,11 @@ import net.soulsweaponry.entity.mobs.DarkSorcerer;
 import net.soulsweaponry.entity.mobs.Remnant;
 import net.soulsweaponry.entity.mobs.ReturningKnight;
 import net.soulsweaponry.entity.util.RandomSummonPos;
+import net.soulsweaponry.particles.ParticleEvents;
+import net.soulsweaponry.particles.ParticleHandler;
 import net.soulsweaponry.registry.EntityRegistry;
 import net.soulsweaponry.registry.SoundRegistry;
 import net.soulsweaponry.util.CustomDamageSource;
-import net.soulsweaponry.particles.ParticleEvents;
-import net.soulsweaponry.particles.ParticleHandler;
 
 import java.util.EnumSet;
 import java.util.List;

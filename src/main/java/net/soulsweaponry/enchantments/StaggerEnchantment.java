@@ -9,9 +9,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.soulsweaponry.config.ConfigConstructor;
-import net.soulsweaponry.items.IUltraHeavy;
 import net.soulsweaponry.entitydata.IEntityDataSaver;
 import net.soulsweaponry.entitydata.PostureData;
+import net.soulsweaponry.items.IUltraHeavy;
 
 public class StaggerEnchantment extends Enchantment {
 
