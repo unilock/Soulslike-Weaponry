@@ -30,6 +30,7 @@ import net.soulsweaponry.util.WeaponUtil;
 import java.util.Map;
 
 public class DarkinScythePre extends SoulHarvestingItem {
+
     public final int MAX_SOULS = ConfigConstructor.darkin_scythe_max_souls;
 
     public DarkinScythePre(ToolMaterial toolMaterial, Settings settings) {
@@ -39,20 +40,13 @@ public class DarkinScythePre extends SoulHarvestingItem {
     }
 
     @Override
-    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        if (this.isDisabled(stack)) {
-            return super.postHit(stack, target, attacker);
+    public void handleKill(LivingEntity target, ItemStack stack) {
+        int amount = target.getType().isIn(ModTags.Entities.BOSSES) ? 20 : 1;
+        if (target.getType().isIn(ModTags.Entities.RANGED_MOBS) || target.getMainHandStack().getItem() instanceof RangedWeaponItem || target instanceof PassiveEntity) {
+            this.addAmount(stack, amount, SoulType.BLUE);
+        } else {
+            this.addAmount(stack, amount, SoulType.RED);
         }
-        if (target.isDead()) {
-            int amount = target.getType().isIn(ModTags.Entities.BOSSES) ? 20 : 1;
-            if (target.getType().isIn(ModTags.Entities.RANGED_MOBS) || target.getMainHandStack().getItem() instanceof RangedWeaponItem || target instanceof PassiveEntity) {
-                this.addAmount(stack, amount, SoulType.BLUE);
-            } else {
-                this.addAmount(stack, amount, SoulType.RED);
-            }
-        }
-        stack.damage(1, attacker, (e) -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
-        return true;
     }
 
     @Override

@@ -1,6 +1,9 @@
 package net.soulsweaponry.items;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.decoration.ArmorStandEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterial;
 import net.soulsweaponry.util.ModTags;
@@ -21,13 +24,30 @@ public abstract class SoulHarvestingItem extends ModdedSword {
             return super.postHit(stack, target, attacker);
         }
         if (target.isDead()) {
-            if (target.getType().isIn(ModTags.Entities.BOSSES)) {
-                this.addAmount(stack, 50);
-            } else {
-                this.addKillCounter(stack);
+            this.handleKill(target, stack);
+        }
+        // Include dead entities hit by sweeping, Better Combat already does this so ignore if loaded
+        if (attacker instanceof PlayerEntity player && !FabricLoader.getInstance().isModLoaded("bettercombat")) {
+            for (LivingEntity livingEntity : player.getWorld().getNonSpectatingEntities(LivingEntity.class, target.getBoundingBox().expand(1.0, 0.25, 1.0))) {
+                if (livingEntity != player
+                        && livingEntity != target
+                        && !player.isTeammate(livingEntity)
+                        && (!(livingEntity instanceof ArmorStandEntity) || !((ArmorStandEntity)livingEntity).isMarker())
+                        && player.squaredDistanceTo(livingEntity) < 9.0
+                        && livingEntity.isDead()) {
+                    this.handleKill(livingEntity, stack);
+                }
             }
         }
         return super.postHit(stack, target, attacker);
+    }
+
+    public void handleKill(LivingEntity target, ItemStack stack) {
+        if (target.getType().isIn(ModTags.Entities.BOSSES)) {
+            this.addAmount(stack, 50);
+        } else {
+            this.addKillCounter(stack);
+        }
     }
 
     public void addKillCounter(ItemStack stack) {
