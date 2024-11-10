@@ -255,7 +255,7 @@ public class NightShadeGoal extends Goal {
             projectile.setVelocity(e, f, g, 2f, 1f);
             projectile.setAgeAndPoints(30, 150, 4);
             projectile.setDamage(this.getModifiedDamage(18f));
-            projectile.setRotateState(MoonlightProjectile.RotationState.NORMAL);
+            projectile.setModelRotation(0);
             this.boss.getWorld().spawnEntity(projectile);
         }
         if (attackStatus >= 25) {

@@ -2,6 +2,7 @@ package net.soulsweaponry.entity.ai.goal;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -418,7 +419,7 @@ public class DayStalkerGoal extends MeleeAttackGoal {
         }
         if (this.attackStatus == 42) {
             boolean phase2 = this.boss.isPhaseTwo();
-            this.shootSunlight(target, phase2 ? 1 : 0, phase2 ? 25f : 15f, MoonlightProjectile.RotationState.NORMAL);
+            this.shootSunlight(target, phase2 ? 1 : 0, phase2 ? 25f : 15f, 0);
         }
         this.checkAndReset(30, 0);
     }
@@ -506,7 +507,7 @@ public class DayStalkerGoal extends MeleeAttackGoal {
                 }
             }
             if (this.boss.isPhaseTwo()) {
-                this.shootSunlight(target, 0, 20f, MoonlightProjectile.RotationState.NORMAL);
+                this.shootSunlight(target, 0, 20f, 0);
             }
         }
         if (this.attackStatus == 32) {
@@ -518,41 +519,34 @@ public class DayStalkerGoal extends MeleeAttackGoal {
                 }
             }
             if (this.boss.isPhaseTwo()) {
-                this.shootSunlight(target, 2, 30f, MoonlightProjectile.RotationState.NORMAL);
+                this.shootSunlight(target, 2, 30f, 0);
             }
         }
         this.checkAndReset(this.boss.isPhaseTwo() ? 10 : 20, 0);
     }
 
-    private void shootSunlight(LivingEntity target, int typeIndex, float damage, MoonlightProjectile.RotationState rotationState) {
+    private void shootSunlight(LivingEntity target, int typeIndex, float damage, int rotationDegrees) {
         if (typeIndex == 0) {
-            MoonlightProjectile projectile = new MoonlightProjectile(EntityRegistry.SUNLIGHT_PROJECTILE_SMALL, this.boss.getWorld(), this.boss);
-            if (this.boss.isEmpowered()) projectile.applyFireTicks(20);
-            projectile.setAgeAndPoints(15, 30, 2);
-            projectile.setDamage(this.getModifiedDamage(damage));
-            projectile.setRotateState(rotationState);
-            projectile.setExplosionParticleType(ParticleTypes.FLAME);
-            projectile.setTrailParticleType(ParticleTypes.WAX_ON);
+            MoonlightProjectile projectile = this.getMoonlightProjectile(EntityRegistry.SUNLIGHT_PROJECTILE_SMALL, damage, rotationDegrees, 15, 30, 2, 20);
             this.shootProjectile(target, projectile, SoundEvents.ENTITY_BLAZE_SHOOT);
         } else if (typeIndex == 1) {
-            MoonlightProjectile projectile = new MoonlightProjectile(EntityRegistry.SUNLIGHT_PROJECTILE_BIG, this.boss.getWorld(), this.boss);
-            if (this.boss.isEmpowered()) projectile.applyFireTicks(40);
-            projectile.setAgeAndPoints(30, 150, 2);
-            projectile.setDamage(this.getModifiedDamage(damage));
-            projectile.setRotateState(rotationState);
-            projectile.setExplosionParticleType(ParticleTypes.FLAME);
-            projectile.setTrailParticleType(ParticleTypes.WAX_ON);
+            MoonlightProjectile projectile = this.getMoonlightProjectile(EntityRegistry.SUNLIGHT_PROJECTILE_BIG, damage, rotationDegrees, 30, 150, 2, 40);
             this.shootProjectile(target, projectile, SoundEvents.ENTITY_BLAZE_SHOOT);
         } else {
-            MoonlightProjectile projectile = new MoonlightProjectile(EntityRegistry.VERTICAL_SUNLIGHT_PROJECTILE, this.boss.getWorld(), this.boss);
-            if (this.boss.isEmpowered()) projectile.applyFireTicks(60);
-            projectile.setAgeAndPoints(30, 75, 5);
-            projectile.setDamage(this.getModifiedDamage(damage));
-            projectile.setHugeExplosion(true);
-            projectile.setExplosionParticleType(ParticleTypes.FLAME);
-            projectile.setTrailParticleType(ParticleTypes.WAX_ON);
+            MoonlightProjectile projectile = this.getMoonlightProjectile(EntityRegistry.VERTICAL_SUNLIGHT_PROJECTILE, damage, rotationDegrees, 30, 75, 5, 60);
             this.shootProjectile(target, projectile, SoundEvents.ENTITY_BLAZE_SHOOT);
         }
+    }
+
+    private MoonlightProjectile getMoonlightProjectile(EntityType<? extends MoonlightProjectile> type, float damage, int rotationDegrees, int maxAge, int explosionParticleCount, int trailParticleCount, int fireTicksApplied) {
+        MoonlightProjectile projectile = new MoonlightProjectile(type, this.boss.getWorld(), this.boss);
+        if (this.boss.isEmpowered()) projectile.applyFireTicks(fireTicksApplied);
+        projectile.setAgeAndPoints(maxAge, explosionParticleCount, trailParticleCount);
+        projectile.setDamage(this.getModifiedDamage(damage));
+        projectile.setModelRotation(rotationDegrees);
+        projectile.setExplosionParticleType(ParticleTypes.FLAME);
+        projectile.setTrailParticleType(ParticleTypes.WAX_ON);
+        return projectile;
     }
 
     private void flamethrower(LivingEntity target, double distance) {
@@ -659,13 +653,13 @@ public class DayStalkerGoal extends MeleeAttackGoal {
     private void sunfireRush(LivingEntity target) {
         this.attackStatus++;
         if (this.attackStatus == 45 || this.attackStatus == 60) {
-            this.shootSunlight(target, 0, 15f, MoonlightProjectile.RotationState.NORMAL);
+            this.shootSunlight(target, 0, 15f, 0);
         } else if (this.attackStatus == 71) {
-            this.shootSunlight(target, 1, 20f, MoonlightProjectile.RotationState.SWIPE_FROM_RIGHT);
+            this.shootSunlight(target, 1, 20f, -45);
         } else if (this.attackStatus == 83) {
-            this.shootSunlight(target, 1, 20f, MoonlightProjectile.RotationState.SWIPE_FROM_LEFT);
+            this.shootSunlight(target, 1, 20f, 45);
         } else if (this.attackStatus == 96) {
-            this.shootSunlight(target, 2, 25f, MoonlightProjectile.RotationState.NORMAL);
+            this.shootSunlight(target, 2, 25f, 0);
         }
         this.checkAndReset(this.boss.isPhaseTwo() ? 10 : 70, 0);
     }

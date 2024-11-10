@@ -25,7 +25,6 @@ import net.soulsweaponry.entity.mobs.Moonknight.MoonknightPhaseOne;
 import net.soulsweaponry.entity.mobs.Moonknight.MoonknightPhaseTwo;
 import net.soulsweaponry.entity.mobs.Remnant;
 import net.soulsweaponry.entity.projectile.MoonlightProjectile;
-import net.soulsweaponry.entity.projectile.MoonlightProjectile.RotationState;
 import net.soulsweaponry.entity.util.RandomSummonPos;
 import net.soulsweaponry.registry.EffectRegistry;
 import net.soulsweaponry.registry.EntityRegistry;
@@ -49,7 +48,7 @@ public class MoonknightGoal extends Goal {
     private int targetNotVisibleTicks;
     private BlockPos targetPos;
     private float yaw;
-    private RotationState projectileRotation = RotationState.SWIPE_FROM_RIGHT;
+    private int projectileRotation = -45;
     private float bonusBeamHeight = 0f;
     private double height = 0D;
 
@@ -84,7 +83,7 @@ public class MoonknightGoal extends Goal {
         this.attackStatus = 0;
         this.specialCooldown = 0;
         this.bonusBeamHeight = 0f;
-        this.projectileRotation = RotationState.SWIPE_FROM_RIGHT;
+        this.projectileRotation = -45;
         this.boss.setCanBeam(false);
         this.boss.setIncreasingBeamHeight(false);
         this.boss.setBeamHeight(0f);
@@ -354,11 +353,11 @@ public class MoonknightGoal extends Goal {
                 projectile.setDamage(this.getModifiedDamage(25f));
                 projectile.setPos(this.boss.getX(), this.boss.getEyeY(), this.boss.getZ());
                 projectile.setVelocity(x, y, z, 1.5f, 1f);
-                projectile.setRotateState(projectileRotation);
-                if (Objects.requireNonNull(projectileRotation) == RotationState.SWIPE_FROM_RIGHT) {
-                    projectileRotation = RotationState.SWIPE_FROM_LEFT;
+                projectile.setModelRotation(projectileRotation);
+                if (projectileRotation == -45) {
+                    projectileRotation = 45;
                 } else {
-                    projectileRotation = RotationState.NORMAL;
+                    projectileRotation = 0;
                 }
                 this.boss.getWorld().spawnEntity(projectile);
             }
@@ -377,7 +376,7 @@ public class MoonknightGoal extends Goal {
         }
         if (attackStatus >= 37) {
             this.boss.getNavigation().stop();
-            this.projectileRotation = RotationState.SWIPE_FROM_RIGHT;
+            this.projectileRotation = -45;
             this.resetAttack(1f, false, 1f);
         }
     }

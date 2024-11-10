@@ -36,7 +36,7 @@ public class MoonlightProjectile extends NonArrowProjectile implements GeoEntity
     private static final TrackedData<Integer> TICK_PARTICLES = DataTracker.registerData(MoonlightProjectile.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Integer> MAX_AGE = DataTracker.registerData(MoonlightProjectile.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Boolean> HUGE_EXPLOSION = DataTracker.registerData(MoonlightProjectile.class, TrackedDataHandlerRegistry.BOOLEAN);
-    private static final TrackedData<Integer> ROTATE_STATE = DataTracker.registerData(MoonlightProjectile.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final TrackedData<Integer> MODEL_ROTATION = DataTracker.registerData(MoonlightProjectile.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<ParticleEffect> EXPLOSION_PARTICLE = DataTracker.registerData(MoonlightProjectile.class, TrackedDataHandlerRegistry.PARTICLE);
     private static final TrackedData<ParticleEffect> TRAIL_PARTICLE = DataTracker.registerData(MoonlightProjectile.class, TrackedDataHandlerRegistry.PARTICLE);
     private static final TrackedData<Integer> APPLY_FIRE_TICKS = DataTracker.registerData(MoonlightProjectile.class, TrackedDataHandlerRegistry.INTEGER);
@@ -58,7 +58,7 @@ public class MoonlightProjectile extends NonArrowProjectile implements GeoEntity
         this.dataTracker.startTracking(TICK_PARTICLES, 4);
         this.dataTracker.startTracking(MAX_AGE, 30);
         this.dataTracker.startTracking(HUGE_EXPLOSION, false);
-        this.dataTracker.startTracking(ROTATE_STATE, 0);
+        this.dataTracker.startTracking(MODEL_ROTATION, 0);
         this.dataTracker.startTracking(EXPLOSION_PARTICLE, ParticleTypes.SOUL_FIRE_FLAME);
         this.dataTracker.startTracking(TRAIL_PARTICLE, ParticleTypes.GLOW);
         this.dataTracker.startTracking(APPLY_FIRE_TICKS, 0);
@@ -74,16 +74,12 @@ public class MoonlightProjectile extends NonArrowProjectile implements GeoEntity
         this.dataTracker.set(HUGE_EXPLOSION, bl);
     }
 
-    public void setRotateState(RotationState state) {
-        for (int i = 0; i < RotationState.values().length; i++) {
-            if (state.equals(RotationState.values()[i])) {
-                this.dataTracker.set(ROTATE_STATE, i);
-            }
-        }
+    public void setModelRotation(int degrees) {
+        this.dataTracker.set(MODEL_ROTATION, degrees);
     }
 
-    public RotationState getRotateState() {
-        return RotationState.values()[this.dataTracker.get(ROTATE_STATE)];
+    public int getModelRotation() {
+        return this.dataTracker.get(MODEL_ROTATION);
     }
 
     public int getMaxParticlePoints() {
@@ -249,11 +245,5 @@ public class MoonlightProjectile extends NonArrowProjectile implements GeoEntity
         if (nbt.contains("FireTicksOnHit")) {
             this.applyFireTicks(nbt.getInt("FireTicksOnHit"));
         }
-    }
-
-    public enum RotationState {
-        NORMAL,
-        SWIPE_FROM_RIGHT,
-        SWIPE_FROM_LEFT
     }
 }
