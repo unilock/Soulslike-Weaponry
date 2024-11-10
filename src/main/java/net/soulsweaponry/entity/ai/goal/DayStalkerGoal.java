@@ -530,10 +530,11 @@ public class DayStalkerGoal extends MeleeAttackGoal {
             MoonlightProjectile projectile = this.getMoonlightProjectile(EntityRegistry.SUNLIGHT_PROJECTILE_SMALL, damage, rotationDegrees, 15, 30, 2, 20);
             this.shootProjectile(target, projectile, SoundEvents.ENTITY_BLAZE_SHOOT);
         } else if (typeIndex == 1) {
-            MoonlightProjectile projectile = this.getMoonlightProjectile(EntityRegistry.SUNLIGHT_PROJECTILE_BIG, damage, rotationDegrees, 30, 150, 2, 40);
+            MoonlightProjectile projectile = this.getMoonlightProjectile(EntityRegistry.SUNLIGHT_PROJECTILE_BIG, damage, rotationDegrees, 30, 75, 2, 40);
             this.shootProjectile(target, projectile, SoundEvents.ENTITY_BLAZE_SHOOT);
         } else {
-            MoonlightProjectile projectile = this.getMoonlightProjectile(EntityRegistry.VERTICAL_SUNLIGHT_PROJECTILE, damage, rotationDegrees, 30, 75, 5, 60);
+            MoonlightProjectile projectile = this.getMoonlightProjectile(EntityRegistry.VERTICAL_SUNLIGHT_PROJECTILE, damage, rotationDegrees, 30, 150, 5, 60);
+            projectile.setExplosionExpansion(0.5f);
             this.shootProjectile(target, projectile, SoundEvents.ENTITY_BLAZE_SHOOT);
         }
     }

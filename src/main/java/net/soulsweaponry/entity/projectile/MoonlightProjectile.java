@@ -32,10 +32,10 @@ import software.bernie.geckolib.core.animation.AnimatableManager;
 public class MoonlightProjectile extends NonArrowProjectile implements GeoEntity {
 
     private static final Logger LOGGER = LogUtils.getLogger();
-    private static final TrackedData<Integer> POINTS = DataTracker.registerData(MoonlightProjectile.class, TrackedDataHandlerRegistry.INTEGER);
-    private static final TrackedData<Integer> TICK_PARTICLES = DataTracker.registerData(MoonlightProjectile.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final TrackedData<Integer> EXPLOSION_PARTICLE_COUNT = DataTracker.registerData(MoonlightProjectile.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final TrackedData<Integer> TRAIL_PARTICLE_COUNT = DataTracker.registerData(MoonlightProjectile.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Integer> MAX_AGE = DataTracker.registerData(MoonlightProjectile.class, TrackedDataHandlerRegistry.INTEGER);
-    private static final TrackedData<Boolean> HUGE_EXPLOSION = DataTracker.registerData(MoonlightProjectile.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final TrackedData<Float> EXPLOSION_EXPANSION = DataTracker.registerData(MoonlightProjectile.class, TrackedDataHandlerRegistry.FLOAT);
     private static final TrackedData<Integer> MODEL_ROTATION = DataTracker.registerData(MoonlightProjectile.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<ParticleEffect> EXPLOSION_PARTICLE = DataTracker.registerData(MoonlightProjectile.class, TrackedDataHandlerRegistry.PARTICLE);
     private static final TrackedData<ParticleEffect> TRAIL_PARTICLE = DataTracker.registerData(MoonlightProjectile.class, TrackedDataHandlerRegistry.PARTICLE);
@@ -54,10 +54,10 @@ public class MoonlightProjectile extends NonArrowProjectile implements GeoEntity
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
-        this.dataTracker.startTracking(POINTS, 75);
-        this.dataTracker.startTracking(TICK_PARTICLES, 4);
+        this.dataTracker.startTracking(EXPLOSION_PARTICLE_COUNT, 75);
+        this.dataTracker.startTracking(TRAIL_PARTICLE_COUNT, 4);
         this.dataTracker.startTracking(MAX_AGE, 30);
-        this.dataTracker.startTracking(HUGE_EXPLOSION, false);
+        this.dataTracker.startTracking(EXPLOSION_EXPANSION, 0.125f);
         this.dataTracker.startTracking(MODEL_ROTATION, 0);
         this.dataTracker.startTracking(EXPLOSION_PARTICLE, ParticleTypes.SOUL_FIRE_FLAME);
         this.dataTracker.startTracking(TRAIL_PARTICLE, ParticleTypes.GLOW);
@@ -66,12 +66,12 @@ public class MoonlightProjectile extends NonArrowProjectile implements GeoEntity
 
     public void setAgeAndPoints(int maxAge, int explosionPoints, int tickParticleAmount) {
         this.dataTracker.set(MAX_AGE, maxAge);
-        this.dataTracker.set(POINTS, explosionPoints);
-        this.dataTracker.set(TICK_PARTICLES, tickParticleAmount);
+        this.dataTracker.set(EXPLOSION_PARTICLE_COUNT, explosionPoints);
+        this.dataTracker.set(TRAIL_PARTICLE_COUNT, tickParticleAmount);
     }
 
-    public void setHugeExplosion(boolean bl) {
-        this.dataTracker.set(HUGE_EXPLOSION, bl);
+    public void setExplosionExpansion(float particleExpansion) {
+        this.dataTracker.set(EXPLOSION_EXPANSION, particleExpansion);
     }
 
     public void setModelRotation(int degrees) {
@@ -83,15 +83,19 @@ public class MoonlightProjectile extends NonArrowProjectile implements GeoEntity
     }
 
     public int getMaxParticlePoints() {
-        return this.dataTracker.get(POINTS);
+        return this.dataTracker.get(EXPLOSION_PARTICLE_COUNT);
     }
 
-    public int getTickParticleAmount() {
-        return this.dataTracker.get(TICK_PARTICLES);
+    public int getTrailParticleCount() {
+        return this.dataTracker.get(TRAIL_PARTICLE_COUNT);
     }
 
-    public double getMaxAge() {
+    public int getMaxAge() {
         return this.dataTracker.get(MAX_AGE);
+    }
+
+    public float getParticleExplosionExpansion() {
+        return this.dataTracker.get(EXPLOSION_EXPANSION);
     }
 
     public void tick() {
@@ -100,10 +104,9 @@ public class MoonlightProjectile extends NonArrowProjectile implements GeoEntity
         double e = vec3d.x;
         double f = vec3d.y;
         double g = vec3d.z;
-        for (int i = 0; i < this.getTickParticleAmount(); ++i) {
+        for (int i = 0; i < this.getTrailParticleCount(); ++i) {
             this.getWorld().addParticle(this.getTrailParticleType(), this.getX() + e * (double)i / 4.0D, this.getY() + f * (double)i / 4.0D, this.getZ() + g * (double)i / 4.0D, -e, -f + 0.2D, -g);
         }
-
         if (this.age > this.getMaxAge()) {
             this.discard(); 
         }
@@ -151,11 +154,7 @@ public class MoonlightProjectile extends NonArrowProjectile implements GeoEntity
     @Override
     public void onRemoved() {
         super.onRemoved();
-        if (this.dataTracker.get(HUGE_EXPLOSION)) {
-            this.detonateEntity(getWorld(), this.getX(), this.getY(), this.getZ(), 750, 0.5f);
-        } else {
-            this.detonateEntity(getWorld(), this.getX(), this.getY(), this.getZ(), this.getMaxParticlePoints(), 0.125f);
-        }
+        this.detonateEntity(getWorld(), this.getX(), this.getY(), this.getZ(), this.getMaxParticlePoints(), this.getParticleExplosionExpansion());
     }
 
     @Override
@@ -220,19 +219,24 @@ public class MoonlightProjectile extends NonArrowProjectile implements GeoEntity
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
-        nbt.putString("Particle", this.getExplosionParticleType().asString());
+        nbt.putString("ExplosionParticle", this.getExplosionParticleType().asString());
         nbt.putString("TrailParticle", this.getExplosionParticleType().asString());
         nbt.putInt("FireTicksOnHit", this.getFireTicksOnHit());
+        nbt.putInt("ExplosionParticleCount", this.getMaxParticlePoints());
+        nbt.putInt("TrailParticleCount", this.getTrailParticleCount());
+        nbt.putInt("MaxAge", this.getMaxAge());
+        nbt.putFloat("ParticleExplosionExpansion", this.getParticleExplosionExpansion());
+        nbt.putInt("ModelRotation", this.getModelRotation());
     }
 
     @Override
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
-        if (nbt.contains("Particle", 8)) {
+        if (nbt.contains("ExplosionParticle", 8)) {
             try {
-                this.setExplosionParticleType(ParticleEffectArgumentType.readParameters(new StringReader(nbt.getString("Particle")), Registries.PARTICLE_TYPE.getReadOnlyWrapper()));
+                this.setExplosionParticleType(ParticleEffectArgumentType.readParameters(new StringReader(nbt.getString("ExplosionParticle")), Registries.PARTICLE_TYPE.getReadOnlyWrapper()));
             } catch (CommandSyntaxException var5) {
-                LOGGER.warn("Couldn't load custom particle {}", nbt.getString("Particle"), var5);
+                LOGGER.warn("Couldn't load custom particle {}", nbt.getString("ExplosionParticle"), var5);
             }
         }
         if (nbt.contains("TrailParticle", 8)) {
@@ -244,6 +248,15 @@ public class MoonlightProjectile extends NonArrowProjectile implements GeoEntity
         }
         if (nbt.contains("FireTicksOnHit")) {
             this.applyFireTicks(nbt.getInt("FireTicksOnHit"));
+        }
+        if (nbt.contains("ExplosionParticleCount") && nbt.contains("TrailParticleCount") && nbt.contains("MaxAge")) {
+            this.setAgeAndPoints(nbt.getInt("MaxAge"), nbt.getInt("ExplosionParticleCount"), nbt.getInt("TrailParticleCount"));
+        }
+        if (nbt.contains("ParticleExplosionExpansion")) {
+            this.setExplosionExpansion(nbt.getFloat("ParticleExplosionExpansion"));
+        }
+        if (nbt.contains("ModelRotation")) {
+            this.setModelRotation(nbt.getInt("ModelRotation"));
         }
     }
 }

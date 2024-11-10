@@ -349,7 +349,7 @@ public class MoonknightGoal extends Goal {
 
                 this.boss.getWorld().playSound(null, this.targetPos, SoundRegistry.MOONLIGHT_BIG_EVENT, SoundCategory.HOSTILE, 1f, 1f);
                 MoonlightProjectile projectile = new MoonlightProjectile(EntityRegistry.MOONLIGHT_BIG_ENTITY_TYPE, this.boss.getWorld(), this.boss);
-                projectile.setAgeAndPoints(30, 150, 4);
+                projectile.setAgeAndPoints(30, 75, 4);
                 projectile.setDamage(this.getModifiedDamage(25f));
                 projectile.setPos(this.boss.getX(), this.boss.getEyeY(), this.boss.getZ());
                 projectile.setVelocity(x, y, z, 1.5f, 1f);
@@ -369,8 +369,8 @@ public class MoonknightGoal extends Goal {
                 projectile.setPos(this.boss.getX(), this.boss.getEyeY(), this.boss.getZ());
                 projectile.setVelocity(x, y, z, 1.5f, 1f);
                 projectile.setDamage(this.getModifiedDamage(40f));
-                projectile.setHugeExplosion(true);
-                projectile.setAgeAndPoints(30, 75, 10);
+                projectile.setExplosionExpansion(0.5f);
+                projectile.setAgeAndPoints(30, 150, 10);
                 this.boss.getWorld().spawnEntity(projectile);
             }
         }
