@@ -72,9 +72,9 @@ public class BlackflameSnakeEntity extends InvisibleEntity {
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(TARGET_UUID, Optional.empty());
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(TARGET_UUID, Optional.empty());
     }
 
     public void setTargetUuid(@Nullable UUID uuid) {

@@ -8,7 +8,7 @@ import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 public class AccursedLordBossModel extends DefaultedEntityGeoModel<AccursedLordBoss> {
 
     public AccursedLordBossModel() {
-        super(new Identifier(SoulsWeaponry.ModId, "accursed_lord"), true);
+        super(Identifier.of(SoulsWeaponry.ModId, "accursed_lord"), true);
     }
     // This creates a new GeoModel with the following asset paths:
     // Animation Json: assets/mymod/animations/entity/monster/my_entity.animation.json
@@ -18,18 +18,18 @@ public class AccursedLordBossModel extends DefaultedEntityGeoModel<AccursedLordB
     /*@Override
     public Identifier getModelResource(AccursedLordBoss object)
     {
-        return new Identifier(SoulsWeaponry.ModId, "geo/accursed_lord.geo.json");
+        return Identifier.of(SoulsWeaponry.ModId, "geo/accursed_lord.geo.json");
     }
 
     @Override
     public Identifier getTextureResource(AccursedLordBoss object)
     {
-        return new Identifier(SoulsWeaponry.ModId, "textures/entity/accursed_lord.png");
+        return Identifier.of(SoulsWeaponry.ModId, "textures/entity/accursed_lord.png");
     }
 
     @Override
     public Identifier getAnimationResource(AccursedLordBoss object)
     {
-        return new Identifier(SoulsWeaponry.ModId, "animations/accursed_lord.animation.json");
+        return Identifier.of(SoulsWeaponry.ModId, "animations/accursed_lord.animation.json");
     }*/
 }

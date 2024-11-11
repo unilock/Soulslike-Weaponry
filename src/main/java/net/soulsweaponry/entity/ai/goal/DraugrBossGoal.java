@@ -15,6 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.soulsweaponry.config.ConfigConstructor;
 import net.soulsweaponry.entity.mobs.DraugrBoss;
+import net.soulsweaponry.entity.mobs.DraugrBoss.States;
 import net.soulsweaponry.particles.ParticleEvents;
 import net.soulsweaponry.particles.ParticleHandler;
 import net.soulsweaponry.registry.EffectRegistry;
@@ -23,8 +24,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
 import java.util.Objects;
-
-import static net.soulsweaponry.entity.mobs.DraugrBoss.States;
 
 public class DraugrBossGoal extends MeleeAttackGoal {
 

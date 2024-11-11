@@ -35,13 +35,13 @@ import net.soulsweaponry.particles.ParticleHandler;
 import net.soulsweaponry.registry.SoundRegistry;
 import net.soulsweaponry.util.CustomDeathHandler;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animatable.instance.SingletonAnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -131,9 +131,10 @@ public class AccursedLordBoss extends BossEntity implements GeoEntity {
         .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 2.0D);
     }
 
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(ATTACKS, 9);
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(ATTACKS, 9);
     }
 
     /**
@@ -218,7 +219,7 @@ public class AccursedLordBoss extends BossEntity implements GeoEntity {
     }
 
     @Override
-    public boolean isUndead() {
+    public boolean hasInvertedHealingAndHarm() {
         return ConfigConstructor.decaying_king_is_undead;
     }
 

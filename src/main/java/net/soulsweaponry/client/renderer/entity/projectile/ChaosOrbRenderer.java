@@ -27,10 +27,10 @@ public class ChaosOrbRenderer extends GeoEntityRenderer<ChaosOrbEntity> {
     static class ChaosOrbColorLayer extends GeoRenderLayer<ChaosOrbEntity> {
 
         private static final Identifier[] LAYERS = {
-                new Identifier(SoulsWeaponry.ModId, "textures/entity/chaos_orb_1.png"),
-                new Identifier(SoulsWeaponry.ModId, "textures/entity/chaos_orb_2.png"),
-                new Identifier(SoulsWeaponry.ModId, "textures/entity/chaos_orb_3.png"),
-                new Identifier(SoulsWeaponry.ModId, "textures/entity/chaos_orb_4.png"),
+                Identifier.of(SoulsWeaponry.ModId, "textures/entity/chaos_orb_1.png"),
+                Identifier.of(SoulsWeaponry.ModId, "textures/entity/chaos_orb_2.png"),
+                Identifier.of(SoulsWeaponry.ModId, "textures/entity/chaos_orb_3.png"),
+                Identifier.of(SoulsWeaponry.ModId, "textures/entity/chaos_orb_4.png"),
         };
         private RenderLayer previousLayer;
 

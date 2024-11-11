@@ -73,7 +73,7 @@ public class BlackflameSnakeLogic {
                     }
                 }
             }
-            world.playSound(null, BlockPos.ofFloored(target), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.HOSTILE, 1f, 1f);
+            world.playSound(null, BlockPos.ofFloored(target), SoundEvents.ENTITY_GENERIC_EXPLODE.value(), SoundCategory.HOSTILE, 1f, 1f);
         }
     }
 

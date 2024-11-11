@@ -5,7 +5,6 @@
     import net.minecraft.block.Blocks;
     import net.minecraft.block.TallPlantBlock;
     import net.minecraft.client.gui.screen.Screen;
-    import net.minecraft.client.item.TooltipContext;
     import net.minecraft.client.render.entity.model.BipedEntityModel;
     import net.minecraft.enchantment.EnchantmentHelper;
     import net.minecraft.enchantment.Enchantments;
@@ -19,6 +18,7 @@
     import net.minecraft.entity.player.PlayerEntity;
     import net.minecraft.item.ArmorMaterial;
     import net.minecraft.item.ItemStack;
+    import net.minecraft.item.tooltip.TooltipType;
     import net.minecraft.particle.ParticleTypes;
     import net.minecraft.registry.tag.BlockTags;
     import net.minecraft.sound.SoundCategory;
@@ -44,13 +44,13 @@
     import org.jetbrains.annotations.Nullable;
     import software.bernie.geckolib.animatable.GeoItem;
     import software.bernie.geckolib.animatable.client.RenderProvider;
-    import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-    import software.bernie.geckolib.core.animation.AnimatableManager;
-    import software.bernie.geckolib.core.animation.Animation;
-    import software.bernie.geckolib.core.animation.AnimationController;
-    import software.bernie.geckolib.core.animation.AnimationState;
-    import software.bernie.geckolib.core.animation.RawAnimation;
-    import software.bernie.geckolib.core.object.PlayState;
+    import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+    import software.bernie.geckolib.animation.AnimatableManager;
+    import software.bernie.geckolib.animation.Animation;
+    import software.bernie.geckolib.animation.AnimationController;
+    import software.bernie.geckolib.animation.AnimationState;
+    import software.bernie.geckolib.animation.PlayState;
+    import software.bernie.geckolib.animation.RawAnimation;
     import software.bernie.geckolib.renderer.GeoArmorRenderer;
     import software.bernie.geckolib.util.GeckoLibUtil;
 
@@ -254,7 +254,7 @@ public class ChaosSet extends ModdedArmor implements GeoItem, ICooldownItem {
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipType context) {
         super.appendTooltip(stack, world, tooltip, context);
         if (Screen.hasShiftDown()) {
             if (stack.isOf(ItemRegistry.CHAOS_CROWN) || stack.isOf(ItemRegistry.CHAOS_HELMET)) {

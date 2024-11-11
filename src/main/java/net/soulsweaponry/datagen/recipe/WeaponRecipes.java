@@ -203,7 +203,7 @@ public class WeaponRecipes {
                 .pattern(" /")
                 .criterion("has_item", conditionsFromItemPredicates(ItemPredicate.Builder.create()
                         .tag(ModTags.Items.LORD_SOUL).build()))
-                .offerTo(exporter, new Identifier(SoulsWeaponry.ModId, "leviathan_axe_left"));
+                .offerTo(exporter, Identifier.of(SoulsWeaponry.ModId, "leviathan_axe_left"));
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, WeaponRegistry.LEVIATHAN_AXE)
                 .input('#', ItemRegistry.VERGLAS)
@@ -214,7 +214,7 @@ public class WeaponRecipes {
                 .pattern("/ ")
                 .criterion("has_item", conditionsFromItemPredicates(ItemPredicate.Builder.create()
                         .tag(ModTags.Items.LORD_SOUL).build()))
-                .offerTo(exporter, new Identifier(SoulsWeaponry.ModId, "leviathan_axe_right"));
+                .offerTo(exporter, Identifier.of(SoulsWeaponry.ModId, "leviathan_axe_right"));
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, WeaponRegistry.MJOLNIR)
                 .input('#', ModTags.Items.STICKS)
                 .input('X', Items.IRON_BLOCK)

@@ -8,6 +8,6 @@ import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 public class MoonknightModel extends DefaultedEntityGeoModel<Moonknight> {
 
     public MoonknightModel() {
-        super(new Identifier(SoulsWeaponry.ModId, "moonknight"), true);
+        super(Identifier.of(SoulsWeaponry.ModId, "moonknight"), true);
     }
 }

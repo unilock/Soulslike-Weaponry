@@ -21,9 +21,9 @@ import net.soulsweaponry.registry.EntityRegistry;
 import net.soulsweaponry.registry.WeaponRegistry;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animatable.instance.SingletonAnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
 
 public class CometSpearEntity extends PersistentProjectileEntity implements GeoEntity {
 
@@ -44,9 +44,10 @@ public class CometSpearEntity extends PersistentProjectileEntity implements GeoE
         this.dataTracker.set(ENCHANTED, stack.hasGlint());
     }
 
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(ENCHANTED, false);
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(ENCHANTED, false);
     }
 
     public void tick() {

@@ -78,6 +78,6 @@ public class GunRecipes {
                 .input(Items.GUNPOWDER)
                 .criterion("has_lost_soul", RecipeProvider.conditionsFromItemPredicates(ItemPredicate.Builder.create()
                         .items(ItemRegistry.LOST_SOUL).build()))
-                .offerTo(exporter, new Identifier(SoulsWeaponry.ModId, "silver_bullet_iron_ingot"));
+                .offerTo(exporter, Identifier.of(SoulsWeaponry.ModId, "silver_bullet_iron_ingot"));
     }
 }

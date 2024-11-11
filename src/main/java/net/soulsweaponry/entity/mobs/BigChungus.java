@@ -128,9 +128,9 @@ public class BigChungus extends HostileEntity {
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(IS_BOSNIAN, false);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(IS_BOSNIAN, false);
     }
 
     @Override

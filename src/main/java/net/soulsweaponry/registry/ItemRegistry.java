@@ -1,11 +1,10 @@
 package net.soulsweaponry.registry;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.AxeItem;
-import net.minecraft.item.FoodComponent;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.MusicDiscItem;
@@ -30,54 +29,54 @@ import net.soulsweaponry.util.RecipeHandler;
 
 public class ItemRegistry {
 
-    public static final LoreItem LORD_SOUL_RED = new LoreItem(new FabricItemSettings().rarity(Rarity.EPIC).fireproof(), "lord_soul_red", 4);
-    public static final LoreItem LORD_SOUL_DARK = new LoreItem(new FabricItemSettings().rarity(Rarity.EPIC).fireproof(), "lord_soul_dark", 3);
-    public static final LoreItem LORD_SOUL_VOID = new LoreItem(new FabricItemSettings().rarity(Rarity.EPIC).fireproof(), "lord_soul_void", 3);
-    public static final LoreItem LORD_SOUL_ROSE = new LoreItem(new FabricItemSettings().rarity(Rarity.EPIC).fireproof(), "lord_soul_rose", 3);
-    public static final LoreItem LORD_SOUL_PURPLE = new LoreItem(new FabricItemSettings().rarity(Rarity.EPIC).fireproof(), "lord_soul_purple", 3);
-    public static final LoreItem LORD_SOUL_WHITE = new LoreItem(new FabricItemSettings().rarity(Rarity.EPIC).fireproof(), "lord_soul_white", 3);
-    public static final LoreItem LORD_SOUL_DAY_STALKER = new LoreItem(new FabricItemSettings().rarity(Rarity.EPIC).fireproof(), "lord_soul_day_stalker", 2);
-    public static final LoreItem LORD_SOUL_NIGHT_PROWLER = new LoreItem(new FabricItemSettings().rarity(Rarity.EPIC).fireproof(), "lord_soul_night_prowler", 3);
-    public static final Item LOST_SOUL = new LoreItem(new FabricItemSettings().rarity(Rarity.RARE), "lost_soul", 3);
-    public static final Item MOONSTONE = new Item(new FabricItemSettings());
-    public static final Item CHUNGUS_EMERALD = new Item(new FabricItemSettings().rarity(Rarity.UNCOMMON));
-    public static final Item DEMON_HEART = new LoreItem(new FabricItemSettings().food(new FoodComponent.Builder()
-            .hunger(4).saturationModifier(6f).meat().alwaysEdible()
+    public static final LoreItem LORD_SOUL_RED = new LoreItem(new Item.Settings().rarity(Rarity.EPIC).fireproof(), "lord_soul_red", 4);
+    public static final LoreItem LORD_SOUL_DARK = new LoreItem(new Item.Settings().rarity(Rarity.EPIC).fireproof(), "lord_soul_dark", 3);
+    public static final LoreItem LORD_SOUL_VOID = new LoreItem(new Item.Settings().rarity(Rarity.EPIC).fireproof(), "lord_soul_void", 3);
+    public static final LoreItem LORD_SOUL_ROSE = new LoreItem(new Item.Settings().rarity(Rarity.EPIC).fireproof(), "lord_soul_rose", 3);
+    public static final LoreItem LORD_SOUL_PURPLE = new LoreItem(new Item.Settings().rarity(Rarity.EPIC).fireproof(), "lord_soul_purple", 3);
+    public static final LoreItem LORD_SOUL_WHITE = new LoreItem(new Item.Settings().rarity(Rarity.EPIC).fireproof(), "lord_soul_white", 3);
+    public static final LoreItem LORD_SOUL_DAY_STALKER = new LoreItem(new Item.Settings().rarity(Rarity.EPIC).fireproof(), "lord_soul_day_stalker", 2);
+    public static final LoreItem LORD_SOUL_NIGHT_PROWLER = new LoreItem(new Item.Settings().rarity(Rarity.EPIC).fireproof(), "lord_soul_night_prowler", 3);
+    public static final Item LOST_SOUL = new LoreItem(new Item.Settings().rarity(Rarity.RARE), "lost_soul", 3);
+    public static final Item MOONSTONE = new Item(new Item.Settings());
+    public static final Item CHUNGUS_EMERALD = new Item(new Item.Settings().rarity(Rarity.UNCOMMON));
+    public static final Item DEMON_HEART = new LoreItem(new Item.Settings().food(new FoodComponent.Builder()
+            .nutrition(4).saturationModifier(6f).meat().alwaysEdible()
             .statusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 150, 0), 1)
             .statusEffect(new StatusEffectInstance(EffectRegistry.BLOODTHIRSTY, 150, 0), 10)
             .statusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 400, 0), 1).build()),
             "demon_heart", 3);
-    public static final Item MOLTEN_DEMON_HEART= new Item(new FabricItemSettings());
-    public static final Item DEMON_CHUNK = new Item(new FabricItemSettings());
-    public static final Item CRIMSON_INGOT = new Item(new FabricItemSettings());
-    public static final Item SOUL_INGOT = new Item(new FabricItemSettings());
-    public static final Item SILVER_BULLET = new Item(new FabricItemSettings().maxCount(20));
-    public static final Item BOSS_COMPASS = new BossCompass(new FabricItemSettings().rarity(Rarity.RARE));
-    public static final Item MOONSTONE_RING = new MoonstoneRing(new FabricItemSettings().rarity(Rarity.EPIC).maxDamage(25));
-    public static final Item SHARD_OF_UNCERTAINTY = new LoreItem(new FabricItemSettings().rarity(Rarity.RARE).fireproof(), "shard_of_uncertainty", 1);
-    public static final Item VERGLAS = new Item(new FabricItemSettings());
-    public static final Item SKOFNUNG_STONE = new SkofnungStone(new FabricItemSettings().maxDamage(20));
-    public static final Item IRON_SKULL = new Item(new FabricItemSettings());
+    public static final Item MOLTEN_DEMON_HEART= new Item(new Item.Settings());
+    public static final Item DEMON_CHUNK = new Item(new Item.Settings());
+    public static final Item CRIMSON_INGOT = new Item(new Item.Settings());
+    public static final Item SOUL_INGOT = new Item(new Item.Settings());
+    public static final Item SILVER_BULLET = new Item(new Item.Settings().maxCount(20));
+    public static final Item BOSS_COMPASS = new BossCompass(new Item.Settings().rarity(Rarity.RARE));
+    public static final Item MOONSTONE_RING = new MoonstoneRing(new Item.Settings().rarity(Rarity.EPIC).maxDamage(25));
+    public static final Item SHARD_OF_UNCERTAINTY = new LoreItem(new Item.Settings().rarity(Rarity.RARE).fireproof(), "shard_of_uncertainty", 1);
+    public static final Item VERGLAS = new Item(new Item.Settings());
+    public static final Item SKOFNUNG_STONE = new SkofnungStone(new Item.Settings().maxDamage(20));
+    public static final Item IRON_SKULL = new Item(new Item.Settings());
 
-    public static final Item MOONSTONE_SHOVEL = new ShovelItem(ModToolMaterials.MOONSTONE_TOOL, 1.5f, -3.0f, new FabricItemSettings());
-    public static final Item MOONSTONE_PICKAXE = new PickaxeItem(ModToolMaterials.MOONSTONE_TOOL, 1, -2.8f, new FabricItemSettings());
-    public static final Item MOONSTONE_AXE = new AxeItem(ModToolMaterials.MOONSTONE_TOOL, 5.0f, -3.0f, new FabricItemSettings());
-    public static final Item MOONSTONE_HOE = new HoeItem(ModToolMaterials.MOONSTONE_TOOL, -3, 0.0f, new FabricItemSettings());
+    public static final Item MOONSTONE_SHOVEL = new ShovelItem(ModToolMaterials.MOONSTONE_TOOL, 1.5f, -3.0f, new Item.Settings());
+    public static final Item MOONSTONE_PICKAXE = new PickaxeItem(ModToolMaterials.MOONSTONE_TOOL, 1, -2.8f, new Item.Settings());
+    public static final Item MOONSTONE_AXE = new AxeItem(ModToolMaterials.MOONSTONE_TOOL, 5.0f, -3.0f, new Item.Settings());
+    public static final Item MOONSTONE_HOE = new HoeItem(ModToolMaterials.MOONSTONE_TOOL, -3, 0.0f, new Item.Settings());
 
-    public static final LoreItem WITHERED_DEMON_HEART = new LoreItem(new FabricItemSettings().rarity(Rarity.RARE).fireproof(), "withered_demon_heart", 4);
-    public static final LoreItem ARKENSTONE = new LoreItem(new FabricItemSettings().rarity(Rarity.RARE).fireproof(), "arkenstone", 4);
-    public static final LoreItem ESSENCE_OF_EVENTIDE = new LoreItem(new FabricItemSettings().rarity(Rarity.RARE).fireproof(), "essence_of_eventide", 2);
-    public static final LoreItem ESSENCE_OF_LUMINESCENCE = new LoreItem(new FabricItemSettings().rarity(Rarity.RARE).fireproof(), "essence_of_luminescence", 3);
-    public static final Item CHAOS_CROWN = new ChaosSet(ModArmorMaterials.CHAOS_SET, ArmorItem.Type.HELMET, new FabricItemSettings().rarity(Rarity.EPIC));
-    public static final Item CHAOS_HELMET = new ChaosSet(ModArmorMaterials.CHAOS_ARMOR, ArmorItem.Type.HELMET, new FabricItemSettings().rarity(Rarity.EPIC));
-    public static final Item ARKENPLATE = new ChaosSet(ModArmorMaterials.CHAOS_ARMOR, ArmorItem.Type.CHESTPLATE, new FabricItemSettings().rarity(Rarity.EPIC));
-    public static final Item ENHANCED_ARKENPLATE = new ChaosSet(ModArmorMaterials.CHAOS_ARMOR, ArmorItem.Type.CHESTPLATE, new FabricItemSettings().rarity(Rarity.EPIC));
-    public static final Item WITHERED_CHEST = new WitheredArmor(ModArmorMaterials.CHAOS_ARMOR, ArmorItem.Type.CHESTPLATE, new FabricItemSettings().rarity(Rarity.EPIC));
-    public static final Item ENHANCED_WITHERED_CHEST = new WitheredArmor(ModArmorMaterials.WITHERED_ARMOR, ArmorItem.Type.CHESTPLATE, new FabricItemSettings().rarity(Rarity.EPIC));
-    public static final Item CHAOS_ROBES = new ChaosSet(ModArmorMaterials.CHAOS_SET, ArmorItem.Type.CHESTPLATE, new FabricItemSettings().rarity(Rarity.EPIC));
-    public static final Item CHAOS_ORB = new ChaosOrb(new FabricItemSettings().rarity(Rarity.EPIC).fireproof());
+    public static final LoreItem WITHERED_DEMON_HEART = new LoreItem(new Item.Settings().rarity(Rarity.RARE).fireproof(), "withered_demon_heart", 4);
+    public static final LoreItem ARKENSTONE = new LoreItem(new Item.Settings().rarity(Rarity.RARE).fireproof(), "arkenstone", 4);
+    public static final LoreItem ESSENCE_OF_EVENTIDE = new LoreItem(new Item.Settings().rarity(Rarity.RARE).fireproof(), "essence_of_eventide", 2);
+    public static final LoreItem ESSENCE_OF_LUMINESCENCE = new LoreItem(new Item.Settings().rarity(Rarity.RARE).fireproof(), "essence_of_luminescence", 3);
+    public static final Item CHAOS_CROWN = new ChaosSet(ModArmorMaterials.CHAOS_SET, ArmorItem.Type.HELMET, new Item.Settings().rarity(Rarity.EPIC));
+    public static final Item CHAOS_HELMET = new ChaosSet(ModArmorMaterials.CHAOS_ARMOR, ArmorItem.Type.HELMET, new Item.Settings().rarity(Rarity.EPIC));
+    public static final Item ARKENPLATE = new ChaosSet(ModArmorMaterials.CHAOS_ARMOR, ArmorItem.Type.CHESTPLATE, new Item.Settings().rarity(Rarity.EPIC));
+    public static final Item ENHANCED_ARKENPLATE = new ChaosSet(ModArmorMaterials.CHAOS_ARMOR, ArmorItem.Type.CHESTPLATE, new Item.Settings().rarity(Rarity.EPIC));
+    public static final Item WITHERED_CHEST = new WitheredArmor(ModArmorMaterials.CHAOS_ARMOR, ArmorItem.Type.CHESTPLATE, new Item.Settings().rarity(Rarity.EPIC));
+    public static final Item ENHANCED_WITHERED_CHEST = new WitheredArmor(ModArmorMaterials.WITHERED_ARMOR, ArmorItem.Type.CHESTPLATE, new Item.Settings().rarity(Rarity.EPIC));
+    public static final Item CHAOS_ROBES = new ChaosSet(ModArmorMaterials.CHAOS_SET, ArmorItem.Type.CHESTPLATE, new Item.Settings().rarity(Rarity.EPIC));
+    public static final Item CHAOS_ORB = new ChaosOrb(new Item.Settings().rarity(Rarity.EPIC).fireproof());
 
-    public static final Item CHUNGUS_DISC = new MusicDiscItem(7, SoundRegistry.BIG_CHUNGUS_SONG_EVENT, new FabricItemSettings().maxCount(1), 112);
+    public static final Item CHUNGUS_DISC = new MusicDiscItem(7, SoundRegistry.BIG_CHUNGUS_SONG_EVENT, new Item.Settings().maxCount(1), 112);
 
     public static void init() {
         registerLoreItem(LORD_SOUL_RED);
@@ -127,11 +126,11 @@ public class ItemRegistry {
 
     public static <I extends Item> I registerItem(I item, String name) {
         SoulsWeaponry.ITEM_GROUP_LIST.add(item);
-        return Registry.register(Registries.ITEM, new Identifier(SoulsWeaponry.ModId, name), item);
+        return Registry.register(Registries.ITEM, Identifier.of(SoulsWeaponry.ModId, name), item);
     }
 
     public static <I extends Item> I registerItemRemovableRecipe(I item, String name, boolean removeRecipe) {
-        RecipeHandler.RECIPE_IDS.put(new Identifier(SoulsWeaponry.ModId, name), removeRecipe);
+        RecipeHandler.RECIPE_IDS.put(Identifier.of(SoulsWeaponry.ModId, name), removeRecipe);
         return registerItem(item, name);
     }
 

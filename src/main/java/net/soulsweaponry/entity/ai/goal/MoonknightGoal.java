@@ -470,7 +470,7 @@ public class MoonknightGoal extends Goal {
             if (entity instanceof LivingEntity living) {
                 entity.damage(CustomDamageSource.create(this.boss.getWorld(), CustomDamageSource.OBLITERATED, this.boss), this.getModifiedDamage(damage));
                 entity.addVelocity(0, 1, 0);
-                if (living.isUndead() && living.isDead() && this.isValidSpawn(living.getBlockPos())) {
+                if (living.hasInvertedHealingAndHarm() && living.isDead() && this.isValidSpawn(living.getBlockPos())) {
                     this.summonRemnant(living.getPos());
                 }
             }

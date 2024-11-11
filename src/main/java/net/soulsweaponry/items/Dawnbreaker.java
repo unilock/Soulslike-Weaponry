@@ -12,7 +12,7 @@ import net.soulsweaponry.client.renderer.item.DawnbreakerRenderer;
 import net.soulsweaponry.config.ConfigConstructor;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.client.RenderProvider;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.function.Consumer;

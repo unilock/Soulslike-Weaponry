@@ -32,13 +32,13 @@ import net.soulsweaponry.util.IKeybindAbility;
 import net.soulsweaponry.util.WeaponUtil;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.client.RenderProvider;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.Animation;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.Animation;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.ArrayList;
@@ -201,7 +201,7 @@ public class DraupnirSpear extends ChargeToUseItem implements GeoItem, IKeybindA
             if (string.equals("damage")) {
                 return WeaponUtil.getEnchantDamageBonus(stack);
             } else {
-                Identifier id = new Identifier(string);
+                Identifier id = Identifier.of(string);
                 Enchantment enchantment = Registries.ENCHANTMENT.get(id);
                 if (enchantment != null) {
                     return EnchantmentHelper.getLevel(enchantment, stack);

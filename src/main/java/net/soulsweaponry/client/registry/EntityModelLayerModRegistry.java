@@ -55,7 +55,7 @@ public class EntityModelLayerModRegistry {
         return create(id, "main");
     }
     private static EntityModelLayer create(String id, String layer) {
-        return new EntityModelLayer(new Identifier(SoulsWeaponry.ModId, id), layer);
+        return new EntityModelLayer(Identifier.of(SoulsWeaponry.ModId, id), layer);
     }
     private static void registerBiped(EntityModelLayer layer) {
         EntityModelLayerRegistry.registerModelLayer(layer, () -> TexturedModelData.of(BipedEntityModel.getModelData(Dilation.NONE, 0.0F), 64, 64));

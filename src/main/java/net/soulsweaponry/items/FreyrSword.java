@@ -18,8 +18,8 @@ import net.soulsweaponry.entitydata.FreyrSwordSummonData;
 import net.soulsweaponry.util.WeaponUtil;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.client.RenderProvider;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.UUID;
@@ -57,7 +57,7 @@ public class FreyrSword extends ModdedSword implements GeoItem {
             } else {
                 user.getInventory().removeOne(stack);
                 entity.setPos(user.getX(), user.getY(), user.getZ());
-                user.playSound(SoundEvents.ENTITY_ZOMBIE_VILLAGER_CONVERTED, SoundCategory.PLAYERS, 1f, 1f);
+                user.playSoundToPlayer(SoundEvents.ENTITY_ZOMBIE_VILLAGER_CONVERTED, SoundCategory.PLAYERS, 1f, 1f);
                 entity.setStationaryPos(FreyrSwordEntity.NULLISH_POS);
                 world.spawnEntity(entity);
             }

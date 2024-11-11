@@ -41,14 +41,14 @@ import net.soulsweaponry.registry.ParticleRegistry;
 import net.soulsweaponry.registry.SoundRegistry;
 import net.soulsweaponry.util.CustomDeathHandler;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.keyframe.event.ParticleKeyframeEvent;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animatable.instance.SingletonAnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
+import software.bernie.geckolib.animation.keyframe.event.ParticleKeyframeEvent;
 
 public class Moonknight extends BossEntity implements GeoEntity {
 
@@ -385,7 +385,7 @@ public class Moonknight extends BossEntity implements GeoEntity {
     }
 
     @Override
-    public boolean isUndead() {
+    public boolean hasInvertedHealingAndHarm() {
         return ConfigConstructor.fallen_icon_is_undead;
     }
 
@@ -438,18 +438,19 @@ public class Moonknight extends BossEntity implements GeoEntity {
         return SoundRegistry.KNIGHT_DEATH_EVENT;
     }
 
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(SPAWNING, Boolean.FALSE);
-        this.dataTracker.startTracking(PHASE_2, Boolean.FALSE);
-        this.dataTracker.startTracking(INITIATE_PHASE_2, Boolean.FALSE);
-        this.dataTracker.startTracking(UNBREAKABLE, Boolean.FALSE);
-        this.dataTracker.startTracking(CAN_BEAM, Boolean.FALSE);
-        this.dataTracker.startTracking(IS_SWORD_CHARGING, Boolean.FALSE);
-        this.dataTracker.startTracking(ATTACK, 0);
-        this.dataTracker.startTracking(BEAM_LOCATION, new BlockPos(0, 0, 0));
-        this.dataTracker.startTracking(BEAM_HEIGHT, 0f);
-        this.dataTracker.startTracking(INCREASING_BEAM_HEIGHT, false);
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(SPAWNING, Boolean.FALSE);
+        builder.add(PHASE_2, Boolean.FALSE);
+        builder.add(INITIATE_PHASE_2, Boolean.FALSE);
+        builder.add(UNBREAKABLE, Boolean.FALSE);
+        builder.add(CAN_BEAM, Boolean.FALSE);
+        builder.add(IS_SWORD_CHARGING, Boolean.FALSE);
+        builder.add(ATTACK, 0);
+        builder.add(BEAM_LOCATION, new BlockPos(0, 0, 0));
+        builder.add(BEAM_HEIGHT, 0f);
+        builder.add(INCREASING_BEAM_HEIGHT, false);
     }
 
     private PlayState predicate(AnimationState<?> state) {

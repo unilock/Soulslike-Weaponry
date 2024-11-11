@@ -1,9 +1,9 @@
 package net.soulsweaponry.items.armor;
 
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
 import net.soulsweaponry.items.IConfigDisable;
@@ -18,7 +18,7 @@ public abstract class ModdedArmor extends ArmorItem implements IConfigDisable {
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipType context) {
         if (this.isDisabled(stack)) {
             tooltip.add(Text.translatableWithFallback("tooltip.soulsweapons.disabled","Disabled"));
         }

@@ -3,7 +3,6 @@ package net.soulsweaponry.entity.mobs;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityStatuses;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -35,13 +34,13 @@ import net.soulsweaponry.registry.ItemRegistry;
 import net.soulsweaponry.registry.SoundRegistry;
 import net.soulsweaponry.util.IAnimatedDeath;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animatable.instance.SingletonAnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
 
 import java.util.Random;
 
@@ -74,10 +73,10 @@ public class WitheredDemon extends HostileEntity implements GeoEntity, IAnimated
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(SWING_ARM, Boolean.FALSE);
-        this.dataTracker.startTracking(DEATH, Boolean.FALSE);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(SWING_ARM, Boolean.FALSE);
+        builder.add(DEATH, Boolean.FALSE);
     }
 
     public boolean getSwingArm() {
@@ -104,10 +103,10 @@ public class WitheredDemon extends HostileEntity implements GeoEntity, IAnimated
         return true;
     }
 
-    @Override
-    public EntityGroup getGroup() {
-        return EntityGroup.UNDEAD;
-    }
+//    @Override
+//    public EntityGroup getGroup() {
+//        return EntityGroup.UNDEAD;
+//    }
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
@@ -303,7 +302,7 @@ public class WitheredDemon extends HostileEntity implements GeoEntity, IAnimated
     }
 
     @Override
-    public boolean isUndead() {
+    public boolean hasInvertedHealingAndHarm() {
         return true;
     }
 

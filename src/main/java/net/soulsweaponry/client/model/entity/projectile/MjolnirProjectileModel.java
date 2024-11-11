@@ -9,18 +9,18 @@ public class MjolnirProjectileModel extends GeoModel<MjolnirProjectile> {
 
     @Override
     public Identifier getAnimationResource(MjolnirProjectile animatable) {
-        return new Identifier(SoulsWeaponry.ModId, null);
+        return Identifier.of(SoulsWeaponry.ModId, null);
     }
 
     @Override
     public Identifier getModelResource(MjolnirProjectile object) {
-        return new Identifier(SoulsWeaponry.ModId, "geo/mjolnir.geo.json");
+        return Identifier.of(SoulsWeaponry.ModId, "geo/mjolnir.geo.json");
 
     }
 
     @Override
     public Identifier getTextureResource(MjolnirProjectile object) {
-        return new Identifier(SoulsWeaponry.ModId, "textures/entity/mjolnir_texture.png");
+        return Identifier.of(SoulsWeaponry.ModId, "textures/entity/mjolnir_texture.png");
     }
     
     

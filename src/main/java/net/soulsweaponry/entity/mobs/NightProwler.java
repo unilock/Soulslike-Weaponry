@@ -47,14 +47,14 @@ import net.soulsweaponry.registry.SoundRegistry;
 import net.soulsweaponry.util.CustomDeathHandler;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.Animation;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animatable.instance.SingletonAnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.Animation;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -203,19 +203,19 @@ public class NightProwler extends BossEntity implements GeoEntity {
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(ATTACKS, 0);
-        this.dataTracker.startTracking(INITIATING_PHASE_2, false);
-        this.dataTracker.startTracking(IS_PHASE_2, false);
-        this.dataTracker.startTracking(PARTNER_UUID, Optional.empty());
-        this.dataTracker.startTracking(REMAINING_ANI_TICKS, 0);
-        this.dataTracker.startTracking(IS_FLYING, false);
-        this.dataTracker.startTracking(TARGET_POS, new BlockPos(0, 0, 0));
-        this.dataTracker.startTracking(CHASE_TARGET, true);
-        this.dataTracker.startTracking(WAIT_ANIMATION, false);
-        this.dataTracker.startTracking(SPAWN_PARTICLES_STATE, 0);
-        this.dataTracker.startTracking(DARKNESS_RISE, false);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(ATTACKS, 0);
+        builder.add(INITIATING_PHASE_2, false);
+        builder.add(IS_PHASE_2, false);
+        builder.add(PARTNER_UUID, Optional.empty());
+        builder.add(REMAINING_ANI_TICKS, 0);
+        builder.add(IS_FLYING, false);
+        builder.add(TARGET_POS, new BlockPos(0, 0, 0));
+        builder.add(CHASE_TARGET, true);
+        builder.add(WAIT_ANIMATION, false);
+        builder.add(SPAWN_PARTICLES_STATE, 0);
+        builder.add(DARKNESS_RISE, false);
     }
 
     @Override
@@ -329,7 +329,7 @@ public class NightProwler extends BossEntity implements GeoEntity {
     }
 
     @Override
-    public boolean isUndead() {
+    public boolean hasInvertedHealingAndHarm() {
         return ConfigConstructor.night_prowler_is_undead;
     }
 

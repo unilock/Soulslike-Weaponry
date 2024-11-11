@@ -1,31 +1,80 @@
 package net.soulsweaponry.registry;
 
+import net.minecraft.component.EnchantmentEffectComponentTypes;
+import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
+import net.minecraft.enchantment.effect.EnchantmentEffectTarget;
+import net.minecraft.item.Item;
+import net.minecraft.registry.Registerable;
+import net.minecraft.registry.RegistryEntryLookup;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Identifier;
 import net.soulsweaponry.SoulsWeaponry;
-import net.soulsweaponry.config.ConfigConstructor;
-import net.soulsweaponry.enchantments.FastHandsEnchantment;
-import net.soulsweaponry.enchantments.StaggerEnchantment;
-import net.soulsweaponry.enchantments.VisceralEnchantment;
+import net.soulsweaponry.enchantments.StaggerEnchantmentEffect;
+import net.soulsweaponry.util.ModTags;
 
 public class EnchantRegistry {
 
-    public static final Enchantment FAST_HANDS = new FastHandsEnchantment(Enchantment.Rarity.RARE, new EquipmentSlot[] {EquipmentSlot.MAINHAND});
-    public static final Enchantment VISCERAL = new VisceralEnchantment(Enchantment.Rarity.UNCOMMON, new EquipmentSlot[] {EquipmentSlot.MAINHAND});
-    public static final Enchantment STAGGER = new StaggerEnchantment(Enchantment.Rarity.UNCOMMON, new EquipmentSlot[] {EquipmentSlot.MAINHAND});
+    public static final RegistryKey<Enchantment> FAST_HANDS = RegistryKey.of(RegistryKeys.ENCHANTMENT, Identifier.of(SoulsWeaponry.ModId, "fast_hands"));
+    public static final RegistryKey<Enchantment> STAGGER = RegistryKey.of(RegistryKeys.ENCHANTMENT, Identifier.of(SoulsWeaponry.ModId, "stagger"));
+    public static final RegistryKey<Enchantment> VISCERAL = RegistryKey.of(RegistryKeys.ENCHANTMENT, Identifier.of(SoulsWeaponry.ModId, "visceral"));
 
     public static void init() {
-        if (!ConfigConstructor.disable_all_enchantments) {
-            if (!ConfigConstructor.disable_enchantment_fast_hands) registerEnchantment(FAST_HANDS, "fast_hands");
-            if (!ConfigConstructor.disable_enchantment_posture_breaker) registerEnchantment(VISCERAL, "visceral");
-            if (!ConfigConstructor.disable_enchantment_stagger) registerEnchantment(STAGGER, "stagger");
-        }
     }
 
-    public static <I extends Enchantment> I registerEnchantment(I enchantment, String name) {
-		return Registry.register(Registries.ENCHANTMENT, new Identifier(SoulsWeaponry.ModId, name), enchantment);
-	}
+    public static void bootstrap(Registerable<Enchantment> registerable) {
+        RegistryEntryLookup<Item> itemLookup = registerable.getRegistryLookup(RegistryKeys.ITEM);
+
+        registerable.register(
+                FAST_HANDS,
+                Enchantment.builder(
+                        Enchantment.definition(
+                                itemLookup.getOrThrow(ModTags.Items.GUN_ENCHANTABLE),
+                                2,
+                                3,
+                                Enchantment.leveledCost(10, 10),
+                                Enchantment.leveledCost(15, 10),
+                                2,
+                                AttributeModifierSlot.MAINHAND
+                        )
+                ).build(FAST_HANDS.getValue())
+        );
+
+        registerable.register(
+                STAGGER,
+                Enchantment.builder(
+                        Enchantment.definition(
+                                itemLookup.getOrThrow(ItemTags.WEAPON_ENCHANTABLE),
+                                5,
+                                3,
+                                Enchantment.leveledCost(10, 10),
+                                Enchantment.leveledCost(15, 10),
+                                2,
+                                AttributeModifierSlot.MAINHAND
+                        )
+                ).addEffect(
+                        EnchantmentEffectComponentTypes.POST_ATTACK,
+                        EnchantmentEffectTarget.ATTACKER,
+                        EnchantmentEffectTarget.VICTIM,
+                        StaggerEnchantmentEffect.INSTANCE
+                ).build(STAGGER.getValue())
+        );
+
+        registerable.register(
+                VISCERAL,
+                Enchantment.builder(
+                        Enchantment.definition(
+                                itemLookup.getOrThrow(ModTags.Items.GUN_ENCHANTABLE),
+                                5,
+                                3,
+                                Enchantment.leveledCost(10, 10),
+                                Enchantment.leveledCost(15, 10),
+                                2,
+                                AttributeModifierSlot.MAINHAND
+                        )
+                ).build(VISCERAL.getValue())
+        );
+    }
 }

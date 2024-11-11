@@ -35,8 +35,8 @@ import net.soulsweaponry.util.IKeybindAbility;
 import net.soulsweaponry.util.WeaponUtil;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.client.RenderProvider;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.HashMap;
@@ -113,7 +113,7 @@ public class Nightfall extends UltraHeavyWeapon implements GeoItem, IKeybindAbil
     }
 
     public void spawnRemnant(LivingEntity target, LivingEntity attacker) {
-        if (target.isUndead() && target.isDead() && attacker instanceof PlayerEntity && !this.isDisabled(attacker.getMainHandStack())) {
+        if (target.hasInvertedHealingAndHarm() && target.isDead() && attacker instanceof PlayerEntity && !this.isDisabled(attacker.getMainHandStack())) {
             double chance = new Random().nextDouble();
             World world = attacker.getEntityWorld();
             if (!world.isClient && this.canSummonEntity((ServerWorld) world, attacker, this.getSummonsListId()) && chance < ConfigConstructor.nightfall_summon_chance) {

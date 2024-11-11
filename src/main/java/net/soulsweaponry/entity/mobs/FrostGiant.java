@@ -1,7 +1,6 @@
 package net.soulsweaponry.entity.mobs;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityStatuses;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -44,13 +43,13 @@ import net.soulsweaponry.registry.EffectRegistry;
 import net.soulsweaponry.util.IAnimatedDeath;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animatable.instance.SingletonAnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
 
 public class FrostGiant extends Remnant implements GeoEntity, IAnimatedDeath {
 
@@ -60,7 +59,7 @@ public class FrostGiant extends Remnant implements GeoEntity, IAnimatedDeath {
 
     public FrostGiant(EntityType<? extends TameableEntity> entityType, World world) {
         super(entityType, world);
-        this.setTamed(false);
+        this.setTamed(false, false);
     }
 
     @Override
@@ -68,7 +67,7 @@ public class FrostGiant extends Remnant implements GeoEntity, IAnimatedDeath {
         this.goalSelector.add(1, new SwimGoal(this));
         this.goalSelector.add(2, new SitGoal(this));
         this.goalSelector.add(3, new FrostGiantGoal(this));
-        this.goalSelector.add(6, new FollowOwnerGoal(this, 1.0D, 10.0F, 5.0F, false));
+        this.goalSelector.add(6, new FollowOwnerGoal(this, 1.0D, 10.0F, 5.0F));
         this.goalSelector.add(8, new WanderAroundFarGoal(this, 1.0D));
         this.goalSelector.add(10, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.add(10, new LookAroundGoal(this));
@@ -166,9 +165,9 @@ public class FrostGiant extends Remnant implements GeoEntity, IAnimatedDeath {
     }
 
     @Override
-    protected void initDataTracker() {
-        this.dataTracker.startTracking(SMASH, false);
-        super.initDataTracker();
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(SMASH, false);
     }
 
     @Override
@@ -181,10 +180,11 @@ public class FrostGiant extends Remnant implements GeoEntity, IAnimatedDeath {
         return this.factory;
     }
 
-    @Override
-    public EntityGroup getGroup() {
-        return EntityGroup.UNDEAD;
-    }
+    // TODO
+//    @Override
+//    public EntityGroup getGroup() {
+//        return EntityGroup.UNDEAD;
+//    }
 
     public static DefaultAttributeContainer.Builder createGiantAttributes() {
         return HostileEntity.createHostileAttributes()
@@ -272,7 +272,7 @@ public class FrostGiant extends Remnant implements GeoEntity, IAnimatedDeath {
                         }
                         this.mob.getWorld().playSound(null, this.mob.getBlockPos(), SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.HOSTILE, 1f, 1f);
                         this.mob.getWorld().playSound(null, this.mob.getBlockPos(), SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.HOSTILE, 1f, .5f);
-                        this.mob.getWorld().playSound(null, this.mob.getBlockPos(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.HOSTILE, 1f, 1f);
+                        this.mob.getWorld().playSound(null, this.mob.getBlockPos(), SoundEvents.ENTITY_GENERIC_EXPLODE.value(), SoundCategory.HOSTILE, 1f, 1f);
                     }
                     if (attackStatus >= 51) {
                         this.mob.setSmash(false);

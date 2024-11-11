@@ -38,13 +38,13 @@ import net.soulsweaponry.registry.ParticleRegistry;
 import net.soulsweaponry.registry.SoundRegistry;
 import net.soulsweaponry.util.CustomDeathHandler;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animatable.instance.SingletonAnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
 
 import java.util.List;
 
@@ -94,16 +94,17 @@ public class ReturningKnight extends BossEntity implements GeoEntity {
         return PlayState.CONTINUE;
     }
 
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(OBLITERATE, Boolean.FALSE);
-        this.dataTracker.startTracking(BLIND, Boolean.FALSE);
-        this.dataTracker.startTracking(SUMMON, Boolean.FALSE);
-        this.dataTracker.startTracking(RUPTURE, Boolean.FALSE);
-        this.dataTracker.startTracking(UNBREAKABLE, Boolean.FALSE);
-        this.dataTracker.startTracking(SPAWN, Boolean.FALSE);
-        this.dataTracker.startTracking(DEATH, Boolean.FALSE);
-        this.dataTracker.startTracking(MACE_OF_SPADES, Boolean.FALSE);
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(OBLITERATE, Boolean.FALSE);
+        builder.add(BLIND, Boolean.FALSE);
+        builder.add(SUMMON, Boolean.FALSE);
+        builder.add(RUPTURE, Boolean.FALSE);
+        builder.add(UNBREAKABLE, Boolean.FALSE);
+        builder.add(SPAWN, Boolean.FALSE);
+        builder.add(DEATH, Boolean.FALSE);
+        builder.add(MACE_OF_SPADES, Boolean.FALSE);
     }
 
     public static DefaultAttributeContainer.Builder createBossAttributes() {
@@ -285,7 +286,7 @@ public class ReturningKnight extends BossEntity implements GeoEntity {
     }
 
     @Override
-    public boolean isUndead() {
+    public boolean hasInvertedHealingAndHarm() {
         return ConfigConstructor.returning_knight_is_undead;
     }
 

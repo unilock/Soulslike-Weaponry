@@ -32,11 +32,11 @@ public class FlamePillar extends InvisibleWarmupEntity {
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(PARTICLE_MOD, 1f);
-        this.dataTracker.startTracking(RADIUS, 1.5f);
-        this.dataTracker.startTracking(DIVERGENCE, 1f);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(PARTICLE_MOD, 1f);
+        builder.add(RADIUS, 1.5f);
+        builder.add(DIVERGENCE, 1f);
     }
 
     @Override

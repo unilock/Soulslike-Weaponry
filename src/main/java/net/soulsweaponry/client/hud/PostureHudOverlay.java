@@ -13,9 +13,9 @@ import net.soulsweaponry.entitydata.PostureData;
 
 public class PostureHudOverlay implements HudRenderCallback {
 
-    private static final Identifier FILLED_BAR = new Identifier(SoulsWeaponry.ModId, "textures/gui/posture/full.png");
-    private static final Identifier EMPTY_BAR = new Identifier(SoulsWeaponry.ModId, "textures/gui/posture/empty.png");
-    private static final Identifier ICON = new Identifier(SoulsWeaponry.ModId, "textures/gui/posture/icon.png");
+    private static final Identifier FILLED_BAR = Identifier.of(SoulsWeaponry.ModId, "textures/gui/posture/full.png");
+    private static final Identifier EMPTY_BAR = Identifier.of(SoulsWeaponry.ModId, "textures/gui/posture/empty.png");
+    private static final Identifier ICON = Identifier.of(SoulsWeaponry.ModId, "textures/gui/posture/icon.png");
 
     @Override
     public void onHudRender(DrawContext drawContext, float tickDelta) {

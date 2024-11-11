@@ -26,9 +26,9 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.slf4j.Logger;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animatable.instance.SingletonAnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
 
 public class MoonlightProjectile extends NonArrowProjectile implements GeoEntity {
 
@@ -60,16 +60,16 @@ public class MoonlightProjectile extends NonArrowProjectile implements GeoEntity
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(POINTS, 75);
-        this.dataTracker.startTracking(TICK_PARTICLES, 4);
-        this.dataTracker.startTracking(MAX_AGE, 30);
-        this.dataTracker.startTracking(HUGE_EXPLOSION, false);
-        this.dataTracker.startTracking(ROTATE_STATE, 0);
-        this.dataTracker.startTracking(EXPLOSION_PARTICLE, ParticleTypes.SOUL_FIRE_FLAME);
-        this.dataTracker.startTracking(TRAIL_PARTICLE, ParticleTypes.GLOW);
-        this.dataTracker.startTracking(APPLY_FIRE_TICKS, 0);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(POINTS, 75);
+        builder.add(TICK_PARTICLES, 4);
+        builder.add(MAX_AGE, 30);
+        builder.add(HUGE_EXPLOSION, false);
+        builder.add(ROTATE_STATE, 0);
+        builder.add(EXPLOSION_PARTICLE, ParticleTypes.SOUL_FIRE_FLAME);
+        builder.add(TRAIL_PARTICLE, ParticleTypes.GLOW);
+        builder.add(APPLY_FIRE_TICKS, 0);
     }
 
     public void setAgeAndPoints(int maxAge, int explosionPoints, int tickParticleAmount) {

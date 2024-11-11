@@ -3,6 +3,7 @@ package net.soulsweaponry.items;
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.WitherSkullEntity;
 import net.minecraft.item.ItemStack;
@@ -16,8 +17,8 @@ import net.soulsweaponry.config.ConfigConstructor;
 import net.soulsweaponry.util.WeaponUtil;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.client.RenderProvider;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.UUID;
@@ -65,7 +66,7 @@ public class ForlornScythe extends SoulHarvestingItem implements GeoItem {
                     this.setPrevUuid(stack, entity);
                     if (!user.isCreative()) this.addAmount(stack, -1);
                     user.getItemCooldownManager().set(this, 10);
-                    stack.damage(1, user, (p_220045_0_) -> p_220045_0_.sendToolBreakStatus(hand));
+                    stack.damage(1, user, hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
                     return TypedActionResult.success(stack, world.isClient());
                 }
             }

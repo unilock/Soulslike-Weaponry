@@ -42,9 +42,9 @@ public class DragonslayerSwordspearEntity extends PersistentProjectileEntity {
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(ENCHANTED, false);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(ENCHANTED, false);
     }
 
     public void tick() {

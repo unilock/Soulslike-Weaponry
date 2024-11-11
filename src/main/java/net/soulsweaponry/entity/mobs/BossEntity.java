@@ -1,7 +1,6 @@
 package net.soulsweaponry.entity.mobs;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.BossBar.Color;
@@ -174,22 +173,23 @@ public abstract class BossEntity extends HostileEntity implements IAnimatedDeath
     public abstract boolean isFireImmune();
 
     @Override
-    public abstract boolean isUndead();
+    public abstract boolean hasInvertedHealingAndHarm();
 
-    @Override
-    public EntityGroup getGroup() {
-        String id = this.getGroupId();
-        if (id == null) {
-            return EntityGroup.DEFAULT;
-        }
-        return switch (id.toUpperCase()) {
-            case "UNDEAD" -> EntityGroup.UNDEAD;
-            case "ARTHROPOD" -> EntityGroup.ARTHROPOD;
-            case "ILLAGER" -> EntityGroup.ILLAGER;
-            case "AQUATIC" -> EntityGroup.AQUATIC;
-            default -> EntityGroup.DEFAULT;
-        };
-    }
+    // TODO
+//    @Override
+//    public EntityGroup getGroup() {
+//        String id = this.getGroupId();
+//        if (id == null) {
+//            return EntityGroup.DEFAULT;
+//        }
+//        return switch (id.toUpperCase()) {
+//            case "UNDEAD" -> EntityGroup.UNDEAD;
+//            case "ARTHROPOD" -> EntityGroup.ARTHROPOD;
+//            case "ILLAGER" -> EntityGroup.ILLAGER;
+//            case "AQUATIC" -> EntityGroup.AQUATIC;
+//            default -> EntityGroup.DEFAULT;
+//        };
+//    }
 
     @Override
     public abstract boolean disablesShield();

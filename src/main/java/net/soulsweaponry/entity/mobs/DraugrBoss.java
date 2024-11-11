@@ -35,14 +35,14 @@ import net.soulsweaponry.registry.ParticleRegistry;
 import net.soulsweaponry.registry.SoundRegistry;
 import net.soulsweaponry.util.CustomDeathHandler;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.Animation;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animatable.instance.SingletonAnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.Animation;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
 
 import java.util.Objects;
 
@@ -113,13 +113,14 @@ public class DraugrBoss extends BossEntity implements GeoEntity {
         .add(EntityAttributes.GENERIC_ARMOR, 5.0D);
     }
 
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(IS_SHIELDING, Boolean.FALSE);
-        this.dataTracker.startTracking(POSTURE_BROKEN, Boolean.FALSE);
-        this.dataTracker.startTracking(STATES, 0);
-        this.dataTracker.startTracking(SAME_WEAPON_COUNT, 0);
-        this.dataTracker.startTracking(POS, new BlockPos(0,0,0));
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(IS_SHIELDING, Boolean.FALSE);
+        builder.add(POSTURE_BROKEN, Boolean.FALSE);
+        builder.add(STATES, 0);
+        builder.add(SAME_WEAPON_COUNT, 0);
+        builder.add(POS, new BlockPos(0,0,0));
     }
 
 
@@ -291,7 +292,7 @@ public class DraugrBoss extends BossEntity implements GeoEntity {
     }
 
     @Override
-    public boolean isUndead() {
+    public boolean hasInvertedHealingAndHarm() {
         return ConfigConstructor.old_champions_remains_is_undead;
     }
 

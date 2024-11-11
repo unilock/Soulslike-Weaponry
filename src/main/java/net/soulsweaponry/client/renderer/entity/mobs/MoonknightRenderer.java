@@ -25,7 +25,7 @@ public class MoonknightRenderer extends GeoEntityRenderer<Moonknight> {
     int[] rgbColorThree = {106, 73, 156};
     int[] rgbColorFour = {176, 253, 252};
     double[] translation = {0, 4, 0};
-    public static final Identifier CRYSTAL_BEAM_TEXTURE = new Identifier(SoulsWeaponry.ModId, "textures/entity/core_beam.png");
+    public static final Identifier CRYSTAL_BEAM_TEXTURE = Identifier.of(SoulsWeaponry.ModId, "textures/entity/core_beam.png");
     private static final RenderLayer CRYSTAL_BEAM_LAYER = RenderLayer.getEntitySmoothCutout(CRYSTAL_BEAM_TEXTURE);
     
     public MoonknightRenderer(Context ctx) {

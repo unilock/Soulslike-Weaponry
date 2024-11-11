@@ -60,8 +60,8 @@ public class Skofnung extends ModdedSword {
         Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
         if (slot == EquipmentSlot.MAINHAND && isEmpowered(stack)) {
             Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
-            builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", ConfigConstructor.skofnung_damage + (ConfigConstructor.skofnung_bonus_damage - 1), EntityAttributeModifier.Operation.ADDITION));
-            builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", this.getAttackSpeed(), EntityAttributeModifier.Operation.ADDITION));
+            builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(BASE_ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", ConfigConstructor.skofnung_damage + (ConfigConstructor.skofnung_bonus_damage - 1), EntityAttributeModifier.Operation.ADD_VALUE));
+            builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(BASE_ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", this.getAttackSpeed(), EntityAttributeModifier.Operation.ADD_VALUE));
             attributeModifiers = builder.build();
             return attributeModifiers;
         }

@@ -134,8 +134,8 @@ public class DragonslayerSwordspear extends ChargeToUseItem {
         Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
         if (slot == EquipmentSlot.MAINHAND && this.getRaining(stack)) {
             Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
-            builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", ConfigConstructor.dragonslayer_swordspear_damage + ConfigConstructor.dragonslayer_swordspear_rain_bonus_damage - 1, EntityAttributeModifier.Operation.ADDITION));
-            builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", - (4f - ConfigConstructor.dragonslayer_swordspear_rain_total_attack_speed), EntityAttributeModifier.Operation.ADDITION));
+            builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(BASE_ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", ConfigConstructor.dragonslayer_swordspear_damage + ConfigConstructor.dragonslayer_swordspear_rain_bonus_damage - 1, EntityAttributeModifier.Operation.ADD_VALUE));
+            builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(BASE_ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", - (4f - ConfigConstructor.dragonslayer_swordspear_rain_total_attack_speed), EntityAttributeModifier.Operation.ADD_VALUE));
             attributeModifiers = builder.build();
             return attributeModifiers;
         } else {

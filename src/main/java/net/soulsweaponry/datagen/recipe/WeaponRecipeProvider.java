@@ -34,55 +34,55 @@ public class WeaponRecipeProvider extends FabricRecipeProvider {
         SmithingTransformRecipeJsonBuilder.create(smithingTemplate, base, addition, recipeCategory, output)
                 .criterion("has_item", conditionsFromItemPredicates(ItemPredicate.Builder.create()
                         .items(itemCriterion).build()))
-                .offerTo(exporter, new Identifier(SoulsWeaponry.ModId, output.toString()));
+                .offerTo(exporter, Identifier.of(SoulsWeaponry.ModId, output.toString()));
     }
 
     public static void smithingRecipeCombat(Ingredient smithingTemplate, Ingredient base, Ingredient addition, Item output, Item itemCriterion, RecipeExporter exporter) {
         SmithingTransformRecipeJsonBuilder.create(smithingTemplate, base, addition, RecipeCategory.COMBAT, output)
                 .criterion("has_item", conditionsFromItemPredicates(ItemPredicate.Builder.create()
                         .items(itemCriterion).build()))
-                .offerTo(exporter, new Identifier(SoulsWeaponry.ModId, output.toString()));
+                .offerTo(exporter, Identifier.of(SoulsWeaponry.ModId, output.toString()));
     }
 
     public static void smithingRecipeLordSoul(Ingredient base, Item output, RecipeCategory category, RecipeExporter exporter) {
         SmithingTransformRecipeJsonBuilder.create(Ingredient.ofItems(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), base, Ingredient.fromTag(ModTags.Items.LORD_SOUL), category, output)
                 .criterion("has_lord_soul", conditionsFromItemPredicates(ItemPredicate.Builder.create()
                         .tag(ModTags.Items.LORD_SOUL).build()))
-                .offerTo(exporter, new Identifier(SoulsWeaponry.ModId, output.toString()));
+                .offerTo(exporter, Identifier.of(SoulsWeaponry.ModId, output.toString()));
     }
 
     public static void smithingRecipeLordSoulCombat(Ingredient base, Item output, RecipeExporter exporter) {
         SmithingTransformRecipeJsonBuilder.create(Ingredient.ofItems(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), base, Ingredient.fromTag(ModTags.Items.LORD_SOUL), RecipeCategory.COMBAT, output)
                 .criterion("has_lord_soul", conditionsFromItemPredicates(ItemPredicate.Builder.create()
                         .tag(ModTags.Items.LORD_SOUL).build()))
-                .offerTo(exporter, new Identifier(SoulsWeaponry.ModId, output.toString()));
+                .offerTo(exporter, Identifier.of(SoulsWeaponry.ModId, output.toString()));
     }
 
     public static void smeltingRecipe(Ingredient ingredient, Item result, float expGain, int cookingTime, Item itemCriterion, RecipeExporter exporter) {
         CookingRecipeJsonBuilder.createSmelting(ingredient, RecipeCategory.MISC, result, expGain, cookingTime)
                 .criterion("has_item", conditionsFromItemPredicates(ItemPredicate.Builder.create()
                         .items(itemCriterion).build()))
-                .offerTo(exporter, new Identifier(SoulsWeaponry.ModId, result.toString()));
+                .offerTo(exporter, Identifier.of(SoulsWeaponry.ModId, result.toString()));
     }
 
     public static void smeltingRecipe(Ingredient ingredient, Item result, float expGain, int cookingTime, TagKey<Item> itemTag, RecipeExporter exporter) {
         CookingRecipeJsonBuilder.createSmelting(ingredient, RecipeCategory.MISC, result, expGain, cookingTime)
                 .criterion("has_item", conditionsFromItemPredicates(ItemPredicate.Builder.create()
                         .tag(itemTag).build()))
-                .offerTo(exporter, new Identifier(SoulsWeaponry.ModId, result.toString()));
+                .offerTo(exporter, Identifier.of(SoulsWeaponry.ModId, result.toString()));
     }
 
     public static void smeltingRecipe(Ingredient ingredient, Item result, float expGain, int cookingTime, Item itemCriterion, RecipeExporter exporter, String fileId) {
         CookingRecipeJsonBuilder.createSmelting(ingredient, RecipeCategory.MISC, result, expGain, cookingTime)
                 .criterion("has_item", conditionsFromItemPredicates(ItemPredicate.Builder.create()
                         .items(itemCriterion).build()))
-                .offerTo(exporter, new Identifier(SoulsWeaponry.ModId, fileId));
+                .offerTo(exporter, Identifier.of(SoulsWeaponry.ModId, fileId));
     }
 
     public static void smeltingRecipe(Ingredient ingredient, Item result, float expGain, int cookingTime, TagKey<Item> itemTag, RecipeExporter exporter, String fileId) {
         CookingRecipeJsonBuilder.createSmelting(ingredient, RecipeCategory.MISC, result, expGain, cookingTime)
                 .criterion("has_item", conditionsFromItemPredicates(ItemPredicate.Builder.create()
                         .tag(itemTag).build()))
-                .offerTo(exporter, new Identifier(SoulsWeaponry.ModId, fileId));
+                .offerTo(exporter, Identifier.of(SoulsWeaponry.ModId, fileId));
     }
 }

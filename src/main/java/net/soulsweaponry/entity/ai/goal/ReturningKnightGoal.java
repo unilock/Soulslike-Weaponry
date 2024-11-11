@@ -205,7 +205,7 @@ public class ReturningKnightGoal extends Goal {
                         if (entity instanceof LivingEntity living) {
                             entity.damage(CustomDamageSource.create(this.boss.getWorld(), CustomDamageSource.OBLITERATED, this.boss), this.getModifiedDamage(60f));
                             entity.setVelocity(entity.getVelocity().x, 1, entity.getVelocity().z);
-                            if (living.isUndead() && living.isDead() && this.isValidSpawn(living.getBlockPos())) {
+                            if (living.hasInvertedHealingAndHarm() && living.isDead() && this.isValidSpawn(living.getBlockPos())) {
                                 this.summonAllies(living.getPos(), false);
                             }
                         }

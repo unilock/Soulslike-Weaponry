@@ -15,7 +15,7 @@ import net.soulsweaponry.client.registry.EntityModelLayerModRegistry;
 import net.soulsweaponry.entity.projectile.DragonslayerSwordspearEntity;
 
 public class DragonslayerSwordspearRenderer extends EntityRenderer<DragonslayerSwordspearEntity> {
-    public static final Identifier TEXTURE = new Identifier("soulsweapons","textures/entity/dragonslayer_swordspear.png");
+    public static final Identifier TEXTURE = Identifier.of("soulsweapons","textures/entity/dragonslayer_swordspear.png");
     private final DragonslayerSwordspearModel model;
 
     public DragonslayerSwordspearRenderer(EntityRendererFactory.Context context) {

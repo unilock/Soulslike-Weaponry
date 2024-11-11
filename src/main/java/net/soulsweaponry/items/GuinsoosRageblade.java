@@ -25,7 +25,7 @@ public class GuinsoosRageblade extends ModdedSword {
         if (attacker.isOnFire()) {
             attacker.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 200, 2));
         }
-        int speed = EnchantmentHelper.getLevel(Enchantments.SWEEPING, stack);
+        int speed = EnchantmentHelper.getLevel(Enchantments.SWEEPING_EDGE, stack);
         if (attacker.hasStatusEffect(StatusEffects.HASTE)) {
             StatusEffectInstance effect = attacker.getStatusEffect(StatusEffects.HASTE);
             int amplifier = effect.getAmplifier();

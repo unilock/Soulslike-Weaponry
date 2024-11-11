@@ -19,9 +19,9 @@ import net.soulsweaponry.entitydata.PostureData;
 import net.soulsweaponry.registry.EntityRegistry;
 import net.soulsweaponry.registry.ItemRegistry;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animatable.instance.SingletonAnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
 
 public class SilverBulletEntity extends NonArrowProjectile implements GeoEntity {
 
@@ -85,7 +85,7 @@ public class SilverBulletEntity extends NonArrowProjectile implements GeoEntity 
                 posture = MathHelper.floor((float) posture * ConfigConstructor.silver_bullet_posture_loss_on_player_modifier);
             }
             PostureData.addPosture((IEntityDataSaver) target, posture);
-            if (target.isUndead()) {
+            if (target.hasInvertedHealingAndHarm()) {
                 this.setDamage(this.getDamage() + (ConfigConstructor.silver_bullet_undead_bonus_damage / this.getVelocity().length()));
             }
         }

@@ -32,7 +32,7 @@ public interface ICooldownItem {
             if (string.equals("damage")) {
                 return WeaponUtil.getEnchantDamageBonus(stack);
             } else {
-                Identifier id = new Identifier(string);
+                Identifier id = Identifier.of(string);
                 Enchantment enchantment = Registries.ENCHANTMENT.get(id);
                 if (enchantment != null) {
                     return EnchantmentHelper.getLevel(enchantment, stack);
@@ -48,7 +48,7 @@ public interface ICooldownItem {
             if (string.equals("damage")) {
                 return WeaponUtil.getEnchantDamageBonus(stack);
             } else {
-                Identifier id = new Identifier(string);
+                Identifier id = Identifier.of(string);
                 Enchantment enchantment = Registries.ENCHANTMENT.get(id);
                 if (enchantment != null) {
                     return EnchantmentHelper.getLevel(enchantment, stack);

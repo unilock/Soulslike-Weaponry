@@ -17,6 +17,6 @@ public class DarkSorcererParentRenderer<T extends DarkSorcerer, M extends DarkSo
 
     @Override
     public Identifier getTexture(T entity) {
-        return new Identifier(SoulsWeaponry.ModId, "textures/entity/dark_sorcerer.png");
+        return Identifier.of(SoulsWeaponry.ModId, "textures/entity/dark_sorcerer.png");
     }
 }

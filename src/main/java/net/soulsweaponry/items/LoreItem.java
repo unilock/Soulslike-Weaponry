@@ -1,9 +1,9 @@
 package net.soulsweaponry.items;
 
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
@@ -26,7 +26,7 @@ public class LoreItem extends Item {
     }
     
     @Override
-    public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+    public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipType context) {
         super.appendTooltip(stack, world, tooltip, context);
         if (Screen.hasControlDown()) {
             for (int i = 1; i < linesOfLore + 1; i++) {

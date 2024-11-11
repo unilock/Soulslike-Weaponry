@@ -1,6 +1,5 @@
 package net.soulsweaponry.registry;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -96,12 +95,12 @@ public class BlockRegistry {
 
     public static <I extends Block> I registerBlock(I block, String name) {
         registerBlockItem(block, name);
-		return Registry.register(Registries.BLOCK, new Identifier(SoulsWeaponry.ModId, name), block);
+		return Registry.register(Registries.BLOCK, Identifier.of(SoulsWeaponry.ModId, name), block);
 	}
 
     public static Item registerBlockItem(Block block, String name) {
-        Item item = new BlockItem(block, new FabricItemSettings());
+        Item item = new BlockItem(block, new Item.Settings());
         SoulsWeaponry.ITEM_GROUP_LIST.add(item);
-        return Registry.register(Registries.ITEM, new Identifier(SoulsWeaponry.ModId, name), item);
+        return Registry.register(Registries.ITEM, Identifier.of(SoulsWeaponry.ModId, name), item);
     }
 }

@@ -40,14 +40,14 @@ import net.soulsweaponry.registry.ParticleRegistry;
 import net.soulsweaponry.registry.SoundRegistry;
 import net.soulsweaponry.util.CustomDeathHandler;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.Animation;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animatable.instance.SingletonAnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.Animation;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
 
 public class NightShade extends BossEntity implements GeoEntity {
     private final AnimatableInstanceCache factory = new SingletonAnimatableInstanceCache(this);
@@ -87,11 +87,12 @@ public class NightShade extends BossEntity implements GeoEntity {
         this.targetSelector.add(5, (new RevengeGoal(this)).setGroupRevenge());
 	}
 
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(CHARGING, Boolean.FALSE);
-        this.dataTracker.startTracking(ATTACK_STATE, 0);
-        this.dataTracker.startTracking(POS, new BlockPos(0,0,0));
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(CHARGING, Boolean.FALSE);
+        builder.add(ATTACK_STATE, 0);
+        builder.add(POS, new BlockPos(0,0,0));
     }
 
     public enum AttackStates {
@@ -284,7 +285,7 @@ public class NightShade extends BossEntity implements GeoEntity {
         }
 
         private boolean isInsideWall() {
-            float f = NightShade.this.getDimensions(EntityPose.STANDING).width * 0.8f;
+            float f = NightShade.this.getDimensions(EntityPose.STANDING).width() * 0.8f;
             Box box = Box.of(NightShade.this.getEyePos(), f, 1.0E-6, f);
             return BlockPos.stream(box).anyMatch(pos -> {
                 BlockState blockState = NightShade.this.getWorld().getBlockState(pos);
@@ -348,7 +349,7 @@ public class NightShade extends BossEntity implements GeoEntity {
     }
 
     @Override
-    public boolean isUndead() {
+    public boolean hasInvertedHealingAndHarm() {
         return ConfigConstructor.frenzied_shade_is_undead;
     }
 

@@ -9,17 +9,17 @@ public class ChaosArmorModel extends GeoModel<ChaosSet> {
 
     @Override
     public Identifier getAnimationResource(ChaosSet animatable) {
-        return new Identifier(SoulsWeaponry.ModId, "animations/chaos_armor.animation.json");
+        return Identifier.of(SoulsWeaponry.ModId, "animations/chaos_armor.animation.json");
     }
 
     @Override
     public Identifier getModelResource(ChaosSet object) {
-        return new Identifier(SoulsWeaponry.ModId, "geo/chaos_armor.geo.json");
+        return Identifier.of(SoulsWeaponry.ModId, "geo/chaos_armor.geo.json");
     }
 
     @Override
     public Identifier getTextureResource(ChaosSet object) {
-        return new Identifier(SoulsWeaponry.ModId, "textures/armor/chaos_armor.png");
+        return Identifier.of(SoulsWeaponry.ModId, "textures/armor/chaos_armor.png");
     }
     
 }

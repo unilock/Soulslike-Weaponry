@@ -18,6 +18,6 @@ public class BigChungusRenderer extends MobEntityRenderer<BigChungus, BigChungus
 
     @Override
     public Identifier getTexture(BigChungus entity) {
-        return new Identifier("soulsweapons", "textures/entity/" + (entity.isBosnian() ? "bosnian_big_chungus.png" : "big_chungus.png"));
+        return Identifier.of("soulsweapons", "textures/entity/" + (entity.isBosnian() ? "bosnian_big_chungus.png" : "big_chungus.png"));
     }
 }

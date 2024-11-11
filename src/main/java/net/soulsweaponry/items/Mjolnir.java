@@ -33,8 +33,8 @@ import net.soulsweaponry.registry.EntityRegistry;
 import net.soulsweaponry.util.WeaponUtil;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.client.RenderProvider;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
@@ -189,8 +189,8 @@ public class Mjolnir extends ChargeToUseItem implements GeoItem {
         Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
         if (slot == EquipmentSlot.MAINHAND) {
             Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
-            builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", this.isRaining(stack) && !this.isDisabled(stack) ? ConfigConstructor.mjolnir_rain_bonus_damage - 1 + ConfigConstructor.mjolnir_damage : ConfigConstructor.mjolnir_damage - 1, EntityAttributeModifier.Operation.ADDITION));
-            builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", - (4f - ConfigConstructor.mjolnir_rain_total_attack_speed), EntityAttributeModifier.Operation.ADDITION));
+            builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(BASE_ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", this.isRaining(stack) && !this.isDisabled(stack) ? ConfigConstructor.mjolnir_rain_bonus_damage - 1 + ConfigConstructor.mjolnir_damage : ConfigConstructor.mjolnir_damage - 1, EntityAttributeModifier.Operation.ADD_VALUE));
+            builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(BASE_ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", - (4f - ConfigConstructor.mjolnir_rain_total_attack_speed), EntityAttributeModifier.Operation.ADD_VALUE));
             attributeModifiers = builder.build();
             return attributeModifiers;
         } else {

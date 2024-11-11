@@ -71,7 +71,7 @@ public class SoundRegistry {
     public static SoundEvent TRINITY = registerSound("trinity");
 
 	public static Identifier registerId(String name) {
-		return new Identifier(SoulsWeaponry.ModId + ":" + name);
+		return Identifier.of(SoulsWeaponry.ModId + ":" + name);
 	}
 
     public static SoundEvent registerSound(String id) {

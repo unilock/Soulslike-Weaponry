@@ -1,5 +1,6 @@
 package net.soulsweaponry.entity.mobs;
 
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -23,25 +24,26 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.SmallFireballEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.world.EntityView;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.soulsweaponry.registry.SoundRegistry;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.Animation;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animatable.instance.SingletonAnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.Animation;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
 
 import java.util.EnumSet;
 
@@ -93,9 +95,9 @@ public class WarmthEntity extends TameableEntity implements GeoEntity {
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(STATES, 0);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(STATES, 0);
     }
 
     public static DefaultAttributeContainer.Builder createEntityAttributes() {
@@ -105,11 +107,6 @@ public class WarmthEntity extends TameableEntity implements GeoEntity {
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.23D)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6D)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 30D);
-    }
-
-    @Override
-    public EntityView method_48926() {
-        return super.getWorld();
     }
 
     @Nullable
@@ -135,8 +132,8 @@ public class WarmthEntity extends TameableEntity implements GeoEntity {
 
     @Override
     public void tickMovement() {
-        if (this.getWorld().isClient) {
-            this.getWorld().addParticle(ParticleTypes.FLAME, this.getParticleX(0.5), this.getRandomBodyY(), this.getParticleZ(0.5), 0.0, 0.0, 0.0);
+        if (this.getWorld() instanceof ClientWorld clientWorld) {
+            clientWorld.addParticle(ParticleTypes.FLAME, this.getParticleX(0.5), this.getRandomBodyY(), this.getParticleZ(0.5), 0.0, 0.0, 0.0);
         }
         super.tickMovement();
     }
@@ -149,8 +146,8 @@ public class WarmthEntity extends TameableEntity implements GeoEntity {
     @Override
     public void onSpawnPacket(EntitySpawnS2CPacket packet) {
         super.onSpawnPacket(packet);
-        if (this.getWorld().isClient) {
-            this.particleExplosion();
+        if (this.getWorld() instanceof ClientWorld clientWorld) {
+            this.particleExplosion(clientWorld);
         }
     }
 
@@ -165,8 +162,8 @@ public class WarmthEntity extends TameableEntity implements GeoEntity {
     @Override
     public void onDeath(DamageSource damageSource) {
         super.onDeath(damageSource);
-        if (this.getWorld().isClient) {
-            this.particleExplosion();
+        if (this.getWorld() instanceof ClientWorld clientWorld) {
+            this.particleExplosion(clientWorld);
         }
         this.discard();
     }
@@ -188,7 +185,7 @@ public class WarmthEntity extends TameableEntity implements GeoEntity {
         return true;
     }
 
-    private void particleExplosion() {
+    private void particleExplosion(ClientWorld clientWorld) {
         double phi = Math.PI * (3. - Math.sqrt(5.));
         float points = 100f;
         for (int i = 0; i < points; i++) {
@@ -197,8 +194,13 @@ public class WarmthEntity extends TameableEntity implements GeoEntity {
             double theta = phi * i;
             double velocityX = Math.cos(theta) * radius;
             double velocityZ = Math.sin(theta) * radius;
-            getWorld().addParticle(ParticleTypes.FLAME, true, this.getX(), this.getBodyY(0.5D), this.getZ(), velocityX*0.4f, velocityY*0.4f, velocityZ*0.4f);
+            clientWorld.addParticle(ParticleTypes.FLAME, true, this.getX(), this.getBodyY(0.5D), this.getZ(), velocityX * 0.4f, velocityY * 0.4f, velocityZ * 0.4f);
         }
+    }
+
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return false;
     }
 
     static class WarmthEntityGoal
@@ -259,7 +261,7 @@ public class WarmthEntity extends TameableEntity implements GeoEntity {
             double g = livingEntity.getZ() - this.entity.getZ();
             if (this.attackStatus == 7 || this.attackStatus == 15 || this.attackStatus == 21) {
                 this.entity.getWorld().playSound(null, this.entity.getBlockPos(), SoundEvents.ENTITY_BLAZE_SHOOT, SoundCategory.HOSTILE, 1f, 1f);
-                SmallFireballEntity smallFireballEntity = new SmallFireballEntity(this.entity.getWorld(), this.entity, e, f, g);
+                SmallFireballEntity smallFireballEntity = new SmallFireballEntity(this.entity.getWorld(), this.entity, new Vec3d(e, f, g));
                 smallFireballEntity.setPosition(smallFireballEntity.getX(), this.entity.getBodyY(0.5f), smallFireballEntity.getZ());
                 this.entity.getWorld().spawnEntity(smallFireballEntity);
             }

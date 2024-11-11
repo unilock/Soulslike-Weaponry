@@ -19,8 +19,8 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -37,13 +37,13 @@ import net.soulsweaponry.registry.ParticleRegistry;
 import net.soulsweaponry.registry.SoundRegistry;
 import net.soulsweaponry.util.CustomDeathHandler;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animatable.instance.SingletonAnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
 
 public class ChaosMonarch extends BossEntity implements GeoEntity {
 
@@ -93,9 +93,9 @@ public class ChaosMonarch extends BossEntity implements GeoEntity {
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(ATTACK, 0);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(ATTACK, 0);
     }
 
     @Override
@@ -128,8 +128,8 @@ public class ChaosMonarch extends BossEntity implements GeoEntity {
         super.tickMovement();
         if (this.getAttack() == Attack.SPAWN) {
             this.spawnTicks++;
-            DefaultParticleType[] dragonParticles = {ParticleTypes.DRAGON_BREATH, ParticleTypes.DRAGON_BREATH};
-            DefaultParticleType[] portalParticles = {ParticleTypes.PORTAL};
+            SimpleParticleType[] dragonParticles = {ParticleTypes.DRAGON_BREATH, ParticleTypes.DRAGON_BREATH};
+            SimpleParticleType[] portalParticles = {ParticleTypes.PORTAL};
             if (this.spawnTicks % 2 == 0 && this.spawnTicks < 20) {
                 this.particleExplosion(portalParticles, 4f);
             }
@@ -195,11 +195,11 @@ public class ChaosMonarch extends BossEntity implements GeoEntity {
         cape.turnBlocks(this, world, blockPos, 3);
     }
 
-    private void particleExplosion(DefaultParticleType[] particles, float sizeModifier) {
+    private void particleExplosion(SimpleParticleType[] particles, float sizeModifier) {
         this.roundParticleOutburst(this.getWorld(), 1000, particles, this.getX(), this.getY() + 3, this.getZ(), sizeModifier);
     }
 
-    public void roundParticleOutburst(World world, double points, DefaultParticleType[] particles, double x, double y, double z, float sizeModifier) {
+    public void roundParticleOutburst(World world, double points, SimpleParticleType[] particles, double x, double y, double z, float sizeModifier) {
         double phi = Math.PI * (3. - Math.sqrt(5.));
         for (int i = 0; i < points; i++) {
             double velocityY = 1 - (i/(points - 1)) * 2;
@@ -207,7 +207,7 @@ public class ChaosMonarch extends BossEntity implements GeoEntity {
             double theta = phi * i;
             double velocityX = Math.cos(theta) * radius;
             double velocityZ = Math.sin(theta) * radius;
-            for (DefaultParticleType particle : particles) {
+            for (SimpleParticleType particle : particles) {
                 world.addParticle(particle, true, x, y, z, velocityX * sizeModifier, velocityY * sizeModifier, velocityZ * sizeModifier);
             }
         } 
@@ -268,7 +268,7 @@ public class ChaosMonarch extends BossEntity implements GeoEntity {
     }
 
     @Override
-    public boolean isUndead() {
+    public boolean hasInvertedHealingAndHarm() {
         return ConfigConstructor.chaos_monarch_is_undead;
     }
 

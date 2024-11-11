@@ -60,10 +60,11 @@ public class DarkSorcerer extends HostileEntity {
                 && this.getWorld().getBlockState(blockUnderEntity).isOf(Blocks.DEEPSLATE_TILES);
     }
 
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(BEAMING, Boolean.FALSE);
-        this.dataTracker.startTracking(BEAM_CORDS, new BlockPos(0, 0, 0));
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(BEAMING, Boolean.FALSE);
+        builder.add(BEAM_CORDS, new BlockPos(0, 0, 0));
     }
 
     public void setBeaming(boolean bl) {
@@ -204,7 +205,7 @@ public class DarkSorcerer extends HostileEntity {
     }
 
     @Override
-    public boolean isUndead() {
+    public boolean hasInvertedHealingAndHarm() {
         return true;
     }
 }

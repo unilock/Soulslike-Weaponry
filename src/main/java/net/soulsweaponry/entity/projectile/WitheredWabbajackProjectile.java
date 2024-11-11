@@ -14,8 +14,8 @@ import net.minecraft.entity.mob.WardenEntity;
 import net.minecraft.entity.passive.BatEntity;
 import net.minecraft.entity.projectile.WitherSkullEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -174,7 +174,7 @@ public class WitheredWabbajackProjectile extends WitherSkullEntity {
             }
             case PARTICLES -> {
                 if (!this.getWorld().isClient) {
-                    DefaultParticleType particle = this.getRandomParticle();
+                    SimpleParticleType particle = this.getRandomParticle();
                     int amount = 1000;
                     if (particle == ParticleTypes.ELDER_GUARDIAN) {
                         amount = 1;
@@ -196,11 +196,11 @@ public class WitheredWabbajackProjectile extends WitherSkullEntity {
         }
     }
 
-    private DefaultParticleType getRandomParticle() {
+    private SimpleParticleType getRandomParticle() {
         Random number = new Random();
-        ArrayList<DefaultParticleType> arr = new ArrayList<>();
+        ArrayList<SimpleParticleType> arr = new ArrayList<>();
         Registries.PARTICLE_TYPE.stream().forEach(p -> {
-            if (p instanceof DefaultParticleType d) {
+            if (p instanceof SimpleParticleType d) {
                 arr.add(d);
             }
         });

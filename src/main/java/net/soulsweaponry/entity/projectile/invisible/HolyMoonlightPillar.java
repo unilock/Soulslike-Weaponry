@@ -43,10 +43,10 @@ public class HolyMoonlightPillar extends InvisibleWarmupEntity {
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(PARTICLE_MOD, 1f);
-        this.dataTracker.startTracking(RADIUS, 1.85f);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(PARTICLE_MOD, 1f);
+        builder.add(RADIUS, 1.85f);
     }
 
     @Override

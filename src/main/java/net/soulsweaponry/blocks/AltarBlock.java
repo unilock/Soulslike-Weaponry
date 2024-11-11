@@ -6,8 +6,8 @@ import net.minecraft.block.FacingBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
@@ -139,7 +139,7 @@ public class AltarBlock extends Block {
         }
     }
 
-    private DefaultParticleType getParticleType() {
+    private SimpleParticleType getParticleType() {
         return ParticleRegistry.NIGHTFALL_PARTICLE;
     }
 

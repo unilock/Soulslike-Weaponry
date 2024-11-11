@@ -16,11 +16,11 @@ public class ModTags {
     public static class Blocks {
 
         private static TagKey<Block> createTag(String name) {
-            return TagKey.of(RegistryKeys.BLOCK, new Identifier(SoulsWeaponry.ModId, name));
+            return TagKey.of(RegistryKeys.BLOCK, Identifier.of(SoulsWeaponry.ModId, name));
         }
 
         private static TagKey<Block> createCommonTag(String name) {
-            return TagKey.of(RegistryKeys.BLOCK, new Identifier("c", name));
+            return TagKey.of(RegistryKeys.BLOCK, Identifier.of("c", name));
         }
     }
 
@@ -34,12 +34,14 @@ public class ModTags {
         public static final TagKey<Item> IRON_INGOTS = createCommonTag("iron_ingots");
         public static final TagKey<Item> SHIELDS = createCommonTag("shields");
 
+        public static final TagKey<Item> GUN_ENCHANTABLE = createTag("enchantable/gun");
+
         private static TagKey<Item> createTag(String name) {
-            return TagKey.of(RegistryKeys.ITEM, new Identifier(SoulsWeaponry.ModId, name));
+            return TagKey.of(RegistryKeys.ITEM, Identifier.of(SoulsWeaponry.ModId, name));
         }
 
         private static TagKey<Item> createCommonTag(String name) {
-            return TagKey.of(RegistryKeys.ITEM, new Identifier("c", name));
+            return TagKey.of(RegistryKeys.ITEM, Identifier.of("c", name));
         }
     }
 
@@ -48,7 +50,7 @@ public class ModTags {
         public static final TagKey<Structure> CHAMPIONS_GRAVES = createTag("champions_graves");
 
         private static TagKey<Structure> createTag(String id) {
-            return TagKey.of(RegistryKeys.STRUCTURE, new Identifier(SoulsWeaponry.ModId, id));
+            return TagKey.of(RegistryKeys.STRUCTURE, Identifier.of(SoulsWeaponry.ModId, id));
         }
     }
 
@@ -58,7 +60,7 @@ public class ModTags {
         public static final TagKey<EntityType<?>> BOSSES = createCommonTag("bosses");
 
         private static TagKey<EntityType<?>> createCommonTag(String id) {
-            return TagKey.of(RegistryKeys.ENTITY_TYPE, new Identifier("c", id));
+            return TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of("c", id));
         }
     }
 
@@ -66,7 +68,7 @@ public class ModTags {
         public static final TagKey<StatusEffect> DAMAGE_OVER_TIME = createCommonTag("damage_over_time");
 
         private static TagKey<StatusEffect> createCommonTag(String id) {
-            return TagKey.of(RegistryKeys.STATUS_EFFECT, new Identifier("c", id));
+            return TagKey.of(RegistryKeys.STATUS_EFFECT, Identifier.of("c", id));
         }
     }
 }
