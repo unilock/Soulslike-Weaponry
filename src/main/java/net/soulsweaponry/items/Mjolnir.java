@@ -53,7 +53,7 @@ public class Mjolnir extends ChargeToUseItem implements GeoItem {
 
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
-        int i = this.getMaxUseTime(stack) - remainingUseTicks;
+        int i = this.getMaxUseTime(stack, user) - remainingUseTicks;
         if (user instanceof PlayerEntity player && i >= 10) {
             int cooldown = 0;
             stack.damage(3, player, p -> p.sendToolBreakStatus(user.getActiveHand()));
