@@ -28,7 +28,7 @@ import net.soulsweaponry.util.IKeybindAbility;
 import net.soulsweaponry.util.WeaponUtil;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoItem;
-import software.bernie.geckolib.animatable.client.RenderProvider;
+import software.bernie.geckolib.animatable.client.GeoRenderProvider;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
@@ -40,12 +40,10 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class WitheredArmor extends ModdedArmor implements GeoItem, IKeybindAbility, ICooldownItem {
 
     private final AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
-    private final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
 
     public WitheredArmor(ArmorMaterial material, Type slot, Settings settings) {
         super(material, slot, settings);
@@ -174,27 +172,21 @@ public class WitheredArmor extends ModdedArmor implements GeoItem, IKeybindAbili
     }
 
     @Override
-    public void createRenderer(Consumer<Object> consumer) {
-        consumer.accept(new RenderProvider() {
+    public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
+        consumer.accept(new GeoRenderProvider() {
             private GeoArmorRenderer<?> renderer;
 
             @Override
-            public BipedEntityModel<LivingEntity> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, BipedEntityModel<LivingEntity> original) {
-                if(this.renderer == null) {
+            public <T extends LivingEntity> BipedEntityModel<?> getGeoArmorRenderer(@Nullable T livingEntity, ItemStack itemStack, @Nullable EquipmentSlot equipmentSlot, @Nullable BipedEntityModel<T> original) {
+                if (this.renderer == null) {
                     if (itemStack.isOf(ItemRegistry.WITHERED_CHEST) || itemStack.isOf(ItemRegistry.ENHANCED_WITHERED_CHEST)) {
                         this.renderer = new WitheredArmorRenderer();
                     }
                 }
-                this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
 
                 return this.renderer;
             }
         });
-    }
-
-    @Override
-    public Supplier<Object> getRenderProvider() {
-        return this.renderProvider;
     }
 
     @Override

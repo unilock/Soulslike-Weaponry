@@ -60,7 +60,7 @@ public class HolyMoonlightGreatsword extends TrickWeapon implements IChargeNeede
                     stack.getNbt().putInt(IChargeNeeded.CHARGE, 0);
                 }
                 world.playSound(player, targetArea, SoundRegistry.MOONLIGHT_BIG_EVENT, SoundCategory.PLAYERS, 1f, 1f);
-                world.playSound(player, targetArea, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 1f, 1f);
+                world.playSound(player, targetArea, SoundEvents.ENTITY_GENERIC_EXPLODE.value(), SoundCategory.PLAYERS, 1f, 1f);
                 if (!world.isClient) {
                     ParticleHandler.particleOutburstMap(player.getWorld(), 150, vecBlocksAway.getX(), user.getY(), vecBlocksAway.getZ(), ParticleEvents.MOONFALL_MAP, 1f);
                 }
@@ -143,7 +143,7 @@ public class HolyMoonlightGreatsword extends TrickWeapon implements IChargeNeede
         return UseAction.SPEAR;
     }
 
-    public int getMaxUseTime(ItemStack stack) {
+    public int getMaxUseTime(ItemStack stack, LivingEntity user) {
         return 72000;
     }
 

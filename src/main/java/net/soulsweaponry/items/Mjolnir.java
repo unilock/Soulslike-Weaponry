@@ -32,19 +32,17 @@ import net.soulsweaponry.entity.projectile.invisible.WarmupLightningEntity;
 import net.soulsweaponry.registry.EntityRegistry;
 import net.soulsweaponry.util.WeaponUtil;
 import software.bernie.geckolib.animatable.GeoItem;
-import software.bernie.geckolib.animatable.client.RenderProvider;
+import software.bernie.geckolib.animatable.client.GeoRenderProvider;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class Mjolnir extends ChargeToUseItem implements GeoItem {
 
     private final AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
-    private final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
     public static final String RAINING = "raining";
     public static final String OWNERS_LAST_POS = "owners_last_pos";
 
@@ -212,20 +210,15 @@ public class Mjolnir extends ChargeToUseItem implements GeoItem {
     }
 
     @Override
-    public void createRenderer(Consumer<Object> consumer) {
-        consumer.accept(new RenderProvider() {
+    public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
+        consumer.accept(new GeoRenderProvider() {
             private final MjolnirItemRenderer renderer = new MjolnirItemRenderer();
 
             @Override
-            public BuiltinModelItemRenderer getCustomRenderer() {
+            public BuiltinModelItemRenderer getGeoItemRenderer() {
                 return this.renderer;
             }
         });
-    }
-
-    @Override
-    public Supplier<Object> getRenderProvider() {
-        return this.renderProvider;
     }
 
     @Override

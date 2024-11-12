@@ -33,7 +33,7 @@ public class WhirligigSawblade extends ChargeToUseItem {
     }
 
     @Override
-    public int getMaxUseTime(ItemStack stack) {
+    public int getMaxUseTime(ItemStack stack, LivingEntity user) {
         return ConfigConstructor.whirligig_sawblade_use_time + WeaponUtil.getEnchantDamageBonus(stack) * 10;
     }
 

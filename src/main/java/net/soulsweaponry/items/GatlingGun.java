@@ -62,7 +62,7 @@ public class GatlingGun extends GunItem {
 
     @Override
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
-        if (remainingUseTicks < this.getMaxUseTime(stack) - 15 && remainingUseTicks % 4 == 0) {
+        if (remainingUseTicks < this.getMaxUseTime(stack, user) - 15 && remainingUseTicks % 4 == 0) {
             if (user instanceof PlayerEntity playerEntity) {
                 boolean bl = playerEntity.getAbilities().creativeMode || EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0;
                 ItemStack itemStack = playerEntity.getProjectileType(stack);
@@ -92,7 +92,7 @@ public class GatlingGun extends GunItem {
                     playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
                 }
             }
-        } else if (-remainingUseTicks > this.getMaxUseTime(stack)) {
+        } else if (-remainingUseTicks > this.getMaxUseTime(stack, user)) {
             user.stopUsingItem();
             super.usageTick(world, user, stack, remainingUseTicks);
         }
@@ -105,7 +105,7 @@ public class GatlingGun extends GunItem {
     }
 
     @Override
-    public int getMaxUseTime(ItemStack stack) {
+    public int getMaxUseTime(ItemStack stack, LivingEntity user) {
         int lvl = EnchantmentHelper.getLevel(EnchantRegistry.FAST_HANDS, stack);
         return ConfigConstructor.gatling_gun_max_time * (lvl == 0 ? 1 : lvl);
     }

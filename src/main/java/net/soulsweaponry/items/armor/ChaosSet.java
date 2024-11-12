@@ -1,69 +1,67 @@
-    package net.soulsweaponry.items.armor;
+package net.soulsweaponry.items.armor;
 
-    import net.minecraft.block.Block;
-    import net.minecraft.block.BlockState;
-    import net.minecraft.block.Blocks;
-    import net.minecraft.block.TallPlantBlock;
-    import net.minecraft.client.gui.screen.Screen;
-    import net.minecraft.client.render.entity.model.BipedEntityModel;
-    import net.minecraft.enchantment.EnchantmentHelper;
-    import net.minecraft.enchantment.Enchantments;
-    import net.minecraft.entity.Entity;
-    import net.minecraft.entity.EquipmentSlot;
-    import net.minecraft.entity.LivingEntity;
-    import net.minecraft.entity.effect.StatusEffect;
-    import net.minecraft.entity.effect.StatusEffectCategory;
-    import net.minecraft.entity.effect.StatusEffectInstance;
-    import net.minecraft.entity.effect.StatusEffects;
-    import net.minecraft.entity.player.PlayerEntity;
-    import net.minecraft.item.ArmorMaterial;
-    import net.minecraft.item.ItemStack;
-    import net.minecraft.item.tooltip.TooltipType;
-    import net.minecraft.particle.ParticleTypes;
-    import net.minecraft.registry.tag.BlockTags;
-    import net.minecraft.sound.SoundCategory;
-    import net.minecraft.sound.SoundEvents;
-    import net.minecraft.text.Text;
-    import net.minecraft.util.Formatting;
-    import net.minecraft.util.math.BlockPos;
-    import net.minecraft.util.math.MathHelper;
-    import net.minecraft.world.World;
-    import net.soulsweaponry.blocks.WitheredBlock;
-    import net.soulsweaponry.blocks.WitheredFlower;
-    import net.soulsweaponry.blocks.WitheredGrass;
-    import net.soulsweaponry.blocks.WitheredTallFlower;
-    import net.soulsweaponry.blocks.WitheredTallGrass;
-    import net.soulsweaponry.client.renderer.armor.ChaosArmorRenderer;
-    import net.soulsweaponry.client.renderer.armor.ChaosSetRenderer;
-    import net.soulsweaponry.client.renderer.armor.EChaosArmorRenderer;
-    import net.soulsweaponry.config.ConfigConstructor;
-    import net.soulsweaponry.items.ICooldownItem;
-    import net.soulsweaponry.particles.ParticleHandler;
-    import net.soulsweaponry.registry.BlockRegistry;
-    import net.soulsweaponry.registry.ItemRegistry;
-    import org.jetbrains.annotations.Nullable;
-    import software.bernie.geckolib.animatable.GeoItem;
-    import software.bernie.geckolib.animatable.client.RenderProvider;
-    import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-    import software.bernie.geckolib.animation.AnimatableManager;
-    import software.bernie.geckolib.animation.Animation;
-    import software.bernie.geckolib.animation.AnimationController;
-    import software.bernie.geckolib.animation.AnimationState;
-    import software.bernie.geckolib.animation.PlayState;
-    import software.bernie.geckolib.animation.RawAnimation;
-    import software.bernie.geckolib.renderer.GeoArmorRenderer;
-    import software.bernie.geckolib.util.GeckoLibUtil;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.TallPlantBlock;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectCategory;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
+import net.soulsweaponry.blocks.WitheredBlock;
+import net.soulsweaponry.blocks.WitheredFlower;
+import net.soulsweaponry.blocks.WitheredGrass;
+import net.soulsweaponry.blocks.WitheredTallFlower;
+import net.soulsweaponry.blocks.WitheredTallGrass;
+import net.soulsweaponry.client.renderer.armor.ChaosArmorRenderer;
+import net.soulsweaponry.client.renderer.armor.ChaosSetRenderer;
+import net.soulsweaponry.client.renderer.armor.EChaosArmorRenderer;
+import net.soulsweaponry.config.ConfigConstructor;
+import net.soulsweaponry.items.ICooldownItem;
+import net.soulsweaponry.particles.ParticleHandler;
+import net.soulsweaponry.registry.BlockRegistry;
+import net.soulsweaponry.registry.ItemRegistry;
+import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib.animatable.GeoItem;
+import software.bernie.geckolib.animatable.client.GeoRenderProvider;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.Animation;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
+import software.bernie.geckolib.renderer.GeoArmorRenderer;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-    import java.util.ArrayList;
-    import java.util.HashMap;
-    import java.util.List;
-    import java.util.function.Consumer;
-    import java.util.function.Supplier;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.function.Consumer;
 
 public class ChaosSet extends ModdedArmor implements GeoItem, ICooldownItem {
 
     private final AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
-    private final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
     private final HashMap<Block, WitheredBlock> turnableBlocks = new HashMap<>();
     private final HashMap<Block, WitheredGrass> turnableGrass = new HashMap<>();
     private final HashMap<Block, WitheredTallGrass> turnableTallPlant = new HashMap<>();
@@ -327,12 +325,12 @@ public class ChaosSet extends ModdedArmor implements GeoItem, ICooldownItem {
     }
 
     @Override
-    public void createRenderer(Consumer<Object> consumer) {
-        consumer.accept(new RenderProvider() {
+    public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
+        consumer.accept(new GeoRenderProvider() {
             private GeoArmorRenderer<?> renderer;
 
             @Override
-            public BipedEntityModel<LivingEntity> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, BipedEntityModel<LivingEntity> original) {
+            public <T extends LivingEntity> BipedEntityModel<?> getGeoArmorRenderer(@Nullable T livingEntity, ItemStack itemStack, @Nullable EquipmentSlot equipmentSlot, @Nullable BipedEntityModel<T> original) {
                 if (this.renderer == null) {
                     if (itemStack.isOf(ItemRegistry.CHAOS_HELMET) || itemStack.isOf(ItemRegistry.ARKENPLATE)) {
                         this.renderer = new ChaosArmorRenderer();
@@ -342,16 +340,10 @@ public class ChaosSet extends ModdedArmor implements GeoItem, ICooldownItem {
                         this.renderer = new ChaosSetRenderer();
                     }
                 }
-                this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
 
                 return this.renderer;
             }
         });
-    }
-
-    @Override
-    public Supplier<Object> getRenderProvider() {
-        return this.renderProvider;
     }
 
     @Override

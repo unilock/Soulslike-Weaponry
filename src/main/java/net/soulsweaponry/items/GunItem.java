@@ -47,7 +47,7 @@ public abstract class GunItem extends BowItem implements IConfigDisable {
     @Override
     public abstract boolean isFireproof();
     public abstract int bulletsNeeded();
-    public int getMaxUseTime(ItemStack stack) {
+    public int getMaxUseTime(ItemStack stack, LivingEntity user) {
         return 0;
     }
 
@@ -88,7 +88,7 @@ public abstract class GunItem extends BowItem implements IConfigDisable {
             tooltip.add(Text.translatable("tooltip.soulsweapons.gun_damage").append(Text.literal(String.format("%.1f", this.getBulletDamage(stack)))).formatted(Formatting.GRAY));
             tooltip.add(Text.translatable("tooltip.soulsweapons.gun_cooldown").append(Text.literal(String.valueOf(this.getCooldown(stack)))).formatted(Formatting.GRAY));
             tooltip.add(Text.translatable("tooltip.soulsweapons.gun_bullets_used").append(Text.literal(String.valueOf(this.bulletsNeeded()))).formatted(Formatting.GRAY));
-            if (this.getMaxUseTime(stack) != 0) {
+            if (this.getMaxUseTime(stack, null) != 0) {
                 tooltip.add(Text.translatable("tooltip.soulsweapons.gun_max_use_time").append(Text.literal(String.valueOf(this.getMaxUseTime(stack)))).formatted(Formatting.GRAY));
             }
         }

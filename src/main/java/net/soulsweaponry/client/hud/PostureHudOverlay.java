@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.soulsweaponry.SoulsWeaponry;
@@ -18,7 +19,7 @@ public class PostureHudOverlay implements HudRenderCallback {
     private static final Identifier ICON = Identifier.of(SoulsWeaponry.ModId, "textures/gui/posture/icon.png");
 
     @Override
-    public void onHudRender(DrawContext drawContext, float tickDelta) {
+    public void onHudRender(DrawContext drawContext, RenderTickCounter renderTickCounter) {
         MinecraftClient client = MinecraftClient.getInstance();
         if (client != null) {
             int width = client.getWindow().getScaledWidth();

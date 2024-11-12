@@ -31,7 +31,7 @@ import net.soulsweaponry.registry.EffectRegistry;
 import net.soulsweaponry.util.IKeybindAbility;
 import net.soulsweaponry.util.WeaponUtil;
 import software.bernie.geckolib.animatable.GeoItem;
-import software.bernie.geckolib.animatable.client.RenderProvider;
+import software.bernie.geckolib.animatable.client.GeoRenderProvider;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.Animation;
@@ -44,12 +44,10 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class DraupnirSpear extends ChargeToUseItem implements GeoItem, IKeybindAbility {
 
     private final AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
-    private final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
     public static final String SPEARS_ID = "thrown_spears_id";
 
     public DraupnirSpear(ToolMaterial toolMaterial, Settings settings) {
@@ -66,7 +64,7 @@ public class DraupnirSpear extends ChargeToUseItem implements GeoItem, IKeybindA
                 entity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, 5.0F, 1.0F);
                 entity.pickupType = PersistentProjectileEntity.PickupPermission.DISALLOWED;
                 world.spawnEntity(entity);
-                world.playSoundFromEntity(null, entity, SoundEvents.ITEM_TRIDENT_THROW, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                world.playSoundFromEntity(null, entity, SoundEvents.ITEM_TRIDENT_THROW.value(), SoundCategory.PLAYERS, 1.0F, 1.0F);
                 this.saveSpearData(stack, entity);
                 this.applyItemCooldown(playerEntity, this.getScaledCooldownThrow(stack));
                 stack.damage(1, (LivingEntity)playerEntity, (p_220045_0_) -> p_220045_0_.sendToolBreakStatus(user.getActiveHand()));
@@ -90,20 +88,15 @@ public class DraupnirSpear extends ChargeToUseItem implements GeoItem, IKeybindA
     }
 
     @Override
-    public void createRenderer(Consumer<Object> consumer) {
-        consumer.accept(new RenderProvider() {
+    public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
+        consumer.accept(new GeoRenderProvider() {
             private final DraupnirSpearItemRenderer renderer = new DraupnirSpearItemRenderer();
 
             @Override
-            public BuiltinModelItemRenderer getCustomRenderer() {
+            public BuiltinModelItemRenderer getGeoItemRenderer() {
                 return this.renderer;
             }
         });
-    }
-
-    @Override
-    public Supplier<Object> getRenderProvider() {
-        return this.renderProvider;
     }
 
     @Override

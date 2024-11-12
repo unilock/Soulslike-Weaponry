@@ -24,7 +24,7 @@ import net.soulsweaponry.registry.EntityRegistry;
 import net.soulsweaponry.registry.SoundRegistry;
 import net.soulsweaponry.util.WeaponUtil;
 import software.bernie.geckolib.animatable.GeoItem;
-import software.bernie.geckolib.animatable.client.RenderProvider;
+import software.bernie.geckolib.animatable.client.GeoRenderProvider;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.Animation;
@@ -36,12 +36,10 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.UUID;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class SoulReaper extends SoulHarvestingItem implements GeoItem, ISummonAllies {
 
     private final AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
-    private final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
 
     public SoulReaper(ToolMaterial toolMaterial, Settings settings) {
         super(toolMaterial, ConfigConstructor.soul_reaper_damage, ConfigConstructor.soul_reaper_attack_speed, settings);
@@ -126,20 +124,15 @@ public class SoulReaper extends SoulHarvestingItem implements GeoItem, ISummonAl
     }
 
     @Override
-    public void createRenderer(Consumer<Object> consumer) {
-        consumer.accept(new RenderProvider() {
+    public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
+        consumer.accept(new GeoRenderProvider() {
             private final SoulReaperRenderer renderer = new SoulReaperRenderer();
 
             @Override
-            public BuiltinModelItemRenderer getCustomRenderer() {
+            public BuiltinModelItemRenderer getGeoItemRenderer() {
                 return this.renderer;
             }
         });
-    }
-
-    @Override
-    public Supplier<Object> getRenderProvider() {
-        return this.renderProvider;
     }
 
     @Override

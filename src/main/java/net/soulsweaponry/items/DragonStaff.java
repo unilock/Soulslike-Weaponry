@@ -109,7 +109,7 @@ public class DragonStaff extends ModdedSword {
     }
 
     @Override
-    public int getMaxUseTime(ItemStack stack) {
+    public int getMaxUseTime(ItemStack stack, LivingEntity user) {
         return ConfigConstructor.dragon_staff_use_time + WeaponUtil.getEnchantDamageBonus(stack) * 20;
     }
 
